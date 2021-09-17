@@ -1,0 +1,72 @@
+.lnb{float:left}
+.cont{float:right;border:1px solid #959595;background:#f9f9f9;padding:50px;width:700px}
+.cont p{color:#0058ff;font-size:16px;font-weight:bold;position:absolute;right:20px;z-index: 1;bottom:16px}
+.cont .form_control{position:relative;margin-bottom:20px;color:#c9c9c9;font-size:20px}
+.cont .form_control h4{padding-left:15px;color:#222}
+.cont .form_control h4 span{font-size:13px;vertical-align: middle;margin-left:3px;color:#0058ff}
+.cont .form_control input[type='text'],
+.cont .form_control input[type='password'],
+.cont .form_control input[type='tel'],
+.cont .form_control input[type='email']{margin-top:4px;text-indent:20px;height:55px;background:#fff;border:1px solid #c4c4c4;font-size:17px;}
+
+.cont .form_control input[type='text'],
+.cont .form_control input[type='password']{width:100%}
+.cont .form_control input[type='tel']{width:200px}
+.cont .form_control input[type='email']{width:330px}
+
+.cont .form_control>div{display:-webkit-box;display:-webkit-flex;display:flex;justify-content: space-between;align-items: center;}
+.cont .b1,.cont .b2{display: inline-block;width:330px;vertical-align: top}
+.cont .b1{margin-right:35px}
+.cont .b_tit{color:#222;font-size:26px;font-weight:bold;margin-top:30px;margin-bottom:20px;position: relative !important;right: auto !important;    bottom: auto !important;}
+.cont label{font-size:16px;font-weight:500;color:#222;margin-top:10px;display: inline-block;margin-right:10px}
+.cont label:last-child{margin-right:0}
+
+.auth_wrap{padding:200px 40px;text-align:center;background:#f9f9f9;box-shadow:inset 0px 14px 41px #e6e6e6;}
+.login_frm{display:inline-block;width:420px;}
+.login_frm>img{padding-bottom:40px;}
+.login_frm .p1{text-align:left;font-weight:bold;font-size:18px;margin-bottom:10px;}
+
+.text_input{width:100%;border:none;border:1px solid #cfcfcf;color:#000;height:50px;font-size:15px;margin-bottom:10px;text-indent:15px}
+.btn_style{background:#0058ff;color:#fff;font-size:18px;font-weight:500;border:none;height:50px;line-height:50px;margin-top:10px;width:100%}
+
+.link_lst{border-top:1px solid #dcdcdc;border-bottom:1px solid #dcdcdc;display:block;margin-top:30px}
+.link_lst li{position:relative;float:left;width:50%;height:50px;line-height:50px;text-align:center}
+.link_lst li a{display:block;font-size:15px;color:#575a5b;font-weight:500}
+.link_lst:after{display:block;content:"";clear:both}
+.link_lst li:nth-child(1):after{position:absolute;top:50%;right:0;margin-top:-10px;height:20px;width:1px;background:#dcdcdc;content:"";display:inline-block;}
+
+.find_id{text-align:center;margin-top:20px;font-size:14px;color:#333;font-weight:500;line-height:1.5}
+.find_id span{font-weight:bold;color:#0058ff}
+
+#id_chk{cursor:pointer;}
+#id_txt{display:none}
+
+.img_group{position:relative;padding-left:15px;width:100px;padding-bottom:30px}
+.img_group .img_box{width:70px;height:70px;overflow:hidden;border-radius:50%;display:block;margin:0 auto}
+.img_group .img_box img{width:100%;height:100%}
+.img_group .img_upload_btn{margin-top:10px;width:100px;height:35px !important;line-height:35px !important;font-size:15px;border:2px solid #0058ff}
+
+.tac_box{position:relative;height:50px;line-height:50px;font-size:14px;font-weight:500}
+.tac_box a{color:#666}
+.tac_box a:hover{color:#0058ff}
+.tac_box input[type=checkbox]{display:none;}
+.tac_box label{cursor:pointer;margin-top:0}
+.tac_box span {vertical-align:middle;display:inline-block;width:20px;height:20px;background:url('/image/site/sub/chk.png') center no-repeat;border:none;margin-right:10px;border-radius:2px;}
+.tac_box input[type="checkbox"]:checked + label span {background:url('/image/site/sub/chk_act.png') center no-repeat;}
+
+.layer_pop{position:relative;background:#fff;border-radius:5px;margin:50px auto;padding:50px;white-space:pre-wrap;max-width:900px}
+
+@media all and (max-width:1080px) {
+	.auth_wrap{padding:100px 40px;}
+	.login_frm{max-width:420px;width:100%;}
+	.login_frm .link_lst li:nth-of-type(1){width:60%;}
+	.login_frm .link_lst li:nth-of-type(2){width:40%;}
+	.lnb{float:none;margin-bottom:30px;}
+	.cont{float:none;width:100%;padding:10px;box-sizing:border-box;}
+	.cont .form_control h4{padding-left:0;font-size:15px}
+	.cont .b1, .cont .b2{width:100%;}
+	.cont .form_control input[type='tel'],
+	.cont .form_control input[type='email']{-webkit-box-flex:1;-webkit-flex:1;flex:1;width:80px;}
+	.cont .form_control input[type='text'], .cont .form_control input[type='password'], .cont .form_control input[type='tel'], .cont .form_control input[type='email']{text-indent:10px;font-size:15px}
+	.tac_box{height:auto;line-height:normal;font-size:14px;font-weight:500}
+}

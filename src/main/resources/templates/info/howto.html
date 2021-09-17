@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/use.css"/>
+    <script type="text/javascript" src="../js/use.js"></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class="snb_wrap">
+    <ul>
+        <li><a th:href="@{howto}">이용방법</a></li>
+        <li><a th:href="@{faq}">자주묻는 질문</a></li>
+        <li><a th:href="@{qna}">문의하기</a></li>
+    </ul>
+    <div class="contest_top"><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class="sub_key">이용방법</div>
+
+<div class="wrap">
+    <p class="nav marginb20">이용안내</p>
+
+    <div class="info_wrap">
+        <div class="nav_lst">
+            <p target="boxA" class="trans03">광고주 이용안내
+                <img src="/image/site/sub/use_icon1.png" class="img1">
+                <img src="/image/site/sub/use_icon1_a.png" class="img2">
+            </p>
+            <p target="boxB" class="trans03">크리에이터 이용안내
+                <img src="/image/site/sub/use_icon2.png" class="img1">
+                <img src="/image/site/sub/use_icon2_a.png" class="img2">
+            </p>
+        </div>
+        <div class="clear"></div>
+
+        <div class="box" id="boxA">
+            <ul>
+                <li>
+                    <p class="step_title"><span>STEP.1</span>콘테스트 유형 선택<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>개최하고자 하는 콘테스트 유형을 선택합니다.<br>콘테스트 노출 채널마다 가격이 상이하오니 아래 표를 참고해주시기 바랍니다.</p>
+                        <img src="/image/site/sub/use_img1.png">
+                    </div>
+                </li>
+                <li>
+                    <p class="step_title"><span>STEP.2</span>콘테스트 요청서 작성 1단계<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>카테고리 선택, 요청 제목, 설명 작성, 콘텐츠 스타일을 선택합니다.</p>
+                        <img src="/image/site/sub/use_img2.png">
+                    </div>
+                </li>
+                <li>
+                    <p class="step_title"><span>STEP.3</span>콘테스트 요청서 작성 2단계<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>상금 설정, 광고비 집행 여부 및 금액 설정, 수수료 직접 부담 선택, 마감일 설정, 콘텐츠 제작 및 배포 완료일을 설정합니다. 최종 결제 금액을 확인하고 결제를
+                            완료합니다.</p>
+                        <img src="/image/site/sub/use_img3.png">
+                    </div>
+                </li>
+                <li>
+                    <p class="step_title"><span>STEP.4</span>콘테스트 지원자 열람 및 선정<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>콘테스트 개최 후 ‘마이페이지 - 콘테스트 개최내역’에서 콘테스트 지원자 열람 및 선정할 수 있습니다.</p>
+                        <img src="/image/site/sub/use_img4.png">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="box" id="boxB">
+            <ul>
+                <li>
+                    <p class="step_title"><span>STEP.1</span>참가하고자 하는 콘테스트 선택<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>‘콘테스트 - 열린콘테스트’에서 진행중인 콘테스트 목록을 확인 할 수 있습니다.<br>콘테스트 목록 중 참가하고자 하는 콘테스트를 선택합니다.</p>
+                        <img src="/image/site/sub/use_img5.png">
+                    </div>
+                </li>
+                <li>
+                    <p class="step_title"><span>STEP.2</span>콘테스트 상세 요강 확인<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>콘테스트 상세 요강을 확인 후 하단 ‘콘테스트 지원하기’ 버튼을 선택하여 제안서를 작성합니다.</p>
+                        <img src="/image/site/sub/use_img6.png">
+                    </div>
+                </li>
+                <li>
+                    <p class="step_title"><span>STEP.3</span>제안서 작성<i class="fas fa-chevron-up"></i></p>
+                    <div class="cont_box">
+                        <p>콘테스트 제안서를 자유롭게 작성합니다.<br>작성 후 하단 ‘제안 완료하기’ 버튼을 클릭하면 제안서 작성이 완료됩니다.</p>
+                        <img src="/image/site/sub/use_img7.png">
+                    </div>
+                </li>
+                <li>
+                    <p class="step_title"><span>STEP.4</span>콘테스트 지원 내용 확인, 최종 선정자 확인<i class="fas fa-chevron-up"></i>
+                    </p>
+                    <div class="cont_box">
+                        <p>콘테스트 지원 후 ‘마이페이지 - 콘테스트 참가내역’에서 콘테스트 지원 내용 확인이 가능합니다.<br>콘테스트 기간 종료 후 최종 선정자를 확인할 수 있습니다.</p>
+                        <img src="/image/site/sub/use_img8.png">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <p class="info_txt">*더 궁금하신 사항이 있다면
+            <a href="/info/faq">자주묻는 질문</a>
+            또는
+            <a href="/info/qna">문의하기</a>를 이용해주세요.
+        </p>
+    </div>
+
+    <div class="rnb">
+        <p class="t1"><img src="/image/site/sub/alarm.png"> 콘테스트 마감이 얼마 남지 않았어요!</p>
+        <ul>
+            <li th:each="contest : ${contests}">
+                <div class="tit">
+                    <div class="img_bx"><img src="/image/site/index/noimage.png"
+                                             th:attr="src=${contest.memberProfileImage}"></div>
+                    <p class="p1" th:text="${contest.name}">KB 국민은행</p>
+                    <p class="p2" th:text="${contest.isReview}? '리뷰' : 'PPL'">리뷰</p>
+                </div>
+                <div class="cont">
+                    <p class="p1">
+                        <span class="s1" th:text="'D-' + ${contest.restDate}">D-11</span>
+                        <span class="s2" th:text="${contest.applyNumber}">11</span>
+                        명 응모</p>
+                    <p class="p2" th:text="${contest.name}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+                    <p class="p4" th:text="${contest.text}">KB 국민은행의 신규 예금상품을 미리 알아보는 것부터 가입하는 과정까지 자연스럽고 재미있는재미있는재미있는재미있는 컨텐츠에 녹여...</p>
+                    <p class="p3">
+                        <img src="/image/site/index/won.png">
+                        <span th:text="${contest.totalReward}"></span>만원
+                    </p>
+                    <p class="p5">
+                        <img src="/image/site/index/premium.png" th:if="${not contest.isStandard}">
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <a href="/contests/list" class="more_list">목록 더보기</a>
+    </div>
+</div>
+
+<div class='clear'></div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

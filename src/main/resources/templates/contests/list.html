@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel='stylesheet' type='text/css' href='../css/contest.css'/>
+    <script type='text/javascript' src='../js/contest.js'></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='snb_wrap'>
+    <ul>
+        <li><a th:href='@{list}'>열린 콘테스트</a></li>
+        <li><a th:href='@{open}'>콘테스트 열기</a></li>
+        <li><a th:href='@{old}'>지난 콘테스트</a></li>
+        <li><a th:href='@{case}'>사례</a></li>
+    </ul>
+    <div class='contest_top'><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class='sub_key'>열린 콘테스트</div>
+
+<div class='wrap'>
+    <p class='nav marginb10'>열린 콘테스트</p>
+    <p class='nav_txt marginb20'>참신한 아이디어를 기다리는 콘테스트가 이렇게 많아요.
+        <a href='#'><i class="fas fa-question-circle"></i> 콘테스트 진행 과정이 궁금하신가요?</a></p>
+
+    <form name="form" action="" method="get">
+        <input type="hidden" name="page_now" value=""/>
+        <input type="hidden" name="page_row" value=""/>
+<!--        <div class='filter_box'>-->
+<!--            <div class="col">-->
+<!--                <div class="chk_box">-->
+<!--                    <input type="checkbox" name="c_style2" id="chk1" value="2">-->
+<!--                    <label for="chk1"><span></span> PPL</label>-->
+<!--                </div>-->
+<!--                <div class="chk_box bd">-->
+<!--                    <input type="checkbox" name="c_style1" id="chk2" value="1">-->
+<!--                    <label for="chk2"><span></span> 리뷰</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="chk_box">-->
+<!--                    <input type="radio" name="chk" id="chk3" value="1">-->
+<!--                    <label for="chk3"><span></span> 최신 등록 순</label>-->
+<!--                </div>-->
+<!--                <div class="chk_box">-->
+<!--                    <input type="radio" name="chk" id="chk4" value="2">-->
+<!--                    <label for="chk4"><span></span> 상금 순</label>-->
+<!--                </div>-->
+<!--                <div class="chk_box">-->
+<!--                    <input type="radio" name="chk" id="chk5" value="3">-->
+<!--                    <label for="chk5"><span></span> 지원 적은 순</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <ul class="contest_lst" th:each="contest : ${contests}">
+            <li>
+                <div class='logo_box'>
+                    <div class="logo"><span></span>
+                        <img src="../image/site/index/noimage.png" th:attr="src=${contest.memberProfileImage}">
+                    </div>
+                    <p th:text="${contest.name}">기업명<a href='#' class='view_pop'>정보 보기</a></p>
+                </div>
+                <div class='cont_box'>
+                    <a href=''>
+                        <p class="p1">
+                            <span th:class="${contest.isReview}? 's1' : 's2'" th:text="${contest.isReview}? '리뷰' : 'PPL'">PPL</span>
+                            <img src="../image/site/sub/pre_crown.png" th:if="${not contest.isStandard}">
+                            <span th:text="${contest.title}">콘테스트 제목ㄱㄱㄱㄱㄱㄱ</span>
+                        </p>
+
+                        <p class='p2' th:text="${contest.text}">콘테스트 내용입니다 콘테스트 내용입니다 콘테스트 내용입니다 콘테스트 내용입니다
+                            콘테스트 내용입니다 콘테스트 내용입니다 콘테스트 내용입니다 콘테스트 내용입니다
+                            콘테스트 내용입니다 콘테스트 내용입니다 콘테스트 내용입니다 콘테스트 내용입니다 </p>
+                    </a>
+                </div>
+                <div class='info_box'>
+                    <p class='p1'>콘테스트 정보</p>
+                    <p class='p2'>기간
+                        <span th:text="'마감 ' + ${contest.restDate} + '일 전'">마감 2일전</span>
+                    </p>
+                    <p class='p2'>지원자 수<span th:text="${contest.applyNumber} + '명'">2명</span></p>
+                    <p class='p3'>총 상금<span th:text="${contest.totalReward} + '원'">400만원</span></p>
+                </div>
+            </li>
+            <!--                <?=$HTML_TAG?>-->
+        </ul>
+        <div class="clear"></div>
+
+        <div class="margint50">
+            <!--                <?php include $_SERVER['DOCUMENT_ROOT']."/lib/paginate_main.php"?>-->
+        </div>
+        <div class="clear"></div>
+    </form>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

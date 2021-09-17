@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<header th:fragment="header">
+    <div class='header_wrap'>
+        <a href='/' class='logo'><img src='/image/site/index/logo.png'></a>
+
+        <div class='menu_wrap trans03'>
+            <ul>
+                <li class='d1'><a href='/contests/list' class='md'>콘테스트<i class="fas fa-angle-right"></i></a>
+                    <div class='sub_menu'>
+                        <a href='/contests/list'>열린 콘테스트</a>
+                        <a href='/contests/open'>콘테스트 열기</a>
+                        <a href='/contests/old'>지난 콘테스트</a>
+                        <a href='/contests/case'>사례</a>
+                    </div>
+                </li>
+                <li class='d2'><a href='#'>크리에이터<i class="fas fa-angle-right"></i></a></li>
+                <li class='d3'><a href='#' class='md'>광고주 후기<i class="fas fa-angle-right"></i></a>
+                    <div class='sub_menu'>
+                        <a href='#'>전체 후기</a>
+                        <a href='#'>리뷰 후기</a>
+                        <a href='#'>PPL 후기</a>
+                    </div>
+                </li>
+                <li class='d4'><a href='/info/howto' class='md'>이용안내<i class="fas fa-angle-right"></i></a>
+                    <div class='sub_menu'>
+                        <a href='/info/howto'>이용방법</a>
+                        <a href='/info/faq'>자주묻는 질문</a>
+                        <a href='/info/qna'>문의하기</a>
+                    </div>
+                </li>
+                <li class='d5'><a href='#'>이벤트<i class="fas fa-angle-right"></i></a></li>
+            </ul>
+            <div class='clear'></div>
+
+            <!-- 모바일 회원가입 버튼 -->
+            <!--            <div class='m_auth_box'>-->
+            <!--                <?if($sess_uidx){?>-->
+            <!--                <a href='/main/mypage/index.php'>마이페이지</a>-->
+            <!--                <a href='/main/auth/logout.php'>로그아웃</a>-->
+            <!--                <?}else{?>-->
+            <!--                <a href='/main/auth/login.php'>로그인</a>-->
+            <!--                <a href='/main/auth/join.php'>회원가입</a>-->
+            <!--                <?}?>-->
+            <!--                <a href='/main/contest/index.php' class='contest_btn'><img src='/image/site/index/contest_btn.png' alt='콘테스트 열기'></a>-->
+            <!--            </div>-->
+        </div>
+
+        <div class='menu_bar'>
+            <div class='d1'>
+                <a href='/contests/list'>열린 콘테스트</a>
+                <a href='/contests/open'>콘테스트 열기</a>
+                <a href='/contests/old'>지난 콘테스트</a>
+                <a href='/contests/case'>사례</a>
+            </div>
+            <div class='d2'>
+                <a href='#'>크리에이터 리스트</a>
+            </div>
+            <div class='d3'>
+                <a href='#'>전체 후기</a>
+                <a href='#'>리뷰 후기</a>
+                <a href='#'>PPL 후기</a>
+            </div>
+            <div class='d4'>
+                <a href='/info/howto'>이용방법</a>
+                <a href='/info/faq'>자주묻는 질문</a>
+                <a href='/info/qna'>문의하기</a>
+            </div>
+            <div class='d5'>
+                <a href='#'>모든 이벤트</a>
+            </div>
+            <div class='clear'></div>
+        </div>
+
+        <div class='auth_box'>
+            <!--            <?if($sess_uidx){?>-->
+            <!--            <a href='#'>마이페이지</a>-->
+            <!--            <a href='#'>로그아웃</a>-->
+            <!--            <?}else{?>-->
+            <a href='#'>로그인</a>
+            <a href='/auth/join'>회원가입</a>
+            <!--            <?}?>-->
+            <a href='/contests/open' class='contest_btn'><img src='/image/site/index/contest_btn.png' alt='콘테스트 열기'></a>
+        </div>
+
+        <div id="open-button">
+            <div style="position:relative">
+                <div class="navicon-line nl1"></div>
+                <div class="navicon-line nl2"></div>
+                <div class="navicon-line nl3"></div>
+            </div>
+        </div>
+        <div class="roof"></div>
+    </div>
+</header>
+

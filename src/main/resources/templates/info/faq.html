@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/use.css"/>
+    <script type="text/javascript" src="../js/use.js"></script>
+</head>
+<body>
+
+<header th:replace="fragments/header :: header"></header>
+
+<div class="snb_wrap">
+    <ul>
+        <li><a th:href="@{howto}">이용방법</a></li>
+        <li><a th:href="@{faq}">자주묻는 질문</a></li>
+        <li><a th:href="@{qna}">문의하기</a></li>
+    </ul>
+    <div class="contest_top"><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class="sub_key">자주묻는 질문</div>
+
+<div class="wrap">
+    <p class="nav">자주묻는 질문</p>
+    <div class="faq_wrap">
+        <div class="content">
+            <ul>
+                <li>
+                    <div class="q"><img src="/image/site/sub/quest.png"> VICON은 어떤 서비스인가요?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="a"><img src="/image/site/sub/answer.png">VICON은 광고주와 크리에이터를 연결시켜주는 새로운 개념의 콘테스트 플랫폼 서비스입니다. 광고주는 원하는 비용으로 광고 콘테스트를 개최하여 크리에이터로부터 다양한 광고 컨텐츠를 제안 받을 수 있고 크리에이터는 자신만의 독창적인 광고 아이디어 및 컨텐츠를 제작하여 광고주가 주최한 콘테스트에 참가할 수 있습니다. 광고주의 최종 선택 시 소정의 상금을 획득할 수 있습니다.
+                    </div>
+                </li>
+            </ul>
+
+            <p class="p1">더 궁금한 질문이 있으신가요? 비콘에 직접 문의 해보세요.</p>
+            <a href="/info/qna">문의하기</a>
+        </div>
+
+        <div class="rnb">
+            <p class="t1"><img src="/image/site/sub/alarm.png"> 콘테스트 마감이 얼마 남지 않았어요!</p>
+            <ul>
+                <li th:each="contest : ${contests}">
+                    <div class="tit">
+                        <div class="img_bx">
+                            <img src="/image/site/index/noimage.png"
+                                 th:attr="src=${contest.memberProfileImage}">
+                        </div>
+                        <p class="p1" th:text="${contest.name}">KB 국민은행</p>
+                        <p class="p2" th:text="${contest.isReview}? ' 리뷰' : 'PPL'">리뷰</p>
+                    </div>
+                    <div class="cont">
+                        <p class="p1">
+                            <span class="s1" th:text="' D-' + ${contest.restDate}">D-11</span>
+                            <span class="s2" th:text="${contest.applyNumber}">11</span>
+                            명 응모</p>
+                        <p class="p2" th:text="${contest.name}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+                        <p class="p4" th:text="${contest.text}">KB 국민은행의 신규 예금상품을 미리 알아보는 것부터 가입하는 과정까지 자연스럽고
+                            재미있는재미있는재미있는재미있는 컨텐츠에 녹여...</p>
+                        <p class="p3">
+                            <img src="/image/site/index/won.png">
+                            <span th:text="${contest.totalReward}"></span>만원
+                        </p>
+                        <p class="p5">
+                            <img src="/image/site/index/premium.png" th:if="${not contest.isStandard}">
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <a href="/contests/list" class="more_list">목록 더보기</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/contest.css"/>
+    <script type="text/javascript" src="../js/contest.js"></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class="snb_wrap">
+    <ul>
+        <li><a th:href="@{list}">열린 콘테스트</a></li>
+        <li><a th:href="@{open}">콘테스트 열기</a></li>
+        <li><a th:href="@{oldContests}">지난 콘테스트</a></li>
+        <li><a th:href="@{case}">사례</a></li>
+    </ul>
+    <div class="contest_top"><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class="sub_key">콘테스트 열기</div>
+
+<div class="wrap">
+    <p class="nav"><span>콘테스트 열기</span> >
+        <span th:text="${contest.type.ordinal}=='1'? '콘테스트 열기' : '프리미엄 콘테스트 열기'">콘테스트 열기</span> > 결제</p>
+
+    <div class="lnb">
+        <p class="p1">콘테스트</p>
+        <p class="p2">제한없이<br>모든 유튜버에게<br>
+            <span th:text="${contest.type.ordinal}=='1'? '30만원부터' : '100만원부터'">100만원부터</span>
+        </p>
+
+        <div class="info_box">
+            <p class="p3"><i class="fas fa-exclamation-triangle"></i> 콘텐츠 제작 프로세스</p>
+            <p class="p4">콘텐츠 제작이 완료되면 "일부 공개" 형태로
+                업로드하여 의뢰인에게 링크 형태로 전달됩니다.<span></span>제작된 콘텐츠에 민감한 사항 존재시 수정 요청을
+                합니다. (영상 전체 수정은 불가합니다.)<span></span>2단계의 수정이 진행되면 ’공개"로 릴리즈 및 광고
+                집행합니다. (광고 집행 시 광고 집행화면 캡처본을
+                광고주 메일로 제출합니다.)</p>
+        </div>
+    </div>
+
+    <div class="cont" th:object="${contest}">
+        <p class="b_tit margint0">결제</p>
+        <div class="form_control">
+            <h4 style="border-bottom:1px solid #000;padding-bottom:10px">무통장 입금</h4>
+            <div class="account_box">
+                <div>제목<span th:text="*{title}"></span></div>
+                <div>기업명<span th:text="*{name}"></span></div>
+                <!--div>계좌번호<span>12-2314-312559-01</span></div-->
+                <div>총 결제금액<span style="color:#0058ff" th:text="*{totalPaymentPrice}">원</span></div>
+            </div>
+            <h5>*입금 후 콘테스트 요청서 검토가 시작됩니다.<br>*24시간 이내 기재된 연락처로 검토 결과를 보내드립니다.</h5>
+        </div>
+
+        <!--div class="form_control">
+            <h4>현금영수증</h4>
+            <label><input type="radio" name="c_receipts" value="1" checked> 소득공제용</label>
+            <label><input type="radio" name="c_receipts" value="2"> 지출증빙용</label>
+            <label><input type="radio" name="c_receipts" value="3"> 미발행</label>
+
+            <div class="cash_box">
+                <select name="c_receipts_slt">
+                    <option value="1">휴대폰 번호</option>
+                    <option value="2">현금영수증 카드번호</option>
+                </select>
+
+                <input type="tel" name="c_receipts_number" placeholder="- 제외">
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="form_control">
+            <h4>세금계산서</h4>
+            <label><input type="radio" name="c_tax_type" value="1" checked> 발행</label>
+            <label><input type="radio" name="c_tax_type" value="2"> 미발행</label>
+            <input type="tel" name="c_tax_number" placeholder="사업자번호(-제외)" value="<?=$mem_business_number?>">
+        </div-->
+
+        <button type="button" class="btn margint20" id="smit_step3">결제하기</button>
+    </div>
+    <div class="clear"></div>
+
+    <form name="frm" action="/contest/payment" th:object="${contest}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="c_type" th:value="*{type.ordinal()}">
+        <input type="hidden" name="c_category" th:value="*{category}">
+        <!--    <input type="hidden" name="mem_service" th:value="*{}">-->
+        <!--    <input type="hidden" name="c_channel_type" th:value="*{}">-->
+        <input type="hidden" name="c_title" th:value="*{title}">
+        <input type="hidden" name="c_name" th:value="*{name}">
+        <input type="hidden" name="c_context" th:value="*{text}">
+        <input type="hidden" name="c_reward" th:value="*{reward}">
+        <input type="hidden" name="c_ad_chk" th:value="*{paidAds}">
+        <input type="hidden" name="c_ad_price" th:value="*{adsPrice}">
+        <input type="hidden" name="c_fees" th:value="*{burdenFee}">
+        <input type="hidden" name="c_deadline" th:value="*{recruitDeadLineDate}">
+        <input type="hidden" name="c_style" th:value="*{contentsStyle}">
+        <input type="hidden" name="c_duedate" th:value="*{contentsCompletedDate}">
+        <!--    <input type="hidden" name="c_file_idx" th:value="*{}">-->
+        <input type="hidden" name="total_cash" th:value="*{totalPaymentPrice}">
+        <!--    <input type="hidden" name="orderId" th:value="*{}">-->
+    </form>
+
+    <div class="clear"></div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

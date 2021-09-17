@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/contest.css"/>
+    <script type="text/javascript" src="../js/contest.js"></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='snb_wrap'>
+    <ul>
+        <li><a th:href='@{list}'>열린 콘테스트</a></li>
+        <li><a th:href='@{open}'>콘테스트 열기</a></li>
+        <li><a th:href='@{old}'>지난 콘테스트</a></li>
+        <li><a th:href='@{case}'>사례</a></li>
+    </ul>
+    <div class='contest_top'><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class="sub_key">콘테스트 열기</div>
+
+<div class="wrap">
+    <p class="nav marginb10">콘테스트 열기</p>
+    <p class="nav_txt">콘테스트 채널 유형을 선택해주세요.<a href="#"><i class="fas fa-question-circle">
+    </i> 콘테스트 진행 과정이 궁금하신가요?</a></p>
+
+    <ul class="lst1">
+        <li>
+            <img src="/image/site/sub/youtube_icon2.png" class="icon">
+            <p class="p1">콘테스트</p>
+            <p class="p2">제한없이<br>모든 유튜버에게<br><span>30만원부터</span></p>
+            <a th:href="@{create1?type=1}"><img src="/image/site/sub/contest_btn1.png"></a>
+        </li>
+        <li>
+            <img src="/image/site/sub/youtube_icon.png" class="icon">
+            <p class="p1">프리미엄 <img src="/image/site/sub/crown.png"></p>
+            <p class="p2">구독자 10만 이상<br>유튜버에게<br><span>100만원부터</span></p>
+            <a th:href="@{create1?type=2}"><img src="/image/site/sub/contest_btn2.png"></a>
+        </li>
+    </ul>
+
+    <ul class="lst2">
+        <li>
+            <img src="/image/site/sub/sns1.png">
+            <p><img src="/image/site/sub/won.png">10만원 ~</p>
+        </li>
+        <li>
+            <img src="/image/site/sub/sns2.png">
+            <p><img src="/image/site/sub/won.png">10만원 ~</p>
+        </li>
+        <li>
+            <img src="/image/site/sub/sns3.png">
+            <p><img src="/image/site/sub/won.png">10만원 ~</p>
+        </li>
+    </ul>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
