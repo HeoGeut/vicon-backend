@@ -42,9 +42,10 @@
     </div>
 
     <div class='cont'>
-        <form name='form' th:action="@{/contests/create1 (id=${id})}" method="post" th:object="${contestForm1}"
+        <form name='form' th:action="@{/contests/create1}" method="post" th:object="${contestForm1}"
               enctype="multipart/form-data">
-            <input type='hidden' name='c_type' th:value="${type}">
+            <input type='hidden' th:name="tempContestType" th:value="${type}">
+            <input type='hidden' th:name="contestId" th:value="${contestId}">
             <p class='b_tit marginb10'>귀하의 비즈니스 키워드를 알려주세요</p>
             <div class='form_control'>
                 <input type='text' th:field="*{businessCategory}"

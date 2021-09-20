@@ -2,7 +2,6 @@ package com.vicon.viconbackend.features.contest
 
 import com.vicon.viconbackend.domain.contest.*
 import com.vicon.viconbackend.domain.member.MemberRepository
-import org.joda.time.format.DateTimeFormatter
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -102,9 +101,10 @@ class ContestController(
         }
 
         val contest = Contest(type = typeEnum)
-        val savedContestId = contestService.save(contest)
+        val savedContestId = contestService.save(contest).id
+        println(savedContestId)
 
-        model.addAttribute("id", savedContestId)
+        model.addAttribute("contestId", savedContestId.toString())
         model.addAttribute("type", type)
         model.addAttribute("contestForm1", ContestCreateForm1())
 
@@ -113,12 +113,14 @@ class ContestController(
 
     @PostMapping("create1")
     fun create1(
-        @RequestParam id: String,
         model: Model,
         contestForm1: ContestCreateForm1
     ): String {
+        println("=====================")
+        println(contestForm1)
+        println("=====================")
 
-        val foundContest = contestService.findById(id.toLong()).get()
+        val foundContest = contestService.findById(contestForm1.contestId.toLong()).get()
         foundContest.run {
             this.category = contestForm1.businessCategory
             this.title = contestForm1.title
@@ -137,9 +139,12 @@ class ContestController(
                         "_${type!!.ordinal}_${id}"
         }
 
-        val savedContestId = contestService.save(foundContest)
+        val savedContestId = contestService.save(foundContest).id!!
 
-        model.addAttribute("id", savedContestId)
+        val tempContestType = contestForm1.tempContestType
+
+        model.addAttribute("contestId", savedContestId)
+        model.addAttribute("tempContestType", tempContestType)
         model.addAttribute("contestForm2", ContestCreateForm2())
 
         return "contests/create2"
@@ -147,19 +152,31 @@ class ContestController(
 
     @PostMapping("create2")
     fun create2(
-        @RequestParam id: String,
         model: Model,
         contestForm2: ContestCreateForm2
     ): String {
+        println("======================")
+        println(contestForm2)
+        println("======================")
 
-        val foundContest = contestService.findById(id.toLong()).get()
+        val foundContest = contestService.findById(contestForm2.contestId.toLong()).get()
         foundContest.run {
-            this.reward = contestForm2.reward.toBigDecimal()
-            this.isPaidAds = contestForm2.paidAds
-            this.adsPrice = contestForm2.adsPrice
+            this.reward = contestForm2.c_reward.replace(",", "").toBigDecimal()
+            this.isPaidAds = contestForm2.c_ad_chk.run {
+                when (this) {
+                    "1" -> true
+                    else -> false
+                }
+            }
+            this.adsPrice = contestForm2.c_ad_price
             this.isBurdenFee = contestForm2.burdenFee
-            this.recruitDeadLineDate = contestForm2.recruitDeadLineDate
-            this.contentsCompletedDate = contestForm2.contentsCompletedDate
+
+            val deadLineDateList = contestForm2.c_deadline!!.split("-").map { it.toInt() }
+            this.recruitDeadLineDate = LocalDateTime.of(deadLineDateList[0], deadLineDateList[1], deadLineDateList[2], 0, 0)
+
+            val dueDateList = contestForm2.c_duedate!!.split("-").map { it.toInt() }
+            this.contentsCompletedDate = LocalDateTime.of(dueDateList[0], dueDateList[1], dueDateList[2], 0, 0)
+
             this.totalPaymentPrice = contestForm2.totalReward.toBigDecimal()
         }
         contestService.save(foundContest)

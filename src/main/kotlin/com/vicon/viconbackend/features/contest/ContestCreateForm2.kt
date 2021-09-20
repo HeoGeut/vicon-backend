@@ -3,11 +3,12 @@ package com.vicon.viconbackend.features.contest
 import java.time.LocalDateTime
 
 data class ContestCreateForm2 (
-    val reward: String = "",
-    val paidAds: Boolean = false,
-    val adsPrice: String = "",
+    val contestId: String = "",
+    val c_reward: String = "",
+    val c_ad_chk: String = "",
+    val c_ad_price: String = "",
     val burdenFee: Boolean = false,
-    val recruitDeadLineDate: LocalDateTime? = null,
-    val contentsCompletedDate: LocalDateTime? = null,
+    val c_deadline: String? = "",
+    val c_duedate: String? = "",
     val totalReward: String = ""
 )

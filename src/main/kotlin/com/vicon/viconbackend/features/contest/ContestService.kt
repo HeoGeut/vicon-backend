@@ -17,8 +17,8 @@ class ContestService(
         return contestRepository.findTop3ByOrderByRecruitDeadLineDate()
     }
 
-    fun save(contest: Contest): Long? {
-        return contestRepository.save(contest).member?.id
+    fun save(contest: Contest): Contest {
+        return contestRepository.save(contest)
     }
 
     fun findById(id: Long): Optional<Contest> {
