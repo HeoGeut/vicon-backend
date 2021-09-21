@@ -1,11 +1,10 @@
 package com.vicon.viconbackend.features.auth
 
+import com.sun.org.apache.xml.internal.serialize.LineSeparator.Web
 import com.vicon.viconbackend.domain.member.Member
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("auth")
@@ -21,10 +20,22 @@ class AuthController(
 
     @PostMapping("join")
     fun createMember(memberCreateForm: MemberCreateForm): String {
+
+        println("=======================")
+        println(memberCreateForm)
+        println("=======================")
+
         val member = Member().from(memberCreateForm)
 
         memberService.save(member)
 
         return "redirect:/"
+    }
+
+    @PostMapping("ajax")
+    fun ajax(
+        @RequestBody data : IdCheckForm
+    ): Boolean {
+        return memberService.findById(data.mem_id.toLong()).isPresent
     }
 }

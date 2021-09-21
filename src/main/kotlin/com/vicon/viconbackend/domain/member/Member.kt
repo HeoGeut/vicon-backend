@@ -42,20 +42,20 @@ data class Member(
 
 ) : Auditable<Long>() {
     fun from(memberCreateForm: MemberCreateForm): Member {
-        this.memberId = memberCreateForm.memberId
-        this.memberPw = memberCreateForm.memberPw
-        this.phoneNumberFront = memberCreateForm.phoneNumberFront
-        this.phoneNumberMiddle = memberCreateForm.phoneNumberMiddle
-        this.phoneNumberBack = memberCreateForm.phoneNumberBack
-        this.emailFront = memberCreateForm.emailFront
-        this.emailBack = memberCreateForm.emailBack
-        this.companyName = memberCreateForm.companyName
-        this.businessCategory = memberCreateForm.businessCategory
-        this.websiteurl = memberCreateForm.websiteUrl
-        this.channelCategory = memberCreateForm.channelCategory
-        this.channelUrl = memberCreateForm.channelUrl
-        this.subscriberAmount = memberCreateForm.subscriberAmount
-        this.businessType = BusinessType.valueOf(memberCreateForm.businessType)
+        this.memberId = memberCreateForm.mem_id
+        this.memberPw = memberCreateForm.mem_pw
+        this.phoneNumberFront = memberCreateForm.mem_hp1
+        this.phoneNumberMiddle = memberCreateForm.mem_hp2
+        this.phoneNumberBack = memberCreateForm.mem_hp3
+        this.emailFront = memberCreateForm.mem_email1
+        this.emailBack = memberCreateForm.mem_email2
+        this.companyName = memberCreateForm.mem_company
+        this.businessCategory = memberCreateForm.mem_service
+        this.websiteurl = memberCreateForm.mem_website
+        this.channelCategory = memberCreateForm.mem_business_type
+        this.channelUrl = memberCreateForm.mem_ch_url
+        this.subscriberAmount = memberCreateForm.mem_ch_subscriber
+        this.businessType = BusinessType.valueOf(memberCreateForm.mem_ch_category)
         this.channelType = memberCreateForm.channelType.toString()
 
         return this

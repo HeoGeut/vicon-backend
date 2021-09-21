@@ -37,29 +37,29 @@
 
             <div class='form_control'>
                 <h4>아이디<span>●</span></h4>
-                <input th:field="*{memberId}" type='text' name='mem_id' placeholder='5~12자' id='userId' maxlength="12">
+                <input type='text' th:name='mem_id' placeholder='5~12자' id='userId' maxlength="12">
                 <p id='id_chk'>중복확인</p>
                 <p id='id_txt'>사용 가능한 아이디입니다.</p>
             </div>
 
             <div class='form_control' style='margin-bottom:0 !important'>
                 <h4>비밀번호<span>●</span></h4>
-                <input th:field="*{memberPw}" type='password' name='mem_pw' placeholder='영어, 숫자, 특수기호를 넣어 8~16자' maxlength="16">
+                <input type='password' th:name='mem_pw' placeholder='영어, 숫자, 특수기호를 넣어 8~16자' maxlength="16">
                 <p id='pw_chk'></p>
             </div>
             <div class='form_control'>
-                <input type='password' name='mem_pw2' placeholder='비밀번호 확인' style='margin-top:0;border-top:none'>
+                <input type='password' th:name='mem_pw2' placeholder='비밀번호 확인' style='margin-top:0;border-top:none'>
                 <p id='pw_chk2'></p>
             </div>
 
             <div class='form_control'>
                 <h4>연락처<span>●</span></h4>
                 <div>
-                    <input th:field="*{phoneNumberFront}" type='tel' name='mem_hp1' onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                    <input type='tel' th:name='mem_hp1' onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                            placeholder='010' value="010" maxlength="3"> -
-                    <input th:field="*{phoneNumberMiddle}" type='tel' name='mem_hp2' onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                    <input type='tel' th:name='mem_hp2' onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                            placeholder='1234' maxlength="4"> -
-                    <input th:field="*{phoneNumberBack}" type='tel' name='mem_hp3' onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                    <input type='tel' th:name='mem_hp3' onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                            placeholder='5678' maxlength="4">
                 </div>
             </div>
@@ -67,8 +67,8 @@
             <div class='form_control'>
                 <h4>이메일<span>●</span></h4>
                 <div>
-                    <input th:field="*{emailFront}" type='email' name='mem_email1' placeholder='id'> @
-                    <input th:field="*{emailBack}" type='email' name='mem_email2' placeholder='service.com'>
+                    <input type='email' th:name='mem_email1' placeholder='id'> @
+                    <input type='email' th:name='mem_email2' placeholder='service.com'>
                 </div>
             </div>
 
@@ -77,50 +77,50 @@
                     <p class='b_tit'>비즈니스 정보</p>
                     <div class='form_control'>
                         <h4>기업명</h4>
-                        <input th:field="*{companyName}" type='text' name='mem_company' placeholder='기업명'>
+                        <input type='text' th:name='mem_company' placeholder='기업명'>
                     </div>
 
                     <div class='form_control'>
                         <h4>비즈니스 카테고리(업종)</h4>
-                        <input th:field="*{businessCategory}" type='text' name='mem_service' placeholder='ex) 화장품 제조, 온라인 서비스 등'>
+                        <input type='text' th:name='mem_service' placeholder='ex) 화장품 제조, 온라인 서비스 등'>
                     </div>
 
                     <div class='form_control'>
                         <h4>웹사이트 주소</h4>
-                        <input th:field="*{websiteUrl}" type='text' name='mem_website' placeholder='http://www.example.com'>
+                        <input type='text' th:name='mem_website' placeholder='http://www.example.com'>
                     </div>
 
                     <div class='form_control'>
                         <h4>사업자 유형</h4>
-                        <label><input type='radio' th:field="*{businessType}" name='mem_business_type' value='INDIVIDUAL'> 개인</label>
-                        <label><input type='radio' th:field="*{businessType}" name='mem_business_type' value='CORPORATION'> 법인</label>
-                        <label><input type='radio' th:field="*{businessType}" name='mem_business_type' value='SIMPLE_TAX'> 간이과세자</label>
-                        <label><input type='radio' th:field="*{businessType}" name='mem_business_type' value='PUBLIC_ENTERPRISE'> 공기업</label>
+                        <label><input type='radio' th:name='mem_business_type' value='INDIVIDUAL'> 개인</label>
+                        <label><input type='radio' th:name='mem_business_type' value='CORPORATION'> 법인</label>
+                        <label><input type='radio' th:name='mem_business_type' value='SIMPLE_TAX'> 간이과세자</label>
+                        <label><input type='radio' th:name='mem_business_type' value='PUBLIC_ENTERPRISE'> 공기업</label>
                     </div>
                 </div>
                 <div class='b2'>
                     <p class='b_tit'>채널 정보</p>
                     <div class='form_control'>
                         <h4>대표 채널 URL</h4>
-                        <input th:field="*{channelUrl}" type='text' name='mem_ch_url' placeholder='대표 채널 URL'>
+                        <input type='text' th:name='mem_ch_url' placeholder='대표 채널 URL'>
                     </div>
 
                     <div class='form_control'>
                         <h4>채널 카테고리</h4>
-                        <input th:field="*{channelCategory}" type='text' name='mem_ch_category' placeholder='주요 콘텐츠/장르'>
+                        <input type='text' th:name='mem_ch_category' placeholder='주요 콘텐츠/장르'>
                     </div>
 
                     <div class='form_control'>
                         <h4>현재 채널 구독자 수</h4>
-                        <input th:field="*{subscriberAmount}" type='text' name='mem_ch_subscriber' placeholder='000,000 명'>
+                        <input type='text' th:name='mem_ch_subscriber' placeholder='000,000 명'>
                     </div>
 
-                    <div class='form_control'>
+                    <div class='form_control' th:field="*{channelType}">
                         <h4>보유채널</h4>
-                        <label><input th:field="*{channelType}" type='checkbox' name='mem_channel_type[]' value='1'> 유튜브</label>
-                        <label><input th:field="*{channelType}" type='checkbox' name='mem_channel_type[]' value='2'> 블로그</label>
-                        <label><input th:field="*{channelType}" type='checkbox' name='mem_channel_type[]' value='3'> 인스타그램</label>
-                        <label><input th:field="*{channelType}" type='checkbox' name='mem_channel_type[]' value='4'> 페이스북</label>
+                        <label><input type='checkbox' name='mem_channel_type[]' value='1'> 유튜브</label>
+                        <label><input type='checkbox' name='mem_channel_type[]' value='2'> 블로그</label>
+                        <label><input type='checkbox' name='mem_channel_type[]' value='3'> 인스타그램</label>
+                        <label><input type='checkbox' name='mem_channel_type[]' value='4'> 페이스북</label>
                     </div>
                 </div>
             </div>

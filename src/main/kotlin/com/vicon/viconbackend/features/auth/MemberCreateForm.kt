@@ -1,25 +1,24 @@
 package com.vicon.viconbackend.features.auth
 
 data class MemberCreateForm(
-    val memberId: String = "",
-    val memberPw: String = "",
-    val memberPwCheck: String = "",
+    val mem_id: String = "",
+    val mem_pw: String = "",
+    val mem_pw2: String = "",
 
-    val phoneNumberFront: String? = "",
-    val phoneNumberMiddle: String? = "",
-    val phoneNumberBack: String? = "",
+    val mem_hp1: String? = "",
+    val mem_hp2: String? = "",
+    val mem_hp3: String? = "",
 
-    val emailFront: String? = "",
-    val emailBack: String? = "",
+    val mem_email1: String? = "",
+    val mem_email2: String? = "",
 
-    val companyName: String? = "",
-    val businessCategory: String? = "",
-    val websiteUrl: String? = "",
+    val mem_company: String? = "",
+    val mem_service: String? = "",
+    val mem_website: String? = "",
+    val mem_business_type: String? = "",
 
-    val channelCategory: String? = "",
-    val channelUrl: String? = "",
-    val subscriberAmount: String? = "",
-
-    val businessType: String = "",
+    val mem_ch_url: String? = "",
+    val mem_ch_category: String = "",
+    val mem_ch_subscriber: String? = "",
     val channelType: List<String> = mutableListOf(),
 )
