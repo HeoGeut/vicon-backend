@@ -94,16 +94,6 @@ class ContestController(
         @RequestParam(value = "type", required = true) type: String,
         model: Model,
     ): String {
-//        val typeEnum = when (type) {
-//            "1" -> ContestType.STANDARD
-//            else -> ContestType.PREMIUM
-//        }
-//
-//        val contest = Contest(type = typeEnum)
-//        val savedContestId = contestService.save(contest).id
-//        println(savedContestId)
-
-//        model.addAttribute("contestId", savedContestId.toString())
         model.addAttribute("c_type", type)
         model.addAttribute("contestForm1", ContestCreateForm())
 
@@ -130,32 +120,6 @@ class ContestController(
             c_style = contestForm1.c_style,
 //                file = contestForm1.file
         )
-
-//        val foundContest = contestService.findById(contestForm1.contestId.toLong()).get()
-//        foundContest.run {
-//            this.category = contestForm1.businessCategory
-//            this.title = contestForm1.title
-//            this.name = contestForm1.name
-//            this.text = contestForm1.text
-//            this.contentsStyle = contestForm1.contentsStyle
-//            this.type = contestForm1.tempContestType.run {
-//                if (this == "1") {
-//                    ContestType.STANDARD
-//                } else {
-//                    ContestType.PREMIUM
-//                }
-//            }
-//            this.orderNumber =
-//                LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm")) +
-//                        "_${type!!.ordinal}_${id}"
-//        }
-
-//        val savedContestId = contestService.save(foundContest).id!!
-//
-//        val tempContestType = contestForm1.tempContestType
-
-//        model.addAttribute("contestId", savedContestId)
-//        model.addAttribute("tempContestType", tempContestType)
         model.addAttribute("contestForm2", contestForm2)
 
         return "contests/create2"
@@ -169,28 +133,6 @@ class ContestController(
         println("======================")
         println(contestForm2)
         println("======================")
-
-//        val foundContest = contestService.findById(contestForm2.contestId.toLong()).get()
-//        foundContest.run {
-//            this.reward = contestForm2.c_reward.replace(",", "").toBigDecimal()
-//            this.isPaidAds = contestForm2.c_ad_chk.run {
-//                when (this) {
-//                    "1" -> true
-//                    else -> false
-//                }
-//            }
-//            this.adsPrice = contestForm2.c_ad_price
-//            this.isBurdenFee = contestForm2.burdenFee
-//
-//            val deadLineDateList = contestForm2.c_deadline!!.split("-").map { it.toInt() }
-//            this.recruitDeadLineDate = LocalDateTime.of(deadLineDateList[0], deadLineDateList[1], deadLineDateList[2], 0, 0)
-//
-//            val dueDateList = contestForm2.c_duedate!!.split("-").map { it.toInt() }
-//            this.contentsCompletedDate = LocalDateTime.of(dueDateList[0], dueDateList[1], dueDateList[2], 0, 0)
-//
-//            this.totalPaymentPrice = contestForm2.totalReward.toBigDecimal()
-//        }
-//        contestService.save(foundContest)
 
         model.addAttribute("contestForm2", contestForm2)
 
