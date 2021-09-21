@@ -6,7 +6,7 @@ import com.vicon.viconbackend.domain.contest.ContestType
 import java.time.LocalDate
 
 data class ContestDTO(
-    val memberProfileImage: String = "",
+    val memberProfileImage: String? = "",
     val name: String = "",
     val title: String = "",
     val text: String = "",
@@ -21,7 +21,7 @@ data class ContestDTO(
     companion object {
         fun of(contest: Contest): ContestDTO {
             return ContestDTO(
-                memberProfileImage = contest.member!!.profileImage!!,
+                memberProfileImage = contest.member!!.profileImage ?: "",
                 name = contest.name!!,
                 title = contest.title!!,
                 text = contest.text!!,

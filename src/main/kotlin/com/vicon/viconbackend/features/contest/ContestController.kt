@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*
 @Controller
 @RequestMapping("contests")
 class ContestController(
-        val contestService: ContestService,
-        val memberRepository: MemberRepository
+    val contestService: ContestService,
+    val memberRepository: MemberRepository
 ) {
     //    init {
 //        val contest = Contest(
@@ -91,8 +91,8 @@ class ContestController(
 
     @GetMapping("create1")
     fun createContest(
-            @RequestParam(value = "type", required = true) type: String,
-            model: Model,
+        @RequestParam(value = "type", required = true) type: String,
+        model: Model,
     ): String {
 //        val typeEnum = when (type) {
 //            "1" -> ContestType.STANDARD
@@ -104,7 +104,7 @@ class ContestController(
 //        println(savedContestId)
 
 //        model.addAttribute("contestId", savedContestId.toString())
-        model.addAttribute("type", type)
+        model.addAttribute("c_type", type)
         model.addAttribute("contestForm1", ContestCreateForm())
 
         return "contests/create1"
@@ -112,8 +112,8 @@ class ContestController(
 
     @PostMapping("create1")
     fun create1(
-            model: Model,
-            contestForm1: ContestCreateForm
+        model: Model,
+        contestForm1: ContestCreateForm
     ): String {
         println("=====================")
         println(contestForm1)
@@ -122,12 +122,12 @@ class ContestController(
 //        val a = contestForm1.file.
 
         val contestForm2 = ContestCreateForm(
-                type = contestForm1.type,
-                businessCategory = contestForm1.businessCategory,
-                title = contestForm1.title,
-                name = contestForm1.name,
-                text = contestForm1.text,
-                contentsStyle = contestForm1.contentsStyle,
+            c_type = contestForm1.c_type,
+            businessCategory = contestForm1.businessCategory,
+            title = contestForm1.title,
+            name = contestForm1.name,
+            text = contestForm1.text,
+            c_style = contestForm1.c_style,
 //                file = contestForm1.file
         )
 
@@ -163,8 +163,8 @@ class ContestController(
 
     @PostMapping("create2")
     fun create2(
-            model: Model,
-            contestForm2: ContestCreateForm
+        model: Model,
+        contestForm2: ContestCreateForm
     ): String {
         println("======================")
         println(contestForm2)
@@ -199,7 +199,7 @@ class ContestController(
 
     @PostMapping("payment")
     fun payment(
-            contestForm: ContestCreateForm
+        contestForm: ContestCreateForm
     ): String {
         val contest = Contest().from(contestForm)
         contestService.save(contest)

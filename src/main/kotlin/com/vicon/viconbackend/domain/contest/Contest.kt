@@ -61,7 +61,7 @@ data class Contest(
 
 ) : Auditable<Long>() {
     fun from(createForm: ContestCreateForm): Contest {
-        this.type = createForm.type.run {
+        this.type = createForm.c_type.run {
             when (this) {
                 "1" -> ContestType.STANDARD
                 else -> ContestType.PREMIUM
