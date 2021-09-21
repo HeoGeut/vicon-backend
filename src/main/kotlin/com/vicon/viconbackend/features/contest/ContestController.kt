@@ -5,13 +5,12 @@ import com.vicon.viconbackend.domain.member.MemberRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
-import java.time.LocalDateTime
 
 @Controller
 @RequestMapping("contests")
 class ContestController(
-    val contestService: ContestService,
-    val memberRepository: MemberRepository
+        val contestService: ContestService,
+        val memberRepository: MemberRepository
 ) {
     //    init {
 //        val contest = Contest(
@@ -92,103 +91,118 @@ class ContestController(
 
     @GetMapping("create1")
     fun createContest(
-        @RequestParam(value = "type", required = true) type: String,
-        model: Model,
+            @RequestParam(value = "type", required = true) type: String,
+            model: Model,
     ): String {
-        val typeEnum = when (type) {
-            "1" -> ContestType.STANDARD
-            else -> ContestType.PREMIUM
-        }
+//        val typeEnum = when (type) {
+//            "1" -> ContestType.STANDARD
+//            else -> ContestType.PREMIUM
+//        }
+//
+//        val contest = Contest(type = typeEnum)
+//        val savedContestId = contestService.save(contest).id
+//        println(savedContestId)
 
-        val contest = Contest(type = typeEnum)
-        val savedContestId = contestService.save(contest).id
-        println(savedContestId)
-
-        model.addAttribute("contestId", savedContestId.toString())
+//        model.addAttribute("contestId", savedContestId.toString())
         model.addAttribute("type", type)
-        model.addAttribute("contestForm1", ContestCreateForm1())
+        model.addAttribute("contestForm1", ContestCreateForm())
 
         return "contests/create1"
     }
 
     @PostMapping("create1")
     fun create1(
-        model: Model,
-        contestForm1: ContestCreateForm1
+            model: Model,
+            contestForm1: ContestCreateForm
     ): String {
         println("=====================")
         println(contestForm1)
         println("=====================")
 
-        val foundContest = contestService.findById(contestForm1.contestId.toLong()).get()
-        foundContest.run {
-            this.category = contestForm1.businessCategory
-            this.title = contestForm1.title
-            this.name = contestForm1.name
-            this.text = contestForm1.text
-            this.contentsStyle = contestForm1.contentsStyle
-            this.type = contestForm1.tempContestType.run {
-                if (this == "1") {
-                    ContestType.STANDARD
-                } else {
-                    ContestType.PREMIUM
-                }
-            }
-            this.orderNumber =
-                LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm")) +
-                        "_${type!!.ordinal}_${id}"
-        }
+//        val a = contestForm1.file.
 
-        val savedContestId = contestService.save(foundContest).id!!
+        val contestForm2 = ContestCreateForm(
+                type = contestForm1.type,
+                businessCategory = contestForm1.businessCategory,
+                title = contestForm1.title,
+                name = contestForm1.name,
+                text = contestForm1.text,
+                contentsStyle = contestForm1.contentsStyle,
+//                file = contestForm1.file
+        )
 
-        val tempContestType = contestForm1.tempContestType
+//        val foundContest = contestService.findById(contestForm1.contestId.toLong()).get()
+//        foundContest.run {
+//            this.category = contestForm1.businessCategory
+//            this.title = contestForm1.title
+//            this.name = contestForm1.name
+//            this.text = contestForm1.text
+//            this.contentsStyle = contestForm1.contentsStyle
+//            this.type = contestForm1.tempContestType.run {
+//                if (this == "1") {
+//                    ContestType.STANDARD
+//                } else {
+//                    ContestType.PREMIUM
+//                }
+//            }
+//            this.orderNumber =
+//                LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm")) +
+//                        "_${type!!.ordinal}_${id}"
+//        }
 
-        model.addAttribute("contestId", savedContestId)
-        model.addAttribute("tempContestType", tempContestType)
-        model.addAttribute("contestForm2", ContestCreateForm2())
+//        val savedContestId = contestService.save(foundContest).id!!
+//
+//        val tempContestType = contestForm1.tempContestType
+
+//        model.addAttribute("contestId", savedContestId)
+//        model.addAttribute("tempContestType", tempContestType)
+        model.addAttribute("contestForm2", contestForm2)
 
         return "contests/create2"
     }
 
     @PostMapping("create2")
     fun create2(
-        model: Model,
-        contestForm2: ContestCreateForm2
+            model: Model,
+            contestForm2: ContestCreateForm
     ): String {
         println("======================")
         println(contestForm2)
         println("======================")
 
-        val foundContest = contestService.findById(contestForm2.contestId.toLong()).get()
-        foundContest.run {
-            this.reward = contestForm2.c_reward.replace(",", "").toBigDecimal()
-            this.isPaidAds = contestForm2.c_ad_chk.run {
-                when (this) {
-                    "1" -> true
-                    else -> false
-                }
-            }
-            this.adsPrice = contestForm2.c_ad_price
-            this.isBurdenFee = contestForm2.burdenFee
+//        val foundContest = contestService.findById(contestForm2.contestId.toLong()).get()
+//        foundContest.run {
+//            this.reward = contestForm2.c_reward.replace(",", "").toBigDecimal()
+//            this.isPaidAds = contestForm2.c_ad_chk.run {
+//                when (this) {
+//                    "1" -> true
+//                    else -> false
+//                }
+//            }
+//            this.adsPrice = contestForm2.c_ad_price
+//            this.isBurdenFee = contestForm2.burdenFee
+//
+//            val deadLineDateList = contestForm2.c_deadline!!.split("-").map { it.toInt() }
+//            this.recruitDeadLineDate = LocalDateTime.of(deadLineDateList[0], deadLineDateList[1], deadLineDateList[2], 0, 0)
+//
+//            val dueDateList = contestForm2.c_duedate!!.split("-").map { it.toInt() }
+//            this.contentsCompletedDate = LocalDateTime.of(dueDateList[0], dueDateList[1], dueDateList[2], 0, 0)
+//
+//            this.totalPaymentPrice = contestForm2.totalReward.toBigDecimal()
+//        }
+//        contestService.save(foundContest)
 
-            val deadLineDateList = contestForm2.c_deadline!!.split("-").map { it.toInt() }
-            this.recruitDeadLineDate = LocalDateTime.of(deadLineDateList[0], deadLineDateList[1], deadLineDateList[2], 0, 0)
-
-            val dueDateList = contestForm2.c_duedate!!.split("-").map { it.toInt() }
-            this.contentsCompletedDate = LocalDateTime.of(dueDateList[0], dueDateList[1], dueDateList[2], 0, 0)
-
-            this.totalPaymentPrice = contestForm2.totalReward.toBigDecimal()
-        }
-        contestService.save(foundContest)
-
-        model.addAttribute("contest", foundContest)
+        model.addAttribute("contestForm2", contestForm2)
 
         return "contests/payment"
     }
 
-    @GetMapping("payment")
-    fun payment(): String {
-
+    @PostMapping("payment")
+    fun payment(
+            contestForm: ContestCreateForm
+    ): String {
+        val contest = Contest().from(contestForm)
+        contestService.save(contest)
 
         return "redirect:/"
     }

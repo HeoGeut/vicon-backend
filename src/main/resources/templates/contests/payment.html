@@ -22,12 +22,12 @@
 
 <div class="wrap">
     <p class="nav"><span>콘테스트 열기</span> >
-        <span th:text="${contest.type.ordinal}=='1'? '콘테스트 열기' : '프리미엄 콘테스트 열기'">콘테스트 열기</span> > 결제</p>
+        <span th:text="${contestForm2.type}=='1'? '콘테스트 열기' : '프리미엄 콘테스트 열기'">콘테스트 열기</span> > 결제</p>
 
     <div class="lnb">
         <p class="p1">콘테스트</p>
         <p class="p2">제한없이<br>모든 유튜버에게<br>
-            <span th:text="${contest.type.ordinal}=='1'? '30만원부터' : '100만원부터'">100만원부터</span>
+            <span th:text="${contestForm2.type}=='1'? '30만원부터' : '100만원부터'">100만원부터</span>
         </p>
 
         <div class="info_box">
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="cont" th:object="${contest}">
+    <div class="cont" th:object="${contestForm2}">
         <p class="b_tit margint0">결제</p>
         <div class="form_control">
             <h4 style="border-bottom:1px solid #000;padding-bottom:10px">무통장 입금</h4>
@@ -49,7 +49,8 @@
                 <div>기업명<span th:text="*{name}"></span></div>
                 <!--div>계좌번호<span>12-2314-312559-01</span></div-->
                 <div>총 결제금액<span style="color:#0058ff"
-                                 th:text="${#numbers.formatDecimal(*{totalPaymentPrice},3,2)}">원</span></div>
+                                 th:text="*{totalReward}">원</span></div>
+                <!--                                 th:text="${#numbers.formatDecimal(*{totalReward},3,2)}">원</span></div>-->
             </div>
             <h5>*입금 후 콘테스트 요청서 검토가 시작됩니다.<br>*24시간 이내 기재된 연락처로 검토 결과를 보내드립니다.</h5>
         </div>
@@ -82,23 +83,23 @@
     </div>
     <div class="clear"></div>
 
-    <form name="frm" action="/contest/payment" th:object="${contest}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="c_type" th:value="*{type.ordinal()}">
-        <input type="hidden" name="c_category" th:value="*{category}">
+    <form name="frm" action="/contest/payment" th:object="${contestForm2}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="type" th:value="*{type}">
+        <input type="hidden" th:name="businessCategory" th:value="*{businessCategory}">
         <!--    <input type="hidden" name="mem_service" th:value="*{}">-->
-        <!--    <input type="hidden" name="c_channel_type" th:value="*{}">-->
-        <input type="hidden" name="c_title" th:value="*{title}">
-        <input type="hidden" name="c_name" th:value="*{name}">
-        <input type="hidden" name="c_context" th:value="*{text}">
-        <input type="hidden" name="c_reward" th:value="*{reward}">
-        <input type="hidden" name="c_ad_chk" th:value="*{paidAds}">
-        <input type="hidden" name="c_ad_price" th:value="*{adsPrice}">
-        <input type="hidden" name="c_fees" th:value="*{burdenFee}">
-        <input type="hidden" name="c_deadline" th:value="*{recruitDeadLineDate}">
-        <input type="hidden" name="c_style" th:value="*{contentsStyle}">
-        <input type="hidden" name="c_duedate" th:value="*{contentsCompletedDate}">
+        <input type="hidden" th:name="title" th:value="*{title}">
+        <input type="hidden" th:name="name" th:value="*{name}">
+        <input type="hidden" th:name="text" th:value="*{text}">
+        <input type="hidden" th:name="contentsStyle" th:value="*{contentsStyle}">
+        <input type="hidden" th:name="file" th:value="*{file}">
+        <input type="hidden" th:name="c_reward" th:value="*{c_reward}">
+        <input type="hidden" th:name="c_ad_chk" th:value="*{c_ad_chk}">
+        <input type="hidden" th:name="c_ad_price" th:value="*{c_ad_price}">
+        <input type="hidden" th:name="burdenFee" th:value="*{burdenFee}">
+        <input type="hidden" th:name="c_deadline" th:value="*{c_deadline}">
+        <input type="hidden" th:name="c_duedate" th:value="*{c_duedate}">
         <!--    <input type="hidden" name="c_file_idx" th:value="*{}">-->
-        <input type="hidden" name="total_cash" th:value="*{totalPaymentPrice}">
+        <input type="hidden" th:name="totalReward" th:value="*{totalReward}">
         <!--    <input type="hidden" name="orderId" th:value="*{}">-->
     </form>
 
