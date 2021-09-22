@@ -9,7 +9,7 @@ data class ContestCreateForm (
     val title: String = "",
     val name: String = "",
     val text: String = "",
-    val c_style: String = "",
+    val style: String = "",
     val file: MultipartFile? = null,
     val c_reward: String = "",
     val c_ad_chk: String = "",

@@ -4,6 +4,9 @@
 <head>
     <link rel='stylesheet' type='text/css' href='../css/contest.css'/>
     <script type='text/javascript' src='../js/contest.js'></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
@@ -71,10 +74,10 @@
 
             <div class="form_control">
                 <h4>콘텐츠 스타일</h4>
-                <input type="hidden" value="2" class="lst_val" th:field="*{c_style}"/>
-                <ul class='chk_lst'>
+                <input type="hidden" th:name="style" value="2" class="lst_val">
+                <ul class="chk_lst c_style">
                     <li th:target="${'1'}">리뷰</li>
-                    <li th:target="${'2'}" class='act'>PPL</li>
+                    <li th:target="${'2'}" class="act">PPL</li>
                 </ul>
             </div>
 

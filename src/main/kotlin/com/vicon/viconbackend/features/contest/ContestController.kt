@@ -117,7 +117,7 @@ class ContestController(
             title = contestForm1.title,
             name = contestForm1.name,
             text = contestForm1.text,
-            c_style = contestForm1.c_style,
+            style = contestForm1.style,
 //                file = contestForm1.file
         )
         model.addAttribute("contestForm2", contestForm2)
