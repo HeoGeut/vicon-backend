@@ -52,10 +52,10 @@ data class Member(
         this.companyName = memberCreateForm.mem_company
         this.businessCategory = memberCreateForm.mem_service
         this.websiteurl = memberCreateForm.mem_website
-        this.channelCategory = memberCreateForm.mem_business_type
+        this.channelCategory = memberCreateForm.mem_ch_category
         this.channelUrl = memberCreateForm.mem_ch_url
         this.subscriberAmount = memberCreateForm.mem_ch_subscriber
-        this.businessType = BusinessType.valueOf(memberCreateForm.mem_ch_category)
+        this.businessType = BusinessType.valueOf(memberCreateForm.mem_business_type!!)
         this.channelType = memberCreateForm.channelType.toString()
 
         return this

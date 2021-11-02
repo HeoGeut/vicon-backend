@@ -11,4 +11,5 @@ class MemberService(
     fun save(member: Member) = memberRepository.save(member)
     fun findTop6By() = memberRepository.findTop6By()
     fun findById(id: Long) = memberRepository.findById(id)
+    fun findByMemberId(memberId: String) = memberRepository.findByMemberId(memberId)
 }

@@ -54,18 +54,25 @@ jQuery(function ($) {
             return false;
         }
 
-        $.post("/auth/ajax", JSON.stringify({type: 'id_chk', mem_id: mem_id}), function (data) {
-            // console.log(data);
-            if (!data) {
-                $("input[name=mem_id_chk]").val('1');
-                $('#id_chk').css('display', 'none');
-                $('#id_txt').css('display', 'block');
-            } else {
-                alert('사용 불가능한 아이디입니다.');
-                $("input[name=mem_id]").focus();
-                return false;
+        $.ajax({
+            url: 'ajax',
+            type: 'POST',
+            dataType: 'text',
+            data: mem_id,
+
+            success: function (data) {
+                if (data == 0) {
+                    $("input[name=mem_id_chk]").val('1');
+                    $('#id_chk').css('display', 'none');
+                    $('#id_txt').css('display', 'block');
+                } else {
+                    alert("사용 불가능한 아이디입니다.");
+                }
+            },
+            error: function () {
+
             }
-        });
+        })
     });
 
     // 아이디 입력 여부에 따라 중복확인 버튼 활성화

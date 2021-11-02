@@ -32,9 +32,12 @@ class AuthController(
     }
 
     @PostMapping("ajax")
+    @ResponseBody
     fun ajax(
-        @RequestBody data : IdCheckForm
-    ): Boolean {
-        return memberService.findById(data.mem_id.toLong()).isPresent
+        @RequestBody data : String
+    ): Int {
+        return if(memberService.findByMemberId(data).isPresent)
+            1
+        else 0
     }
 }
