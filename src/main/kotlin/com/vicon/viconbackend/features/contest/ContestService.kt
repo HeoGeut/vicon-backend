@@ -24,4 +24,8 @@ class ContestService(
     fun findById(id: Long): Optional<Contest> {
         return contestRepository.findById(id)
     }
+
+    fun findTop10ByCloseContest() : List<Contest>{
+        return contestRepository.findTop10ByIsCompletedContents(true)
+    }
 }

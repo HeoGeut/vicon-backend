@@ -4,6 +4,7 @@ import com.vicon.viconbackend.domain.contest.ContentsStyle
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.domain.contest.ContestType
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 data class ContestDTO(
     val memberProfileImage: String? = "",
@@ -27,8 +28,10 @@ data class ContestDTO(
                 text = contest.text!!,
                 isReview = contest.contentsStyle!! == ContentsStyle.PPL,
                 isStandard = contest.type!! == ContestType.STANDARD,
-                restDate = contest.recruitDeadLineDate!!
-                    .minusDays(LocalDate.now().dayOfMonth.toLong()).dayOfMonth.toString(),
+                restDate = ChronoUnit.DAYS.between(
+                    LocalDate.now(), contest.recruitDeadLineDate!!.toLocalDate()
+                )
+                    .toString(),
                 applyNumber = contest.applies!!.size.toString(),
                 totalReward = "${contest.reward!!.toInt().div(10000)}만"
             )

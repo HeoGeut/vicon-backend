@@ -1,18 +1,27 @@
 package com.vicon.viconbackend.features.contest
 
+import com.vicon.viconbackend.domain.board.BoardRepository
 import com.vicon.viconbackend.domain.contest.*
+import com.vicon.viconbackend.domain.member.BusinessType
+import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.domain.member.MemberRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import java.math.BigDecimal
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalAmount
 
 @Controller
 @RequestMapping("contests")
 class ContestController(
     val contestService: ContestService,
-    val memberRepository: MemberRepository
+    val memberRepository: MemberRepository,
+    val boardRepository: BoardRepository,
 ) {
-    //    init {
+//        init {
 //        val contest = Contest(
 //            type = ContestType.STANDARD,
 //            category = "기업 홍보",
@@ -49,14 +58,13 @@ class ContestController(
 //            orderNumber = "20210731112721_2_25"
 //        )
 //
-//        val savedContest = contestRepository.save(contest)
+//        val savedContest = contestService.save(contest)
 //    }
-    //    init {
+//        init {
 //        val member = Member(
 //            profileImage = "https://vicon-static-bucket.s3.ap-northeast-2.amazonaws.com/user/saneone/profile_image/syukharbang.jpg",
 //            memberId = "seonyul",
 //            memberPw = "123123",
-//            name = "선율샵",
 //            phoneNumberFront = "010",
 //            phoneNumberMiddle = "2706",
 //            phoneNumberBack = "7170",
@@ -67,7 +75,7 @@ class ContestController(
 //            websiteurl = null,
 //            channelCategory = "유튜브",
 //            channelUrl = null,
-//            SubscriberAmount = "100만",
+//            subscriberAmount = "100만",
 //            businessType = BusinessType.INDIVIDUAL,
 //            channelType = "1",
 //            businessNumber = "123123123"
@@ -109,8 +117,6 @@ class ContestController(
         println(contestForm1)
         println("=====================")
 
-//        val a = contestForm1.file.
-
         val contestForm2 = ContestCreateForm(
             c_type = contestForm1.c_type,
             businessCategory = contestForm1.businessCategory,
@@ -118,7 +124,6 @@ class ContestController(
             name = contestForm1.name,
             text = contestForm1.text,
             style = contestForm1.style,
-//                file = contestForm1.file
         )
         model.addAttribute("contestForm2", contestForm2)
 
@@ -149,4 +154,35 @@ class ContestController(
         return "redirect:/"
     }
 
+    @GetMapping("old")
+    fun old(model: Model): String {
+        val contests = contestService.findTop10ByCloseContest()
+        val contestDtoList = contests.map { OldContestDTO.of(it) }
+        model.addAttribute("contests", contestDtoList)
+
+        return "contests/old"
+    }
+
+    @GetMapping("view/{id}")
+    fun view(model: Model, @PathVariable id: String): String {
+        val contest = contestService.findById(id.toLong()).get()
+        val oldContestDTO = OldContestDTO.of(contest)
+
+        model.addAttribute("contest", oldContestDTO)
+
+        return "contests/view"
+    }
+
+    @GetMapping("case")
+    fun case(model: Model) : String{
+        val contests = contestService.findTop3ByOrderByRecruitDeadLineDate()
+        val contestDtoList = contests.map { ContestDTO.of(it) }
+
+        model.addAttribute("contests", contestDtoList)
+
+        val boards = boardRepository.findAll().toList()
+        model.addAttribute("boards", boards)
+
+        return "contests/case"
+    }
 }

@@ -162,8 +162,8 @@ textarea::placeholder {
 .summary{display: flex;align-items: end;border-top:1px solid #959595;padding:6px 10px;}
 .summary .logo{vertical-align: middle;display:flex;align-items: center;margin-right:10px;border-radius:50%;border:1px solid #e6e6e6;width:50px;height:50px;text-align:center;line-height:50px;background:#fff}
 .summary .logo img{display:block;width:100%;height:100%;margin:0 auto}
-.summary p{font-size:16px;color:#a8a8a8;width:190px;word-break: break-all;}
-.summary p span{display:block;font-weight:bold;color:#333;}
+.summary .info{font-size:16px;color:#a8a8a8;word-break: break-all;}
+.summary p{font-weight:bold;color:#333;}
 .summary a{font-size:16px;color:#999999;text-decoration:underline;}
 
 .go_list{position:absolute;top:50px;right:0;display:block;width:115px;}
@@ -182,6 +182,7 @@ textarea::placeholder {
 .contest_view .view_box{width:870px;padding-bottom:150px}
 .contest_view .view_box .title{height:210px;border-bottom:1px solid #dedede}
 .contest_view .view_box .title .p1{padding:0 30px;padding-top:60px;font-size:18px;font-weight:bold;color:#838383}
+.contest_view .view_box .title .p1 .date{font-size:18px;font-weight:bold;color:#838383;}
 .contest_view .view_box .title .p1 span{font-size:13px;color:#fff;border-radius:30px;display:inline-block;padding:3px 10px;margin-right:5px;line-height:1;vertical-align: middle}
 .contest_view .view_box .title .p1 span.s1{background:#0058ff;}
 .contest_view .view_box .title .p1 span.s2{background:#ffb400;}
@@ -209,7 +210,8 @@ textarea::placeholder {
 
 .contest_view .rnb>ul{padding:50px 0 0 40px;}
 .contest_view .rnb>ul li{margin-bottom:30px;display: flex;align-items: center;}
-.contest_view .rnb>ul li p{font-size:18px;font-weight: bold;color:#868686;margin-left:10px;white-space:pre-wrap;}
+.contest_view .rnb>ul li p{margin-left:10px;white-space:pre-wrap;font-size:18px;font-weight: bold;color:#868686;}
+.contest_view .rnb>ul li .info1{font-size:18px;font-weight: bold;color:#868686;}
 .contest_view .rnb>ul li p span{font-size:28px;font-weight:bold;color:#191919;display:block;}
 
 .contest_view .rnb .text_box{padding:30px;}

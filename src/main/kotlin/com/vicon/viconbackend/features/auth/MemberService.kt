@@ -12,4 +12,5 @@ class MemberService(
     fun findTop6By() = memberRepository.findTop6By()
     fun findById(id: Long) = memberRepository.findById(id)
     fun findByMemberId(memberId: String) = memberRepository.findByMemberId(memberId)
+    fun findTop10By() = memberRepository.findTop10By()
 }

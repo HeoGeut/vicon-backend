@@ -6,4 +6,5 @@ import java.util.*
 interface MemberRepository : JpaRepository<Member, Long> {
     fun findTop6By(): List<Member>
     fun findByMemberId(memberId: String) : Optional<Member>
+    fun findTop10By(): List<Member>
 }

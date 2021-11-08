@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/creator.css"/>
+    <script type="text/javascript" src="../js/use.js"></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class="snb_wrap">
+    <ul>
+        <li><a href="creator/list">크리에이터 리스트</a></li>
+    </ul>
+    <div class='top' style="background:url('/image/site/sub/sub_top3.png')no-repeat center;background-size:cover">
+        <div class='inner'>
+            <p><span>VICON Pick</span>광고주이자 크리에이터라<br>뭔가 다른 전달력</p>
+            <a href='/info/howto'>콘테스트는 어떻게 진행되나요?</a>
+        </div>
+    </div>
+</div>
+
+<div class='sub_key'>크리에이터 리스트</div>
+
+<div class='wrap'>
+    <p class='nav marginb50'>크리에이터 리스트</p>
+
+    <div class='creater_box'>
+        <div class='b1'>
+            <p class='title'>Creator list</p>
+            <form name="frm" action="#" method="get">
+                <!--        <input type="hidden" name="page_now" value="<?=$page_now?>" />-->
+                <!--        <input type="hidden" name="page_row" value="<?=$page_row?>"/>-->
+                <!--        <div class='filter_box'>-->
+                <!--          <div class="chk_box">-->
+                <!--            <input type="radio" name="chk" id="chk1" value="1" <?=$check_class?>>-->
+                <!--            <label for="chk1"><span></span> 최신 등록 순</label>-->
+                <!--          </div>-->
+                <!--          <div class="chk_box">-->
+                <!--            <input type="radio" name="chk" id="chk2" value="2" <?=check($chk,'2')?>>-->
+                <!--            <label for="chk2"><span></span> 가나다 순</label>-->
+                <!--          </div>-->
+                <!--          <div class="chk_box">-->
+                <!--            <input type="radio" name="chk" id="chk3" value="3" <?=check($chk,'3')?>>-->
+                <!--            <label for="chk3"><span></span> 응모 많은 순</label>-->
+                <!--          </div>-->
+                <!--          <div class="chk_box">-->
+                <!--            <input type="radio" name="chk" id="chk4" value="4" <?=check($chk,'4')?>>-->
+                <!--            <label for="chk4"><span></span> 당선 많은 순</label>-->
+                <!--          </div>-->
+                <!--        </div>-->
+
+                <ul class='lst' th:each="creator: ${creators}">
+                    <li>
+                        <div class='img_bx'>
+                            <img src="/image/site/noimage.png">
+                        </div>
+                        <div>
+                            <p th:text="${creator.memberId}">도익 TV</p>
+                            <span th:text="'응모 ' + ${creator.applyNumber} + ' | '">응모 139 |</span>
+                            <span th:text="'당선 ' + ${creator.confirmNumber} + ' | '">당선 97 |</span>
+                            <span th:text="'총상금 ' + ${creator.totalReward} + '원'">총상금 2160만원</span>
+                        </div>
+                        <a href=''>모든 당선작 보기</a>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+
+                <!--        <div class="margint50">-->
+                <!--          <?php include $_SERVER['DOCUMENT_ROOT']."/lib/paginate_main.php"?>-->
+                <!--        </div>-->
+                <div class="clear"></div>
+            </form>
+        </div>
+
+        <div class="rnb">
+            <p class="t1"><img src="/image/site/sub/alarm.png"> 콘테스트 마감이 얼마 남지 않았어요!</p>
+            <ul>
+                <li th:each="contest : ${contests}">
+                    <div class="tit">
+                        <div class="img_bx"><img src="/image/site/index/noimage.png"
+                                                 th:attr="src=${contest.memberProfileImage}"></div>
+                        <p class="p1" th:text="${contest.name}">KB 국민은행</p>
+                        <p class="p2" th:text="${contest.isReview}? '리뷰' : 'PPL'">리뷰</p>
+                    </div>
+                    <div class="cont">
+                        <p class="p1">
+                            <span class="s1" th:text="'D-' + ${contest.restDate}">D-11</span>
+                            <span class="s2" th:text="${contest.applyNumber}">11</span>
+                            명 응모</p>
+                        <p class="p2" th:text="${contest.name}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+                        <p class="p4" th:text="${contest.text}">KB 국민은행의 신규 예금상품을 미리 알아보는 것부터 가입하는 과정까지 자연스럽고
+                            재미있는재미있는재미있는재미있는 컨텐츠에 녹여...</p>
+                        <p class="p3">
+                            <img src="/image/site/index/won.png">
+                            <span th:text="${contest.totalReward}"></span>만원
+                        </p>
+                        <p class="p5">
+                            <img src="/image/site/index/premium.png" th:if="${not contest.isStandard}">
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <a href="/contests/list" class="more_list">목록 더보기</a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

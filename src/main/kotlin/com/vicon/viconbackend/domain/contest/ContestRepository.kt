@@ -6,4 +6,6 @@ interface ContestRepository : JpaRepository<Contest, Long> {
     fun findTop6ByIsConfirmed(isConfirmed: Boolean): List<Contest>
 
     fun findTop3ByOrderByRecruitDeadLineDate(): List<Contest>
+
+    fun findTop10ByIsCompletedContents(isCompleted: Boolean) : List<Contest>
 }

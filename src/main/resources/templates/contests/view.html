@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel='stylesheet' type='text/css' href='../../css/contest.css'/>
+    <script type='text/javascript' src='../../js/contest.js'></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='snb_wrap'>
+    <ul>
+        <li><a href='/contests/list'>열린 콘테스트</a></li>
+        <li><a href='/contests/open'>콘테스트 열기</a></li>
+        <li><a href='/contests/old'>지난 콘테스트</a></li>
+        <li><a href='/contests/case'>사례</a></li>
+    </ul>
+    <div class='contest_top'><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class='sub_key'>지난 콘테스트</div>
+<div class='wrap' style='padding-bottom:0'>
+    <p class='nav marginb30'>지난 콘테스트</p>
+    <a href='javascript:history.back();' class='go_list'><img src='/image/site/sub/go_list.png'></a>
+    <div class='contest_view' th:object="${contest}">
+        <div class='view_box'>
+            <div class='title'>
+                <p class="p1">
+                    <span th:class="*{isReview}? 's1' : 's2'"
+                          th:text="*{isReview}? '리뷰' : 'PPL'">리뷰</span>
+                    <span class="date" th:text="*{createdDate}">
+                    2020.12.03
+                    </span>
+                </p>
+                <p class='p2' th:text="*{title}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+            </div>
+            <div class='box' th:text="*{text}">콘텐츠 내용
+            </div>
+        </div>
+        <div class='rnb'>
+            <div class='info'>
+                <div class='summary'>
+                    <div class="logo"><img src="/image/site/noimage.png"></div>
+                    <p>
+                        <span th:text="*{name}">회원이름</span>
+                        <a href='#'>정보 보기</a>
+                    </p>
+                </div>
+                <ul>
+                    <li>
+                        <img src='/image/site/sub/rnb_icon4.png'>
+                        <span>마감</span>
+                        <span th:text="*{restDate}" style="color: #FFFFFF">11일 전</span>
+                    </li>
+                    <li>
+                        <img src='/image/site/sub/rnb_icon5.png'>
+                        <span>1등</span>
+                        <span th:text="*{totalReward}" style="color: #FFFFFF">400만원</span>
+                    </li>
+                    <li>
+                        <img src='/image/site/sub/rnb_icon6.png'>
+                        <span>지원</span>
+                        <span th:text="*{applyNumber} + '명'" style="color: #FFFFFF">198명</span>
+                    </li>
+                    <li>
+                        <img src='/image/site/sub/rnb_icon7.png'>
+                        <span th:text="*{category}" style="color: #FFFFFF">금융</span>
+                    </li>
+                </ul>
+                <div class='clear'></div>
+            </div>
+
+            <ul>
+                <li>
+                    <img src='/image/site/sub/rnb_icon1.png'>
+                    <p><span>1명만</span>1명만 선정되는 콘테스트입니다.</p>
+                </li>
+                <li>
+                    <img src='/image/site/sub/rnb_icon2.png'>
+                    <p><span>100%</span>수수료없이 전액 지급됩니다.</p>
+                </li>
+                <li>
+                    <img src='/image/site/sub/rnb_icon3.png'>
+                    <p style="white-space: nowrap">
+                        <span th:text="*{applyNumber} + '명'">
+                            198명</span>
+                        <span class="info1" th:text="'현재 ' + *{applyNumber} + '명이 지원했습니다'"></span>
+                    </p>
+                </li>
+            </ul>
+
+            <a href='javascript:history.back();' class='go_list'><img src='/image/site/sub/go_list.png'></a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
