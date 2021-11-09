@@ -2,6 +2,7 @@ package com.vicon.viconbackend.features.reivew
 
 import com.vicon.viconbackend.domain.contest.ContentsStyle
 import com.vicon.viconbackend.domain.review.Review
+import java.math.BigDecimal
 
 data class ReviewInfoDTO(
     val thumbnailImage: String? = "",
@@ -15,7 +16,7 @@ data class ReviewInfoDTO(
 
     val memberProfileImage: String? = "",
     val memberId: String = "",
-    val star: Int = 5,
+    val star: BigDecimal = BigDecimal(5),
 
     val createdDate: String = "",
     val reward: String = "",
@@ -24,7 +25,7 @@ data class ReviewInfoDTO(
 ) {
     companion object {
         fun of(review: Review): ReviewInfoDTO {
-            return ReviewInfoDTO(
+            return com.vicon.viconbackend.features.reivew.ReviewInfoDTO(
                 thumbnailImage = "",
                 isReview = review.contest!!.contentsStyle == ContentsStyle.REVIEW,
                 contestTitle = review.contest!!.title.toString(),
@@ -33,12 +34,17 @@ data class ReviewInfoDTO(
                 reviewContent = review.content.toString(),
                 memberProfileImage = review.member!!.profileImage,
                 memberId = review.member!!.memberId.toString(),
-                star = review.star?.toInt() ?: 5,
+                star = review.star?.toBigDecimal() ?: BigDecimal(5),
                 createdDate = review.createdAt!!.toLocalDate().toString(),
-                reward = review.contest!!.reward.toString(),
+                reward = (review.contest!!.reward!!.toInt() / 10000).toString(),
                 category = review.contest!!.category,
                 applyNumber = review.contest!!.applies?.size.toString()
             )
         }
+    }
+
+    @JvmName("getStar1")
+    fun getStar(): BigDecimal {
+        return this.star
     }
 }

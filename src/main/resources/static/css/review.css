@@ -27,6 +27,7 @@
 .lst li .cont .b1 a{position:absolute;top:50%;right:15px;width:105px;height:40px;line-height:40px;font-size:16px;font-weight:bold;color:#0058ff;border-radius: 10px;text-align:center;border:1px solid #0058ff;margin-top:-20px;background:#fff}
 .lst li .cont .b1 p{font-size:20px;color:#5d5d5d;font-weight:bold;padding-top:23px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:75%}
 .lst li .cont .b1 p span{display:block;width:48px;color:#fff;font-size:14px;font-weight:bold;height:22px;line-height:22px;text-align:center;border-radius:30px;margin-bottom:5px}
+.lst li .cont .b1 p .c1{width:75%;color:#5d5d5d;font-size:20px;font-weight:bold;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height:22px;text-align:left;border-radius:30px;margin-bottom:5px}
 .lst li .cont .b1 p .s1{background:#0058ff}
 .lst li .cont .b1 p .s2{background: #ffb400;}
 .lst li .cont .b2{position:relative;padding-left:20px;}
@@ -35,6 +36,7 @@
 .lst li .cont .b2 .p1 img{width:40px}
 .lst li .cont .b2 .p2{font-size:18px;font-weight:500;color:#565656;margin-top:10px;line-height:1.4;overflow: hidden;text-overflow: ellipsis;white-space: normal;height: 50px;text-align: left;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
 .lst li .cont .b2 .p2 span{color:#919191;display: inline-block;margin-right:10px}
+.lst li .cont .b2 .p2 .c2{color:#565656;display: inline;}
 
 .lst li .info{width:218px;height:250px;border-left: 1px solid #959595;background:#fbfbfb}
 .lst li .info .summary{display: flex;align-items: center;justify-content: center;background:#efefef;border-bottom: 1px solid #959595;height:95px}

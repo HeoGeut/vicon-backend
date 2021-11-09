@@ -16,8 +16,7 @@
     </ul>
     <div class='top2'>
         <div class='inner'>
-            <p><span>VICON review</span>쉽게 원하는 것을 요구하고
-                그 이상을 받아서 좋아요.</p>
+            <p><span>VICON review</span>쉽게 원하는 것을 요구하고 그 이상을 받아서 좋아요.</p>
             <!-- <a href=''>이 콘테스트 자세히 알아보기</a> -->
         </div>
     </div>
@@ -48,23 +47,33 @@
 
         <ul class='lst' th:each="review : ${reviews}">
             <li>
-                <div class='img'><img th:src="${review.thumbnailImage}" src='/image/site/sub/sample2.png'></div>
+                <div class='img'><img src="/image/site/no_img2.jpeg"></div>
                 <div class='cont'>
                     <div class='b1'>
-                        <p th:text="${review.contestTitle}">
-                      <span th:class="${review.isReview()? 's2' : 's1'}"
-                            th:text="${review.isReview()? '리뷰' : 'PPL'}">리뷰
-                      </span>
-                            contest title</p>
+                        <p>
+                            <span th:class="${review.isReview()? 's2' : 's1'}"
+                                  th:text="${review.isReview()? '리뷰' : 'PPL'}">
+                                리뷰
+                            </span>
+                            <span class="c1" th:text="${review.contestTitle}">
+                                contest title
+                            </span>
+                        </p>
                         <a href=''>자세히보기</a>
                     </div>
                     <div class='b2'>
-                        <p class='p1' th:text="${review.reviewTitle}">
-                            <img src='/image/site/sub/comt.png'> 콘티부터 너무 좋았어요!
-                        <p class='p2' th:text="${review.reviewContent}">
+                        <p class='p1'>
+                            <img src='/image/site/sub/comt.png'>
+                            <span th:text="${review.reviewTitle}">리뷰제목</span>
+                        </p>
+                        <p class='p2'>
                             <span>이용후기</span>
-                            요구사항 올리기가 간단한데 콘티부터 색다른 제안이 많이 들어왔어요. 이정도일줄은 생각 못했는데이정도일줄은 생각
-                            못했는데이정도일줄은 생각 못했는데생각 못했는데</p>
+                            <span class="c2" th:text="${review.reviewContent}">
+                                요구사항 올리기가 간단한데 콘티부터 색다른 제안이 많이 들어왔어요. 이정도일줄은 생각 못했는데이정도일줄은 생각
+                            못했는데이정도일줄은 생각 못했는데생각 못했는데
+                            </span>
+
+                        </p>
                         <a href='#'>후기 읽기</a>
                     </div>
                 </div>
@@ -74,14 +83,28 @@
                         </div>
                         <p>
                             <span>KB 국민은행</span>
-                            <img th:each="num: ${#numbers.sequence(1,${review.star})}" src="/image/site/sub/star.png">
+                            <!--                            <img th:each="num: ${#numbers.sequence(1,${review.star.toInt()})}" src="/image/site/sub/star.png">-->
+                            <img th:each="num: ${#numbers.sequence(0, review.getStar()-1)}"
+                                 src="/image/site/sub/star.png">
                         </p>
                     </div>
                     <div class='b3'>
-                        <p th:text="${review.createdDate}"><img src="/image/site/sub/review_icon1.png"> 2020. 12. 03</p>
-                        <p th:text="${review.reward} + '만원'"><img src="/image/site/sub/review_icon2.png"> 400만원</p>
-                        <p th:text="${review.category}"><img src="/image/site/sub/review_icon3.png"> 금융</p>
-                        <p th:text="${review.applyNumber} + '명 지원'"><img src="/image/site/sub/review_icon4.png"> 45명 지원</p>
+                        <p>
+                            <img src="/image/site/sub/review_icon1.png">
+                            <span th:text="${review.createdDate}">2020. 12. 03</span>
+                        </p>
+                        <p>
+                            <img src="/image/site/sub/review_icon2.png">
+                            <span th:text="${review.reward} + '만원'">400만원</span>
+                        </p>
+                        <p>
+                            <img src="/image/site/sub/review_icon3.png">
+                            <span th:text="${review.category}">금융</span>
+                        </p>
+                        <p>
+                            <img src="/image/site/sub/review_icon4.png">
+                            <span th:text="${review.applyNumber} + '명 지원'">45명 지원</span>
+                        </p>
                     </div>
                 </div>
             </li>
