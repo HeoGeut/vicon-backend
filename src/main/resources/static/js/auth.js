@@ -246,4 +246,48 @@ jQuery(function ($) {
 
         $(this).parents('form').submit();
     });
+
+    $('#login_smit').click(function () {
+        var memberId = $('input[name=memberId]').val();
+        var memberPw = $('input[name=memberPw]').val();
+
+        if (memberId === "") {
+            alert("아이디를 입력해 주세요.")
+            $("input[name=memberId]").focus();
+            return false;
+        }
+
+        if (memberPw === "") {
+            alert("비밀번호를 입력해 주세요.")
+            $("input[name=memberPw]").focus();
+            return false;
+        }
+
+        $.ajax({
+            url: 'loginAjax',
+            type: 'POST',
+            dataType: 'text',
+            data: {"id": memberId, "pw": memberPw},
+
+            success: function (data) {
+                console.log("success")
+                if (data == 1) {
+                    console.log("1")
+                    alert("존재하지 않는 아이디입니다.")
+                    $("input[name=memberId]").focus();
+
+                } else if (data == 2) {
+                    console.log("2")
+                    window.location.href = '/';
+                } else{
+                    console.log("3")
+                    alert("비밀번호가 일치하지 않습니다.")
+                    $("input[name=memberPw]").focus();
+                }
+            },
+            error: function () {
+                console.log("error")
+            }
+        })
+    })
 });

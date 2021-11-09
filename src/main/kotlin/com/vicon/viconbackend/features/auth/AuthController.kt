@@ -34,10 +34,39 @@ class AuthController(
     @PostMapping("ajax")
     @ResponseBody
     fun ajax(
-        @RequestBody data : String
+        @RequestBody data: String
     ): Int {
-        return if(memberService.findByMemberId(data).isPresent)
+        return if (memberService.findByMemberId(data).isPresent)
             1
         else 0
+    }
+
+    @GetMapping("login")
+    fun login(model: Model): String {
+        model.addAttribute("loginForm", LoginDTO())
+        return "auth/login"
+    }
+
+    @PostMapping("loginAjax")
+    @ResponseBody
+    fun loginMember(
+        @RequestParam("id") id: String,
+        @RequestParam("pw") pw: String
+    ): Int {
+        println("id : $id")
+        println("pw : $pw")
+
+        val findMember = memberService.findByMemberId(id)
+        val isExist = findMember.isPresent
+        println(isExist)
+        return if (!isExist) {
+            1
+        } else {
+            if (findMember.get().memberPw == pw) {
+                2
+            } else {
+                3
+            }
+        }
     }
 }

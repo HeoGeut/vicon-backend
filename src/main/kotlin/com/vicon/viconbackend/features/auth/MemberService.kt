@@ -13,4 +13,7 @@ class MemberService(
     fun findById(id: Long) = memberRepository.findById(id)
     fun findByMemberId(memberId: String) = memberRepository.findByMemberId(memberId)
     fun findTop10By() = memberRepository.findTop10By()
+    fun login(loginForm: LoginDTO) {
+
+    }
 }

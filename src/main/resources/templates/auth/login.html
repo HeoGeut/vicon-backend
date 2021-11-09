@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/auth.css"/>
+    <script type="text/javascript" src="../js/auth.js"></script>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='auth_wrap'>
+    <div class='login_frm'>
+        <img src='/image/site/sub/auth_logo.png'>
+        <div name='' action='' method='' th:object="${loginForm}">
+            <input type='text' name='memberId' id="memberId" placeholder='아이디' class='text_input'>
+            <input type='password' name='memberPw' id="memberPw" placeholder='비밀번호' class='text_input'>
+            <button type='submit' id='login_smit' class='btn_style'>로그인</button>
+        </div>
+
+        <ul class='link_lst'>
+            <li><a href=''>아이디/비밀번호 찾기</a></li>
+            <li><a href='/auth/join'>회원가입</a></li>
+        </ul>
+        <div class='clear'></div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>
