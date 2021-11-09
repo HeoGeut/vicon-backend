@@ -1,0 +1,37 @@
+.nav{margin-bottom:20px !important}
+
+.lst{border-top:1px solid #e6e6e6;padding-top:40px;}
+.lst li{float:left;width:410px;margin-right:15px;margin-bottom:50px;position:relative;border-radius:10px;overflow:hidden}
+.lst li:nth-child(3n){margin-right:0;}
+.lst li:not(.act) .cover{display:block;}
+.lst li .cover{display:none;z-index:10;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);text-align:center;font-size:17px;font-weight:bold;color:#fff}
+.lst li .cover p{padding-top:32%}
+.lst li .img{width:100%;height:230px;overflow:hidden;}
+.lst li .img img{width:100%;height:100%;}
+.lst li .p1{margin-top:10px;font-size:20px;color:#000;font-weight:500;    overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.lst li .p2{margin-top:5px;font-size:15px;color:#000;font-weight:500}
+
+.view_cont .tit{border-top:2px solid #000}
+.view_cont .tit{padding:20px 15px;position:relative;border-bottom:1px solid #ddd}
+.view_cont .tit .p1{font-size:16px;font-weight:bold;width:70%}
+.view_cont .tit .p1 img{width:20px;vertical-align: middle}
+.view_cont .tit .p2{position:absolute;top:20px;right:0;font-size:15px;font-weight:bold;color:#878787}
+.view_cont .tit .p2 span{color:#000;margin-right:15px;margin-left:5px}
+.view_cont .btn_box{float:right}
+.view_cont .btn2{display:inline-block;background:#a6abb4;font-size:15px;color:#fff;border-radius:4px;background:#a6abb4;padding:5px 10px}
+.view_cont .cont{font-size:16px;color:#000;white-space:pre-wrap;line-height:1.5;padding:15px 15px 80px 15px;border-bottom:1px solid #ddd;}
+.view_cont .reply{background:#f7f8fa;padding:30px 15px 30px 15px;border-bottom:1px solid #ddd;margin-bottom:10px;position:relative;}
+.view_cont .reply .p1{position:absolute;top:30px;right:15px;font-size:15px;font-weight:bold;color:#878787}
+.view_cont .reply .p1 span{color:#000;margin-right:15px;margin-left:5px}
+.view_cont .reply .p2{font-size:16px;color:#000;background:#f7f8fa;white-space:pre-wrap;line-height:1.5;}
+.view_cont .reply img{width:100px;display:block;margin-bottom:15px}
+
+@media all and (max-width:1080px) {
+	.lst li{float:none;width:100%;}
+	.view_cont .tit{padding:15px 0;}
+	.view_cont .tit .p1{width:100%;}
+	.view_cont .tit .p2{position:static;margin-top:7px;font-size:14px;}
+	.view_cont .cont{padding:15px 0 50px;}
+	.view_cont .btn2{width:100%;text-align:center;box-sizing:border-box;}
+
+}

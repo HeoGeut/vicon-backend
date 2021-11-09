@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/event.css"/>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='snb_wrap'>
+    <ul>
+        <li><a href='/templates/event/list.html'>이벤트</a></li>
+    </ul>
+    <div class='top'>
+        <div class='inner'>
+            <p><span>콘테스트</span>원하는 비용으로
+                원하는 광고를 만들고
+                내보내는 좋은 방법</p>
+            <a href='/info/howto'>콘테스트는 어떻게 진행되나요?</a>
+        </div>
+    </div>
+</div>
+
+
+<div class='sub_key'>이벤트</div>
+
+<div class='wrap'>
+    <p class='nav'>이벤트</p>
+
+    <form name="frm" action="" method="get">
+        <ul class='lst'>
+            <!-- 마감되지 않은 이벤트에는 act 활성화 클래스 붙여주기 -->
+            <li class='act'>
+                <div class='cover'><p>마감된 이벤트입니다.</p></div>
+                <a href=''>
+                    <div class='img'><img src='/image/site/sub/sample.png'></div>
+                    <p class='p1'>첫 콘테스트 수수료 면제</p>
+                    <p class='p2'>2020.12.31 ~ 2021.03.30</p>
+                </a>
+            </li>
+            <li>
+                <div class='cover'><p>마감된 이벤트입니다.</p></div>
+                <a href=''>
+                    <div class='img'><img src='/image/site/sub/sample.png'></div>
+                    <p class='p1'>첫 콘테스트 수수료 면제</p>
+                    <p class='p2'>2020.12.31 ~ 2021.03.30</p>
+                </a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+
+        <!--    <div class="margint50">-->
+        <!--      <?php include $_SERVER['DOCUMENT_ROOT']."/lib/paginate_main.php"?>-->
+        <!--    </div>-->
+        <div class="clear"></div>
+    </form>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>
