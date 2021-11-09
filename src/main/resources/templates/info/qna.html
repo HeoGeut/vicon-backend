@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/use.css"/>
+    <script type="text/javascript" src="../js/use.js"></script>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class="snb_wrap">
+    <ul>
+        <li><a th:href="@{howto}">이용방법</a></li>
+        <li><a th:href="@{faq}">자주묻는 질문</a></li>
+        <li><a th:href="@{qna}">문의하기</a></li>
+    </ul>
+    <div class="contest_top"><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+</div>
+
+<div class='sub_key'>문의하기</div>
+
+<div class='wrap'>
+    <p class='nav marginb20'>문의하기</p>
+
+    <div class='rq_wrap'>
+        <div class='content'>
+            <form name="frm" action="" method="get">
+                <!--                <input type="hidden" name="page_now" value="<?=$page_now?>" />-->
+                <!--                <input type="hidden" name="page_row" value="<?=$page_row?>"/>-->
+                <table cellpadding='0' cellspacing='0'>
+                    <colgroup>
+                        <col width='7%'>
+                        <col width=''>
+                        <col width='10%'>
+                        <col width='15%'>
+                        <col width='10%'>
+                    </colgroup>
+                    <tr>
+                        <th>NO</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>상태</th>
+                    </tr>
+                    <tr th:each="qna, index : ${qnaList}">
+                        <td th:text="${index.count}">1</td>
+                        <td><a href='#' th:text="${qna.title}">이용 요금 궁금합니다.</a></td>
+                        <td th:text="${qna.user}">crespe</td>
+                        <td th:text="${qna.writeDate}">20.12.14</td>
+                        <td>
+                            <span th:classappend="${qna.status} == '답변대기' ? 's1' : 's2'"
+                                  th:text="${qna.status}">답변대기</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <!--                <a href='wrt.php' class='wrt_btn'>글쓰기</a>-->
+                <!--                <div class="clear"></div>-->
+                <!--                <div class="margint10">-->
+                <!--                    <?php include $_SERVER['DOCUMENT_ROOT']."/lib/paginate_main.php"?>-->
+                <!--                </div>-->
+
+                <!--                <div class='search_box'>-->
+                <!--                    <input type='text' name='table_search' placeholder="검색" value='<?=$table_search?>'>-->
+                <!--                    <button type='submit'><i class="fas fa-search"></i></button>-->
+                <!--                </div>-->
+            </form>
+        </div>
+        <div class="rnb">
+            <p class="t1"><img src="/image/site/sub/alarm.png"> 콘테스트 마감이 얼마 남지 않았어요!</p>
+            <ul>
+                <li th:each="contest : ${contests}">
+                    <div class="tit">
+                        <div class="img_bx"><img src="/image/site/index/noimage.png"
+                                                 th:attr="src=${contest.memberProfileImage}"></div>
+                        <p class="p1" th:text="${contest.name}">KB 국민은행</p>
+                        <p class="p2" th:text="${contest.isReview}? '리뷰' : 'PPL'">리뷰</p>
+                    </div>
+                    <div class="cont">
+                        <p class="p1">
+                            <span class="s1" th:text="'D-' + ${contest.restDate}">D-11</span>
+                            <span class="s2" th:text="${contest.applyNumber}">11</span>
+                            명 응모</p>
+                        <p class="p2" th:text="${contest.name}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+                        <p class="p4" th:text="${contest.text}">KB 국민은행의 신규 예금상품을 미리 알아보는 것부터 가입하는 과정까지 자연스럽고
+                            재미있는재미있는재미있는재미있는 컨텐츠에 녹여...</p>
+                        <p class="p3">
+                            <img src="/image/site/index/won.png">
+                            <span th:text="${contest.totalReward}"></span>만원
+                        </p>
+                        <p class="p5">
+                            <img src="/image/site/index/premium.png" th:if="${not contest.isStandard}">
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <a href="/contests/list" class="more_list">목록 더보기</a>
+        </div>
+
+    </div>
+
+</div>
+
+<div class='clear'></div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>

@@ -4,7 +4,6 @@ import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.features.auth.MemberCreateForm
-import com.vicon.viconbackend.features.creator.CreatorDTO
 import javax.persistence.Entity
 import javax.persistence.OneToMany
 
