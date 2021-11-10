@@ -7,7 +7,7 @@
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
-    <div th:replace="main/main :: main(${contests}, ${members})"></div>
+    <div th:replace="main/main :: main(${contests}, ${members}, ${boards}, ${reviews})"></div>
     <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
