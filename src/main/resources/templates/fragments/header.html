@@ -18,8 +18,8 @@
                 <li class='d3'><a href='/review/list' class='md'>광고주 후기<i class="fas fa-angle-right"></i></a>
                     <div class='sub_menu'>
                         <a href='/review/list'>전체 후기</a>
-<!--                        <a href='#'>리뷰 후기</a>-->
-<!--                        <a href='#'>PPL 후기</a>-->
+                        <!--                        <a href='#'>리뷰 후기</a>-->
+                        <!--                        <a href='#'>PPL 후기</a>-->
                     </div>
                 </li>
                 <li class='d4'><a href='/info/howto' class='md'>이용안내<i class="fas fa-angle-right"></i></a>
@@ -58,8 +58,8 @@
             </div>
             <div class='d3'>
                 <a href='/review/list'>전체 후기</a>
-<!--                <a href='#'>리뷰 후기</a>-->
-<!--                <a href='#'>PPL 후기</a>-->
+                <!--                <a href='#'>리뷰 후기</a>-->
+                <!--                <a href='#'>PPL 후기</a>-->
             </div>
             <div class='d4'>
                 <a href='/info/howto'>이용방법</a>
@@ -73,13 +73,10 @@
         </div>
 
         <div class='auth_box'>
-            <!--            <?if($sess_uidx){?>-->
-            <!--            <a href='#'>마이페이지</a>-->
-            <!--            <a href='#'>로그아웃</a>-->
-            <!--            <?}else{?>-->
-            <a href='/auth/login'>로그인</a>
-            <a href='/auth/join'>회원가입</a>
-            <!--            <?}?>-->
+            <a th:href="${#httpServletRequest.remoteUser}? '/mypage' : '/auth/login'"
+               th:text="${#httpServletRequest.remoteUser} ? '마이페이지' : '로그인'"></a>
+            <a th:href="${#httpServletRequest.remoteUser}? '/index' : '/auth/join'"
+               th:text="${#httpServletRequest.remoteUser} ? '로그아웃' : '회원가입'"></a>
             <a href='/contests/open' class='contest_btn'>
                 <img src='/image/site/index/contest_btn.png' alt='콘테스트 열기'>
             </a>

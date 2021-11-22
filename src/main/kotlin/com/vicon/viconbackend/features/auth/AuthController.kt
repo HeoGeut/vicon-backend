@@ -20,14 +20,12 @@ class AuthController(
     @PostMapping("join")
     fun createMember(memberCreateForm: MemberCreateForm): String {
 
-        println("=======================")
-        println(memberCreateForm)
-        println("=======================")
+//        println("=======================")
+//        println(memberCreateForm)
+//        println("=======================")
 
         val member = Member().from(memberCreateForm)
-
         memberService.save(member)
-
         return "redirect:/"
     }
 
@@ -53,16 +51,17 @@ class AuthController(
         @RequestParam("id") id: String,
         @RequestParam("pw") pw: String
     ): Int {
-        println("id : $id")
-        println("pw : $pw")
+//        println("id : $id")
+//        println("pw : $pw")
 
         val findMember = memberService.findByMemberId(id)
         val isExist = findMember.isPresent
-        println(isExist)
+//        println(isExist)
+
         return if (!isExist) {
             1
         } else {
-            if (findMember.get().memberPw == pw) {
+            if (memberService.login(LoginDTO(id, pw))) {
                 2
             } else {
                 3

@@ -4,8 +4,10 @@ import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.features.auth.MemberCreateForm
-import javax.persistence.Entity
-import javax.persistence.OneToMany
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.User
+import java.util.stream.Collectors
+import javax.persistence.*
 
 @Entity
 data class Member(
@@ -34,6 +36,10 @@ data class Member(
 
     var isCertificated: Boolean? = false,
 
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    var roles: MutableSet<MemberRole>? = mutableSetOf(MemberRole.USER),
+
     @OneToMany(mappedBy = "member")
     var applies: List<Apply>? = mutableListOf(),
 
@@ -57,8 +63,16 @@ data class Member(
         this.subscriberAmount = memberCreateForm.mem_ch_subscriber
         this.businessType = BusinessType.valueOf(memberCreateForm.mem_business_type!!)
         this.channelType = memberCreateForm.channelType.toString()
+        this.roles = mutableSetOf(MemberRole.USER)
 
         return this
+    }
+
+    fun getAuthorities(): User {
+        return User(
+            this.memberId, this.memberPw,
+            this.roles!!.stream().map { role -> SimpleGrantedAuthority("ROLE_$role") }.collect(Collectors.toSet())
+        )
     }
 }
 
@@ -68,4 +82,8 @@ enum class BusinessType(val type: String) {
     CORPORATION("법인사업자"),
     SIMPLE_TAX("간이과세자"),
     PUBLIC_ENTERPRISE("공기업")
+}
+
+enum class MemberRole {
+    ADMIN, USER
 }
