@@ -14,7 +14,7 @@ data class MemberDTO(
             return MemberDTO(
                 id = member.id!!,
                 profileImage = member.profileImage!!,
-                memberId = member.memberId!!,
+                memberId = member.username,
                 tryApply = member.applies!!.size.toString(),
                 chosenApply = member.applies!!.count { it.isConfirm == true }.toString()
             )

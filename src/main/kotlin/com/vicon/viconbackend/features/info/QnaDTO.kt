@@ -12,7 +12,7 @@ data class QnaDTO(
         fun of(qna: Qna): QnaDTO {
             return QnaDTO(
                 title = qna.title.toString(),
-                user = qna.member!!.memberId.toString(),
+                user = qna.member!!.username.toString(),
                 writeDate = qna.createdAt!!.toLocalDate().toString(),
                 status = getStatus(qna.isConfirmed!!)
             )

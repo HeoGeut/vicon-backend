@@ -1,19 +1,26 @@
 package com.vicon.viconbackend.domain.member
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.vicon.viconbackend.domain.apply.Apply
-import com.vicon.viconbackend.domain.common.Auditable
+import com.vicon.viconbackend.domain.auth.AuthenticationPassword
+import com.vicon.viconbackend.domain.common.Persistable
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.features.auth.MemberCreateForm
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.User
-import java.util.stream.Collectors
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import java.time.LocalDateTime
 import javax.persistence.*
+import javax.validation.constraints.NotEmpty
 
 @Entity
-data class Member(
+class Member(
+    @NotEmpty @Column(unique = true)
+    var username: String = "",
+
+    @JsonIgnore
+    var password: String = "",
+
     var profileImage: String? = "",
-    var memberId: String? = "",
-    var memberPw: String? = "",
 
     var phoneNumberFront: String? = "",
     var phoneNumberMiddle: String? = "",
@@ -36,20 +43,25 @@ data class Member(
 
     var isCertificated: Boolean? = false,
 
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
-    var roles: MutableSet<MemberRole>? = mutableSetOf(MemberRole.USER),
+    var enabled: Boolean = true,
 
     @OneToMany(mappedBy = "member")
     var applies: List<Apply>? = mutableListOf(),
 
     @OneToMany(mappedBy = "member")
-    var contests: List<Contest>? = mutableListOf()
+    var contests: List<Contest>? = mutableListOf(),
 
-) : Auditable<Long>() {
+    @CreationTimestamp
+    var createdAt: LocalDateTime? = null,
+
+    @UpdateTimestamp
+    var modifiedAt: LocalDateTime? = null
+
+) : Persistable<Long>() {
+
     fun from(memberCreateForm: MemberCreateForm): Member {
-        this.memberId = memberCreateForm.mem_id
-        this.memberPw = memberCreateForm.mem_pw
+        this.username = memberCreateForm.mem_id
+        this.password = memberCreateForm.mem_pw
         this.phoneNumberFront = memberCreateForm.mem_hp1
         this.phoneNumberMiddle = memberCreateForm.mem_hp2
         this.phoneNumberBack = memberCreateForm.mem_hp3
@@ -63,27 +75,67 @@ data class Member(
         this.subscriberAmount = memberCreateForm.mem_ch_subscriber
         this.businessType = BusinessType.valueOf(memberCreateForm.mem_business_type!!)
         this.channelType = memberCreateForm.channelType.toString()
-        this.roles = mutableSetOf(MemberRole.USER)
 
         return this
     }
 
-    fun getAuthorities(): User {
-        return User(
-            this.memberId, this.memberPw,
-            this.roles!!.stream().map { role -> SimpleGrantedAuthority("ROLE_$role") }.collect(Collectors.toSet())
-        )
+//    fun getPassword(): String {
+//        return password
+//    }
+//
+//    fun setPassword(password: String) {
+//        this.password = password
+//    }
+
+//    fun getUsername(): String {
+//        return username
+//    }
+
+    fun isAccountNonExpired(): Boolean {
+        return enabled
     }
-}
 
-enum class BusinessType(val type: String) {
-    NONE("없음"),
-    INDIVIDUAL("개인사업자"),
-    CORPORATION("법인사업자"),
-    SIMPLE_TAX("간이과세자"),
-    PUBLIC_ENTERPRISE("공기업")
-}
+    fun isAccountNonLocked(): Boolean {
+        return enabled
+    }
 
-enum class MemberRole {
-    ADMIN, USER
+    fun isCredentialsNonExpired(): Boolean {
+        return enabled
+    }
+
+    fun isEnabled(): Boolean {
+        return enabled
+    }
+
+    fun validEnabled() {
+        if (this.enabled.not()) throw IllegalAccessException("Should be enabled")
+    }
+//
+//    fun updatePassword(auth: AuthenticationPassword, passwordEncoder: PasswordEncoder) {
+//        if (this.password != passwordEncoder.encode(auth.password)) {
+//            throw IllegalAccessException("User password not equals")
+//        }
+//
+//        this.password = passwordEncoder.encode(auth.changePassword)
+//    }
+//
+//    fun updatePassword(new: String, passwordEncoder: PasswordEncoder) {
+//        this.password = passwordEncoder.encode(new)
+//    }
+
+    fun leave() {
+        this.enabled = false
+    }
+
+    enum class BusinessType(val type: String) {
+        NONE("없음"),
+        INDIVIDUAL("개인사업자"),
+        CORPORATION("법인사업자"),
+        SIMPLE_TAX("간이과세자"),
+        PUBLIC_ENTERPRISE("공기업")
+    }
+
+    enum class MemberRole {
+        ADMIN, USER
+    }
 }

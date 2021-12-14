@@ -73,10 +73,12 @@
         </div>
 
         <div class='auth_box'>
-            <a th:href="${#httpServletRequest.remoteUser}? '/mypage' : '/auth/login'"
-               th:text="${#httpServletRequest.remoteUser} ? '마이페이지' : '로그인'"></a>
-            <a th:href="${#httpServletRequest.remoteUser}? '/index' : '/auth/join'"
-               th:text="${#httpServletRequest.remoteUser} ? '로그아웃' : '회원가입'"></a>
+            <a th:href="${session.loginMember != null} ? '/mypage/info' : '/auth/login'"
+               th:text="${session.loginMember != null} ? '마이페이지' : '로그인'"></a>
+            <a th:href="${session.loginMember != null} ? '/auth/logout' : '/auth/join'"
+               th:text="${session.loginMember != null} ? '로그아웃' : '회원가입'"></a>
+
+
             <a href='/contests/open' class='contest_btn'>
                 <img src='/image/site/index/contest_btn.png' alt='콘테스트 열기'>
             </a>

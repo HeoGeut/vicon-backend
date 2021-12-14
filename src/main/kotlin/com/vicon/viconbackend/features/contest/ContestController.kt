@@ -2,7 +2,6 @@ package com.vicon.viconbackend.features.contest
 
 import com.vicon.viconbackend.domain.board.BoardRepository
 import com.vicon.viconbackend.domain.contest.*
-import com.vicon.viconbackend.domain.member.BusinessType
 import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.domain.member.MemberRepository
 import org.springframework.stereotype.Controller

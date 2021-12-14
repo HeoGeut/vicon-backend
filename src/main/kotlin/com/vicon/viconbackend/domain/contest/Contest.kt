@@ -33,6 +33,8 @@ data class Contest(
         var recruitDeadLineDate: LocalDateTime? = null,
         var contentsCompletedDate: LocalDateTime? = null,
 
+        var recruitNumber : BigDecimal = BigDecimal.ZERO,
+
         @Enumerated(EnumType.STRING)
         var cashReceiptType: CashReceiptType? = CashReceiptType.UNISSUED,
         var cashReceiptIssuanceType: Char? = null,

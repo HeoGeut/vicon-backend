@@ -1,15 +1,21 @@
 package com.vicon.viconbackend.features.auth
 
+import com.vicon.viconbackend.config.SessionConst
 import com.vicon.viconbackend.domain.member.Member
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpServletRequest
 
 @Controller
 @RequestMapping("auth")
 class AuthController(
-    val memberService: MemberService
+    val memberService: MemberService,
+    val authService: AuthService
 ) {
+    private val logger = LoggerFactory.getLogger(AuthController::class.java)
 
     @GetMapping("join")
     fun join(model: Model): String {
@@ -19,10 +25,6 @@ class AuthController(
 
     @PostMapping("join")
     fun createMember(memberCreateForm: MemberCreateForm): String {
-
-//        println("=======================")
-//        println(memberCreateForm)
-//        println("=======================")
 
         val member = Member().from(memberCreateForm)
         memberService.save(member)
@@ -45,27 +47,40 @@ class AuthController(
         return "auth/login"
     }
 
-    @PostMapping("loginAjax")
-    @ResponseBody
+    @PostMapping("login")
     fun loginMember(
-        @RequestParam("id") id: String,
-        @RequestParam("pw") pw: String
-    ): Int {
-//        println("id : $id")
-//        println("pw : $pw")
+        @ModelAttribute loginDTO: LoginDTO,
+        request: HttpServletRequest,
+        bindingResult: BindingResult,
+        @RequestParam(value = "redirectURI", defaultValue = "/") redirectURI: String,
+        model: Model
+    ): String {
 
-        val findMember = memberService.findByMemberId(id)
-        val isExist = findMember.isPresent
-//        println(isExist)
-
-        return if (!isExist) {
-            1
-        } else {
-            if (memberService.login(LoginDTO(id, pw))) {
-                2
-            } else {
-                3
-            }
+        if (bindingResult.hasErrors()) {
+            logger.debug("error")
+            return "auth/login"
         }
+
+        val loginMember = authService.login(loginDTO)
+
+        if (loginMember == null) {
+            val msg = "아이디 또는 비밀번호가 맞지 않습니다"
+            model.addAttribute("msg", msg)
+            model.addAttribute("url", "/")
+            return "redirect"
+        }
+
+        val session = request.getSession(true)
+        session.setAttribute(SessionConst().LOGIN_MEMBER, loginMember.id)
+
+        return "redirect:$redirectURI"
+
+    }
+
+    @GetMapping("/logout")
+    fun logout(request: HttpServletRequest): String? {
+        val session = request.getSession(false)
+        session?.invalidate()
+        return "redirect:/"
     }
 }

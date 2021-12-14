@@ -1,0 +1,11 @@
+<html>
+<head>
+    <title>VICON</title>
+</head>
+<body>
+<script th:inline="javascript">
+    alert([[${msg}]]);
+    location.href='<c:out value="${pageContext.request.contextPath}"/>[[${url}]]';
+</script>
+</body>
+</html>

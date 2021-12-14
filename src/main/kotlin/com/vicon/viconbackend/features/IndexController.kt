@@ -1,6 +1,8 @@
 package com.vicon.viconbackend.features
 
 import com.vicon.viconbackend.domain.board.BoardRepository
+import com.vicon.viconbackend.domain.member.Member
+import com.vicon.viconbackend.domain.member.MemberRepository
 import com.vicon.viconbackend.domain.review.ReviewRepository
 import com.vicon.viconbackend.features.contest.*
 import com.vicon.viconbackend.features.contest.ContestService
@@ -12,17 +14,23 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.SessionAttribute
 
 @Controller
 @RequestMapping("")
 class IndexController(
     val contestService: ContestService,
     val memberService: MemberService,
+    val memberRepository: MemberRepository,
     val boardRepository : BoardRepository,
     val reviewRepository: ReviewRepository
 ) {
-    @GetMapping("")
-    fun index(model: Model): String {
+    @GetMapping("/")
+    fun index(
+        model: Model,
+        @SessionAttribute(name="loginMember", required = false) loginMemberId: String?
+    ): String {
+
         val contests = contestService.findTop6ByOpenContest()
         val contestDtoList = contests.map { ContestDTO.of(it) }
 
@@ -40,6 +48,14 @@ class IndexController(
         model.addAttribute("boards", boardDtoList)
         model.addAttribute("reviews", reviewDtoList)
 
+        if (loginMemberId == null) {
+            println("index")
+            return "index"
+        }
+
+        model.addAttribute("loginMember", loginMemberId)
+
+        println("login index")
         return "index"
     }
 }

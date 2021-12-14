@@ -33,7 +33,7 @@ data class ReviewInfoDTO(
                 reviewTitle = review.title.toString(),
                 reviewContent = review.content.toString(),
                 memberProfileImage = review.member!!.profileImage,
-                memberId = review.member!!.memberId.toString(),
+                memberId = review.member!!.username.toString(),
                 star = review.star?.toBigDecimal() ?: BigDecimal(5),
                 createdDate = review.createdAt!!.toLocalDate().toString(),
                 reward = (review.contest!!.reward!!.toInt() / 10000).toString(),

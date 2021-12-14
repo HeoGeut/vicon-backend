@@ -263,31 +263,31 @@ jQuery(function ($) {
             return false;
         }
 
-        $.ajax({
-            url: 'loginAjax',
-            type: 'POST',
-            dataType: 'text',
-            data: {"id": memberId, "pw": memberPw},
-
-            success: function (data) {
-                console.log("success")
-                if (data == 1) {
-                    console.log("1")
-                    alert("존재하지 않는 아이디입니다.")
-                    $("input[name=memberId]").focus();
-
-                } else if (data == 2) {
-                    console.log("2")
-                    window.location.href = '/';
-                } else{
-                    console.log("3")
-                    alert("비밀번호가 일치하지 않습니다.")
-                    $("input[name=memberPw]").focus();
-                }
-            },
-            error: function () {
-                console.log("error")
-            }
-        })
+        // $.ajax({
+        //     url: 'loginAjax',
+        //     type: 'POST',
+        //     dataType: 'text',
+        //     data: {"id": memberId, "pw": memberPw},
+        //
+        //     success: function (data) {
+        //         console.log("success")
+        //         if (data == 1) {
+        //             console.log("1")
+        //             alert("존재하지 않는 아이디입니다.")
+        //             $("input[name=memberId]").focus();
+        //
+        //         } else if (data == 2) {
+        //             console.log("2")
+        //             window.location.href = '/';
+        //         } else{
+        //             console.log("3")
+        //             alert("비밀번호가 일치하지 않습니다.")
+        //             $("input[name=memberPw]").focus();
+        //         }
+        //     },
+        //     error: function () {
+        //         console.log("error")
+        //     }
+        // })
     })
 });
