@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="admin/fragments/head :: head"></head>
+<body class='skin-purple sidebar-mini'>
+
+<header th:replace="admin/fragments/header :: header"></header>
+<aside th:replace="admin/fragments/sidebar :: aside"></aside>
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1> 회원 관리 <small>목록</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="">회원 관리</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <form name="frm" action="<?=$_SERVER['PHP_SELF']?>" method="get" class="frm" id="frm">
+                <!--        <input type="hidden" name="page_now" value="<?=$page_now?>"/>-->
+                <!--        <input type="hidden" name="page_row" value="<?=$page_row?>"/>-->
+                <!--        <input type="hidden" name="page_type" value="<?=$page_type?>"/>-->
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class='text-right'>
+                                <div class="input-group">
+                                    <input type="text" name="table_search" class="form-control input-sm pull-right"
+                                           style="width: 150px;" placeholder="검색어를 입력하세요." value="<?=$table_search?>"/>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+
+                            <table class="table table-hover tbl_sort table-bordered">
+                                <colgroup>
+                                    <col width='50'/>
+                                    <col width=''/>
+                                    <col width=''/>
+                                    <col width=''/>
+                                    <col width=''/>
+                                    <col width=''/>
+                                    <col width=''/>
+                                    <col width=''/>
+                                    <col width='50'/>
+                                    <col width='100'/>
+                                    <col width='150'/>
+                                    <col width='50'/>
+                                    <col width='50'/>
+                                </colgroup>
+                                <tr>
+                                    <th class="text-center">번호</th>
+                                    <th class="text-left">아이디</th>
+                                    <th class="text-left">연락처</th>
+                                    <th class="text-left">이메일</th>
+                                    <th class="text-left">기업명</th>
+                                    <th class="text-left">업종</th>
+                                    <th class="text-left">구독자수</th>
+                                    <th class="text-left">보유채널</th>
+                                    <th class="text-left">SBA 여부</th>
+                                    <th class="text-left">회원인증여부</th>
+                                    <th class="text-left">가입일</th>
+                                    <th class="text-center">수정</th>
+                                    <th class="text-center">삭제</th>
+                                </tr>
+                                <tr th:each="member : ${members}">
+                                    <td class="text-center" th:text="${memberStat.count}">52</td>
+                                    <td class="text-left" th:text="${member.username}">creativeden</td>
+                                    <td class="text-left" th:text="${member.phoneNumber}">010-8555-7125</td>
+                                    <td class="text-left" th:text="${member.email}">foreignerinkoreaden@gmail.com</td>
+                                    <td class="text-left" th:text="${member.companyName}">디엔엠미디어</td>
+                                    <td class="text-left" th:text="${member.businessCategory}">광고대행업</td>
+                                    <td class="text-left" th:text="${member.subscriberAmount}">165,000명</td>
+                                    <td class="text-left" th:text="${member.channelType}"> 유튜브</td>
+                                    <td class="text-center"><i class="far fa-circle"></i></td>
+                                    <td class="text-center"><i th:if="${member.isCertificated}"
+                                                               class="far fa-circle"></i>
+                                    </td>
+                                    <td class="text-left" th:text="${member.createdDate}">2021-12-12 22:44:28</td>
+                                    <td class="text-center">
+                                        <a href="view.php?key=JTI1MjUzRE1qTg==" class="btn btn-default btn-sm">수정</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" class="btn btn-warning btn-sm del">삭제</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div class="box-footer clearfix text-right">
+                            <ul class="pagination pagination-sm no-margin">
+                                <li><a href="javascript:goList('0')" class="direction prev">Prev End</a></li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="javascript:goList('1')">2</a></li>
+                                <li><a href="javascript:goList('2')">3</a></li>
+                                <li><a href="javascript:goList('3')">4</a></li>
+                                <li><a href="javascript:goList('4')">5</a></li>
+                                <li><a href="javascript:goList('5')">6</a></li>
+                                <li><a href="javascript:goList('1')" class="direction next">Next</a></li>
+                                <li><a href="javascript:goList('5')" class="direction next">Next End</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<footer th:replace="admin/fragments/footer :: footer"></footer>
+
+</body>

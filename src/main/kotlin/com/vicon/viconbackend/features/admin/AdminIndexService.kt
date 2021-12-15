@@ -7,8 +7,8 @@ class AdminIndexService {
     fun selectedNavigation(requestURI: String): String {
         return when (requestURI) {
             "/admin" -> "관리자 메인"
-            "/admin/members" -> "회원 관리"
-            "/admin/contests" -> "콘테스트 관리"
+            "/admin/member" -> "회원 관리"
+            "/admin/contest" -> "콘테스트 관리"
             "/admin/video" -> "비디오 콘테스트 사례"
             "/admin/creator" -> "크리에이터 관리"
             "/admin/review" -> "후기 관리"
