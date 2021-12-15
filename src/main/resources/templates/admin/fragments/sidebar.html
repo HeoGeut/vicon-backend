@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<aside th:fragment="aside" class='main-sidebar'>
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class='sidebar'>
+        <!-- Sidebar user panel -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class='sidebar-menu'>
+            <li class='header'>NAVIGATION</li>
+
+            <li class=''>
+                <a href='/admin/index.php'> <i class="fas fa-tachometer-alt marginr10"></i><span>관리자 메인</span></a>
+            </li>
+
+            <li class=''>
+                <a href='/admin/member/list.php'> <i class='fa fa-user'></i> <span>회원 관리</span> </a>
+            </li>
+
+            <li class="">
+                <a href='/admin/contest/list.php'> <i class="fas fa-video"></i>&nbsp;&nbsp;<span>콘테스트 관리</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/payment/list.php'> <i class="fas fa-list"></i>&nbsp;&nbsp;<span>결제 관리</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/board/list.php'> <i class='fa fa-list'></i>&nbsp;<span>비디오 콘테스트 사례</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/creater/list.php'> <i class='fa fa-list'></i>&nbsp;<span>크리에이터 관리</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/review/list.php'> <i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;<span>후기 관리</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/event/list.php'> <i class="fas fa-splotch"></i>&nbsp;&nbsp;<span>이벤트 관리</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/rq/list.php'> <i class="fas fa-comment"></i>&nbsp;&nbsp;<span>문의하기</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/chat/list.php'> <i class="fas fa-comment"></i>&nbsp;&nbsp;<span>소통 관리</span></a>
+            </li>
+
+            <li class="">
+                <a href='/admin/faq/list.php'> <i class="fas fa-question-circle"></i>&nbsp;&nbsp;<span>자주묻는 질문</span></a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

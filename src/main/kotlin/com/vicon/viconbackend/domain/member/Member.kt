@@ -3,6 +3,7 @@ package com.vicon.viconbackend.domain.member
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.auth.AuthenticationPassword
+import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.common.Persistable
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.features.auth.MemberCreateForm
@@ -43,7 +44,7 @@ class Member(
 
     var isCertificated: Boolean? = false,
 
-    var enabled: Boolean = true,
+//    var enabled: Boolean = true,
 
     @OneToMany(mappedBy = "member")
     var applies: List<Apply>? = mutableListOf(),
@@ -51,13 +52,7 @@ class Member(
     @OneToMany(mappedBy = "member")
     var contests: List<Contest>? = mutableListOf(),
 
-    @CreationTimestamp
-    var createdAt: LocalDateTime? = null,
-
-    @UpdateTimestamp
-    var modifiedAt: LocalDateTime? = null
-
-) : Persistable<Long>() {
+) : Auditable<Long>() {
 
     fun from(memberCreateForm: MemberCreateForm): Member {
         this.username = memberCreateForm.mem_id
@@ -91,25 +86,25 @@ class Member(
 //        return username
 //    }
 
-    fun isAccountNonExpired(): Boolean {
-        return enabled
-    }
-
-    fun isAccountNonLocked(): Boolean {
-        return enabled
-    }
-
-    fun isCredentialsNonExpired(): Boolean {
-        return enabled
-    }
-
-    fun isEnabled(): Boolean {
-        return enabled
-    }
-
-    fun validEnabled() {
-        if (this.enabled.not()) throw IllegalAccessException("Should be enabled")
-    }
+//    fun isAccountNonExpired(): Boolean {
+//        return enabled
+//    }
+//
+//    fun isAccountNonLocked(): Boolean {
+//        return enabled
+//    }
+//
+//    fun isCredentialsNonExpired(): Boolean {
+//        return enabled
+//    }
+//
+//    fun isEnabled(): Boolean {
+//        return enabled
+//    }
+//
+//    fun validEnabled() {
+//        if (this.enabled.not()) throw IllegalAccessException("Should be enabled")
+//    }
 //
 //    fun updatePassword(auth: AuthenticationPassword, passwordEncoder: PasswordEncoder) {
 //        if (this.password != passwordEncoder.encode(auth.password)) {
@@ -123,9 +118,9 @@ class Member(
 //        this.password = passwordEncoder.encode(new)
 //    }
 
-    fun leave() {
-        this.enabled = false
-    }
+//    fun leave() {
+//        this.enabled = false
+//    }
 
     enum class BusinessType(val type: String) {
         NONE("없음"),

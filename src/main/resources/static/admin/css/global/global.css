@@ -1,0 +1,6 @@
+.txt_left{text-align:left !important;}
+.txt_center{text-align:center !important;}
+.txt_right{text-align:right !important;}
+body.modal-open {
+  padding-right: 0!important;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<header th:fragment="header" class='main-header'>
+    <!-- Logo -->
+    <a href='/admin' class='logo'>
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class='logo-mini'><img src='/image/admin/small.png'/></span>
+
+        <!-- logo for regular state and mobile devices -->
+        <span class='logo-lg'><img src='/image/site/index/logo.png' width='120'/></span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class='navbar navbar-static-top' role='navigation'>
+        <!-- Sidebar toggle button-->
+        <a href='#' class='sidebar-toggle' data-toggle='offcanvas' role='button'><i class="fas fa-bars"></i></a>
+        <div class='navbar-custom-menu'>
+            <ul class='nav navbar-nav'>
+                <li class='dropdown user user-menu'>
+                    <a href='/admin/auth/logout.php'><span class='hidden-xs'>로그아웃</span> </a>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                <li><a href='/admin/cfg/cfg_admin.php'><i class='fa fa-gears'></i></a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -5,9 +5,7 @@ import org.springframework.boot.runApplication
 import javax.annotation.PostConstruct
 
 @SpringBootApplication
-class ViconBackendApplication{
-
-}
+class ViconBackendApplication
 
 fun main(args: Array<String>) {
     runApplication<ViconBackendApplication>(*args)

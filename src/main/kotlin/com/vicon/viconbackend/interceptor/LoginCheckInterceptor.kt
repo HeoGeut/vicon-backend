@@ -10,12 +10,26 @@ class LoginCheckInterceptor : HandlerInterceptor {
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val requestURI = request.requestURI
+        println(requestURI)
+
+        if(requestURI.contains("admin")) return adminHandle(request, response)
+
         val session = request.session
-        if (session?.getAttribute(SessionConst().LOGIN_MEMBER) == null) {
-            //로그인으로 redirect
+        return if (session?.getAttribute(SessionConst().LOGIN_MEMBER) == null) {
             response.sendRedirect("/auth/login?redirectURI=$requestURI")
-            return false
+            false
+        } else {
+            true
         }
-        return true
+    }
+
+    private fun adminHandle(request: HttpServletRequest, response: HttpServletResponse): Boolean {
+        val session = request.session
+        return if (session?.getAttribute(SessionConst().ADMIN_MEMBER) == null) {
+            response.sendRedirect("/admin/login")
+            false
+        } else {
+            true
+        }
     }
 }

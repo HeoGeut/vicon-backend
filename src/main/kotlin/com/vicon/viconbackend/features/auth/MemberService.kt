@@ -25,4 +25,8 @@ class MemberService(
 
         memberRepository.save(member)
     }
+
+    fun saveAll(members: List<Member>) {
+        memberRepository.saveAll(members)
+    }
 }

@@ -48,14 +48,10 @@ class IndexController(
         model.addAttribute("boards", boardDtoList)
         model.addAttribute("reviews", reviewDtoList)
 
-        if (loginMemberId == null) {
-            println("index")
-            return "index"
+        if (loginMemberId != null) {
+            model.addAttribute("loginMember", loginMemberId)
         }
 
-        model.addAttribute("loginMember", loginMemberId)
-
-        println("login index")
         return "index"
     }
 }

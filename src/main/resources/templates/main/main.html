@@ -54,14 +54,14 @@
                 <ul th:each="member : ${members}">
                     <li>
                         <div class='img_bx'>
-                            <img src='/image/site/index/noimage.png' th:attr="src=${member.profileImage}">
+                            <img src='/image/site/noimage.png'>
                         </div>
                         <span th:text="${member.memberId}"></span><br>
                         <p th:text="'응모 ' + ${member.tryApply} + ' | 당선 ' + ${member.chosenApply} + ' | 콘텐츠리뷰'"></p>
                         <a href=''>사례 보기</a>
                     </li>
                 </ul>
-                <a href='#' class='view_btn trans03'>모든 VICON 크리에이터 보기
+                <a href='/creator/list' class='view_btn trans03'>모든 VICON 크리에이터 보기
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </div>

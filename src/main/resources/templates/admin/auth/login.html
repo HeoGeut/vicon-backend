@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>ADMIN</title>
+
+    <script type="text/javascript" src="/lib/front/jQuery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="/lib/front/animate.min.css">
+    <link href="/admin/css/global/init.css" rel="stylesheet" type="text/css"/>
+    <link href="/admin/css/global/common.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/admin/css/auth/auth.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../admin/js/auth/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="/admin/css/auth/login.css">
+</head>
+
+<body class="trans03">
+<div class="total_scale">
+    <div class="ratate_wrap blackhole trans03">
+        <div class='intra_bg more_in'></div>
+    </div>
+</div>
+<div class="intra_login">
+    <div class="auth_tit"><img class="paddingt12" src='/image/site/index/logo.png' width='120'/></div>
+    <div class="auth_con">
+        <p class="login_tit margint15">웹사이트 관리도구</p>
+        <form action="/admin/login" method="post" id='auth_form'>
+            <input type='hidden' name='url' value='https://www.vicon.company/admin/>'/>
+            <div class="txt_boxs margint15">
+                <ul class="txt_wrap">
+                    <li class="input_img"><img class='margint9' src='/image/admin/auth_id.png'/></li>
+                    <li class="input_txt"><input type="text" name="userid" id="userid" class="auth_login_id text"/></li>
+                </ul>
+                <div class='clear'></div>
+                <ul class="txt_wrap margint10">
+                    <li class="input_img"><img class='margint9' src='/image/admin/auth_pw.png'/></li>
+                    <li class="input_txt"><input type="password" name="password" id="password"
+                                                 class="auth_login_pass text"/></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="auth_login_btn margint10 trans03">로그인</div>
+            <p class="margint12"><a class="we_txt go_crespe trans03" href='http://crespe.co.kr' target='_blank'>크리스피
+                웹사이트 방문</a></p>
+            <p class="we_txt margint5">전략 010.3444.6589</p>
+        </form>
+    </div>
+</div>
+
+</body>
+<!--[if lt IE 9]>
+<div class="bad-exver" style='background-color:#ced6d6;padding:10px;position:relative;z-index:9999'>
+    <table cellspacing='5'>
+    <tr>
+        <td class='txt_center'><a target='_blank' href='http://windows.microsoft.com/ko-kr/internet-explorer/download-ie'><img width='64' src='http://ljsystem.co.kr/image/ico/ie.png'/><br/>[바로가기]</a></td>
+        <td class='txt_center'><a target='_blank' href='https://www.google.com/intl/ko/chrome/browser/'><img width='64' src='http://ljsystem.co.kr/image/ico/chrome.png'/><br/>[바로가기]</a></td>
+        <td class='txt_center'><a target='_blank' href='http://www.mozilla.or.kr/ko/firefox/fx/'><img width='64' src='http://ljsystem.co.kr/image/ico/ff.png'/><br/>[바로가기]</a></td>
+        <td class='txt_center'><a target='_blank' href='http://www.apple.com/kr/support/safari/'><img width='64' src='http://ljsystem.co.kr/image/ico/safari.png'/><br/>[바로가기]</a></td>
+        <td>사용하고 계신 브라우저 IE은 보안에 매우 취약합니다. <br/>보안과 속도가 강화된 웹 브라우저를 무료 업그레이드하세요.</td>
+    </tr>
+    </table>
+</div>
+<![endif]-->
+</html>

@@ -24,7 +24,8 @@ class WebConfig : WebMvcConfigurer {
                 "/contests/case", "/contests/list", "/contests/old", "/contests/open", "/contests/view",
                 "/static/**", "/css/**", "/image/**", "/js/**", "/lib/**",
                 "/*.ico", "/error",
-//                "/login", "/logout"
+                "/admin/css/**", "/admin/js/**", "/admin/font/**", "/admin/image/**", "/admin/plugins/**",
+                "/admin/login"
             )
     }
 }

@@ -1,0 +1,32 @@
+@charset "utf-8";
+@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+
+html,body{
+    width:100%;height:100%;
+    font-family: 'Noto Sans KR',"맑은 고딕",sans-serif,'dotum','굴림','Spinnaker','gulim','Vertical','Arial';
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -moz-font-feature-settings:"liga", "kern";
+    font-weight:400;
+    color:#464646;
+}
+
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select {margin:0; padding:0;}
+
+html{overflow-y:scroll;}
+body{word-break:break-all;-ms-word-break:break-all;word-break:keep-all;word-wrap:break-word;}
+img,fieldset,iframe{border:0 none;}
+input[type=checkbox]{border:0 none;}
+
+ul,ol {list-style:none;}
+em,address {font-style:normal;}
+a {text-decoration:none;}
+a:hover,a:active,a:focus {text-decoration:underline;}
+a,img,button,input{selector-dummy: expression(this.hideFocus=true);}
+a,img,button,input{outline: none;selector-dummy:expression(this.hideFocus=true);}
+article,aside,dialog,footer,header,section,footer,nav,figure {display:block; margin:0; padding:0;} /* html5 tags */
+button {cursor:pointer;}
+
+/* Fire Fox button style bug */
+button::-moz-focus-inner {padding:0; border:0;}

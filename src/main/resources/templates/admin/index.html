@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="admin/fragments/head :: head"></head>
+<head>
+    <!--    <link rel='stylesheet' type='text/css' href='css/index.css'/>-->
+    <!--    <script type='text/javascript' src='js/index.js'></script>-->
+    <script th:inline="javascript" type="text/javascript">
+        jQuery(function () {
+            $('#visitor_rate').highchartTable();
+        });
+
+        jQuery(function () {
+            var navigation = [[${navigation}]];
+            $('.sidebar-menu span:contains(' + navigation + ')').parents('li').addClass('active');
+        });
+    </script>
+</head>
+<body class='skin-purple sidebar-mini'>
+<div class="wrapper">
+    <header th:replace="admin/fragments/header :: header"></header>
+    <aside th:replace="admin/fragments/sidebar :: aside"></aside>
+    <div th:replace="admin/main/main :: main"></div>
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+    <div th:replace="admin/fragments/include :: include"></div>
+</div>
+</body>
+</html>
