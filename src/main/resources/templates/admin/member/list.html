@@ -97,15 +97,6 @@
                                     th:classappend="${currentPage == i ? 'active' : ''} ">
                                     <a href="#" th:onclick="|javaScript:goList(${i})|" th:text="${i}"></a>
                                 </li>
-
-                                <!--                                <li class=" active"><a href="">1</a></li>
-                                                                -->
-                                <!--                                <li><a href="javascript:goList('1')">2</a></li>-->
-                                <!--                                <li><a href="javascript:goList('2')">3</a></li>-->
-                                <!--                                <li><a href="javascript:goList('3')">4</a></li>-->
-                                <!--                                <li><a href="javascript:goList('4')">5</a></li>-->
-                                <!--                                <li><a href="javascript:goList('5')">6</a></li>-->
-
                                 <li><a href="#" th:onclick="|javascript:goList(${currentPage+1})|" class="direction next">Next</a></li>
                                 <li><a href="#" th:onclick="|javascript:goList(${totalPage})|" class="direction next">Next End</a></li>
                             </ul>
