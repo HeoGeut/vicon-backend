@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletRequest
 
 @Controller
@@ -19,14 +20,18 @@ class AdminMemberController(
     @GetMapping("")
     fun memberList(
         model: Model,
-        request: HttpServletRequest
+        request: HttpServletRequest,
+        @RequestParam(value = "page_now", required = false, defaultValue = "1") selectedPage: String
     ): String {
-        val pageRequest = PageRequest.of(0, 10)
+        val pageRequest = PageRequest.of(selectedPage.toInt() - 1, 10)
         val page = memberService.findAllByPageable(pageRequest)
         val members = page.content.map { AdminMemberDTO.of(it) }
         model.addAttribute("members", members)
         model.addAttribute("totalPage", page.totalPages)
-        model.addAttribute("", page.number)
+        model.addAttribute("currentPage", page.number + 1)
+
+        println(page.totalPages)
+        println(page.number)
 
         val navigationName = adminIndexService.selectedNavigation(request.requestURI)
         model.addAttribute("navigation", navigationName)

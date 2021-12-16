@@ -15,17 +15,17 @@
     </section>
     <section class="content">
         <div class="row">
-            <form name="frm" action="<?=$_SERVER['PHP_SELF']?>" method="get" class="frm" id="frm">
-                <!--        <input type="hidden" name="page_now" value="<?=$page_now?>"/>-->
-                <!--        <input type="hidden" name="page_row" value="<?=$page_row?>"/>-->
-                <!--        <input type="hidden" name="page_type" value="<?=$page_type?>"/>-->
+            <form name="frm" action="/admin/member" method="get" class="frm" id="frm">
+                        <input type="hidden" name="page_now" th:value="${currentPage}"/>
+<!--                        <input type="hidden" name="page_row" value=""/>-->
+<!--                        <input type="hidden" name="page_type" value=""/>-->
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
                             <div class='text-right'>
                                 <div class="input-group">
                                     <input type="text" name="table_search" class="form-control input-sm pull-right"
-                                           style="width: 150px;" placeholder="검색어를 입력하세요." value="<?=$table_search?>"/>
+                                           style="width: 150px;" placeholder="검색어를 입력하세요." value=""/>
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                                     </div>
@@ -91,15 +91,23 @@
                         </div>
                         <div class="box-footer clearfix text-right">
                             <ul class="pagination pagination-sm no-margin">
-                                <li><a href="javascript:goList('0')" class="direction prev">Prev End</a></li>
-                                <li class="active"><a href="">1</a></li>
-                                <li><a href="javascript:goList('1')">2</a></li>
-                                <li><a href="javascript:goList('2')">3</a></li>
-                                <li><a href="javascript:goList('3')">4</a></li>
-                                <li><a href="javascript:goList('4')">5</a></li>
-                                <li><a href="javascript:goList('5')">6</a></li>
-                                <li><a href="javascript:goList('1')" class="direction next">Next</a></li>
-                                <li><a href="javascript:goList('5')" class="direction next">Next End</a></li>
+                                <li><a href="javascript:goList('1')" class="direction prev">Prev End</a></li>
+
+                                <li th:each="i : ${#numbers.sequence(1, totalPage)}"
+                                    th:classappend="${currentPage == i ? 'active' : ''} ">
+                                    <a href="#" th:onclick="|javaScript:goList(${i})|" th:text="${i}"></a>
+                                </li>
+
+                                <!--                                <li class=" active"><a href="">1</a></li>
+                                                                -->
+                                <!--                                <li><a href="javascript:goList('1')">2</a></li>-->
+                                <!--                                <li><a href="javascript:goList('2')">3</a></li>-->
+                                <!--                                <li><a href="javascript:goList('3')">4</a></li>-->
+                                <!--                                <li><a href="javascript:goList('4')">5</a></li>-->
+                                <!--                                <li><a href="javascript:goList('5')">6</a></li>-->
+
+                                <li><a href="#" th:onclick="|javascript:goList(${currentPage+1})|" class="direction next">Next</a></li>
+                                <li><a href="#" th:onclick="|javascript:goList(${totalPage})|" class="direction next">Next End</a></li>
                             </ul>
                         </div>
                     </div>
