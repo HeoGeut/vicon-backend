@@ -10,7 +10,7 @@ class LoginCheckInterceptor : HandlerInterceptor {
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val requestURI = request.requestURI
-        println(requestURI)
+//        println(requestURI)
 
         if(requestURI.contains("admin")) return adminHandle(request, response)
 
