@@ -21,6 +21,7 @@ class MemberService(
     fun findAllByPageable(pageRequest: Pageable): Page<Member> = memberRepository.findBy(pageRequest)
 
     fun save(member: Member) {
+
 //        val encodedPassword = passwordEncoder.encode(member.password)
 //        member.password = encodedPassword
 
