@@ -5,7 +5,6 @@ import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.features.auth.MemberService
 import com.vicon.viconbackend.features.globalConfig.GlobalConfigService
 import org.springframework.stereotype.Component
-import javax.annotation.PostConstruct
 
 @Component
 class PostConstructor(
@@ -27,7 +26,7 @@ class PostConstructor(
                 emailBack = "naver.com",
                 companyName = "company1",
                 businessCategory = "cate1",
-                websiteurl = "www.qqq.com",
+                websiteUrl = "www.qqq.com",
                 channelCategory = "cate1",
                 channelUrl = "www.qqq.com",
                 subscriberAmount = "10만명",

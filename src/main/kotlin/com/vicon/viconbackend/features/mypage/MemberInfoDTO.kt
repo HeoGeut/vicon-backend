@@ -32,7 +32,7 @@ data class MemberInfoDTO(
                 totalPrice = 0.toString(),
                 companyName = member.companyName ?: "",
                 businessCategory = member.businessCategory ?: "",
-                websiteUrl = member.websiteurl ?: "",
+                websiteUrl = member.websiteUrl ?: "",
                 businessType = member.businessType?.type ?: Member.BusinessType.NONE.type,
                 businessNumber = member.businessNumber ?: "",
                 channelUrl = member.channelUrl ?: "",

@@ -2,14 +2,9 @@ package com.vicon.viconbackend.domain.member
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.vicon.viconbackend.domain.apply.Apply
-import com.vicon.viconbackend.domain.auth.AuthenticationPassword
 import com.vicon.viconbackend.domain.common.Auditable
-import com.vicon.viconbackend.domain.common.Persistable
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.features.auth.MemberCreateForm
-import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
-import java.time.LocalDateTime
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty
 
@@ -32,7 +27,7 @@ class Member(
 
     var companyName: String? = "",
     var businessCategory: String? = "",
-    var websiteurl: String? = "",
+    var websiteUrl: String? = "",
 
     var channelCategory: String? = "",
     var channelUrl: String? = "",
@@ -52,7 +47,7 @@ class Member(
     @OneToMany(mappedBy = "member")
     var contests: List<Contest>? = mutableListOf(),
 
-) : Auditable<Long>() {
+    ) : Auditable<Long>() {
 
     fun from(memberCreateForm: MemberCreateForm): Member {
         this.username = memberCreateForm.mem_id
@@ -64,7 +59,7 @@ class Member(
         this.emailBack = memberCreateForm.mem_email2
         this.companyName = memberCreateForm.mem_company
         this.businessCategory = memberCreateForm.mem_service
-        this.websiteurl = memberCreateForm.mem_website
+        this.websiteUrl = memberCreateForm.mem_website
         this.channelCategory = memberCreateForm.mem_ch_category
         this.channelUrl = memberCreateForm.mem_ch_url
         this.subscriberAmount = memberCreateForm.mem_ch_subscriber
