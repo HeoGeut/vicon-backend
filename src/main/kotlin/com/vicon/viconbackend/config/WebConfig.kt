@@ -20,7 +20,7 @@ class WebConfig : WebMvcConfigurer {
                 "/info/**",
                 "/main/**",
                 "/review/**",
-                "/auth/join", "/auth/login",
+                "/auth/join", "/auth/login", "/auth/ajax",
                 "/contests/case", "/contests/list", "/contests/old", "/contests/open", "/contests/view",
                 "/static/**", "/css/**", "/image/**", "/js/**", "/lib/**",
                 "/*.ico", "/error",

@@ -5,6 +5,7 @@ import com.vicon.viconbackend.domain.member.MemberRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class MemberService(
@@ -14,9 +15,10 @@ class MemberService(
 
     fun findTop6By() = memberRepository.findTop6By()
     fun findById(id: Long) = memberRepository.findById(id)
-    fun findByMemberId(memberId: String) = memberRepository.findByUsername(memberId)
+    fun findByUsername(username: String) = memberRepository.findByUsername(username)
+
     fun findTop10By() = memberRepository.findTop10By()
-    fun findAllByPageable(pageRequest : Pageable) : Page<Member> = memberRepository.findBy(pageRequest)
+    fun findAllByPageable(pageRequest: Pageable): Page<Member> = memberRepository.findBy(pageRequest)
 
     fun save(member: Member) {
 //        val encodedPassword = passwordEncoder.encode(member.password)

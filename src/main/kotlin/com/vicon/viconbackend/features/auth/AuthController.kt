@@ -36,9 +36,9 @@ class AuthController(
     fun ajax(
         @RequestBody data: String
     ): Int {
-        return if (memberService.findByMemberId(data).isPresent)
-            1
-        else 0
+        return if (memberService.findByUsername(data.dropLast(1)).isPresent)
+            0
+        else 1
     }
 
     @GetMapping("login")
