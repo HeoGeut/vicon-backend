@@ -5,6 +5,7 @@ import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.features.auth.MemberService
 import com.vicon.viconbackend.features.globalConfig.GlobalConfigService
 import org.springframework.stereotype.Component
+import javax.annotation.PostConstruct
 
 @Component
 class PostConstructor(
@@ -12,7 +13,7 @@ class PostConstructor(
     val globalConfigService: GlobalConfigService
 ) {
 
-    //    @PostConstruct
+//    @PostConstruct
     fun initSetting() {
         val memberNames = IntRange(1, 20).map { "test$it" }
         val members = memberNames.map {
