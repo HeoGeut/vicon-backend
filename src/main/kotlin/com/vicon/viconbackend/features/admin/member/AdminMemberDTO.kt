@@ -4,9 +4,10 @@ import com.vicon.viconbackend.domain.member.Member
 import java.time.format.DateTimeFormatter
 
 data class AdminMemberDTO(
+    val id: String = "",
     val username: String = "",
     val phoneNumber: String = "",
-    val email : String = "",
+    val email: String = "",
     val companyName: String = "",
     val businessCategory: String = "",
     val subscriberAmount: String = "",
@@ -17,6 +18,7 @@ data class AdminMemberDTO(
     companion object {
         fun of(member: Member): AdminMemberDTO {
             return AdminMemberDTO(
+                id = member.id.toString(),
                 username = member.username,
                 phoneNumber = "${member.phoneNumberFront}-${member.phoneNumberMiddle}-${member.phoneNumberBack}",
                 email = "${member.emailFront}@${member.emailBack}",

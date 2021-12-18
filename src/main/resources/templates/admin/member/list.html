@@ -16,9 +16,9 @@
     <section class="content">
         <div class="row">
             <form name="frm" action="/admin/member" method="get" class="frm" id="frm">
-                        <input type="hidden" name="page_now" th:value="${currentPage}"/>
-<!--                        <input type="hidden" name="page_row" value=""/>-->
-<!--                        <input type="hidden" name="page_type" value=""/>-->
+                <input type="hidden" name="page_now" th:value="${currentPage}"/>
+                <!--                        <input type="hidden" name="page_row" value=""/>-->
+                <!--                        <input type="hidden" name="page_type" value=""/>-->
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
@@ -75,12 +75,13 @@
                                     <td class="text-left" th:text="${member.subscriberAmount}">165,000명</td>
                                     <td class="text-left" th:text="${member.channelType}"> 유튜브</td>
                                     <td class="text-center"><i class="far fa-circle"></i></td>
-                                    <td class="text-center"><i th:if="${member.isCertificated}"
-                                                               class="far fa-circle"></i>
+                                    <td class="text-center">
+                                        <i th:if="${member.isCertificated}" class="far fa-circle"></i>
                                     </td>
                                     <td class="text-left" th:text="${member.createdDate}">2021-12-12 22:44:28</td>
                                     <td class="text-center">
-                                        <a href="view.php?key=JTI1MjUzRE1qTg==" class="btn btn-default btn-sm">수정</a>
+                                        <a th:href="@{/admin/member/edit (id=${member.id})}"
+                                           class="btn btn-default btn-sm">수정</a>
                                     </td>
                                     <td class="text-center">
                                         <a href="#" class="btn btn-warning btn-sm del">삭제</a>
@@ -97,8 +98,10 @@
                                     th:classappend="${currentPage == i ? 'active' : ''} ">
                                     <a href="#" th:onclick="|javaScript:goList(${i})|" th:text="${i}"></a>
                                 </li>
-                                <li><a href="#" th:onclick="|javascript:goList(${currentPage+1})|" class="direction next">Next</a></li>
-                                <li><a href="#" th:onclick="|javascript:goList(${totalPage})|" class="direction next">Next End</a></li>
+                                <li><a href="#" th:onclick="|javascript:goList(${currentPage+1})|"
+                                       class="direction next">Next</a></li>
+                                <li><a href="#" th:onclick="|javascript:goList(${totalPage})|" class="direction next">Next
+                                    End</a></li>
                             </ul>
                         </div>
                     </div>

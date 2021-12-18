@@ -5,11 +5,12 @@ import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.features.auth.MemberCreateForm
+import org.hibernate.Hibernate
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty
 
 @Entity
-class Member(
+data class Member(
     @NotEmpty @Column(unique = true)
     var username: String = "",
 

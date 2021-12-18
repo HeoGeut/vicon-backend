@@ -35,3 +35,7 @@ cloud:
 cdn:
   path: https://vicon-static-bucket.s3.ap-northeast-2.amazonaws.com
 
+logging:
+  level:
+    org.springframework.web: DEBUG
+    com.vicon: DEBUG

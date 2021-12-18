@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="admin/fragments/head :: head"></head>
+<body class='skin-purple sidebar-mini'>
+
+<header th:replace="admin/fragments/header :: header"></header>
+<aside th:replace="admin/fragments/sidebar :: aside"></aside>
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1> 회원 관리 <small>상세보기</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="">회원 관리</li>
+        </ol>
+    </section>
+    <style>
+        pre em {
+            font-size: 11px;
+            color: #999
+        }
+    </style>
+
+    <section class="content">
+
+        <form action="/admin/member/edit" th:object="${member}" method="post" enctype="multipart/form-data">
+            <input type='hidden' name='key' th:value='${id}'/>
+            <!-- <input type='hidden' name='send_mail' value='<?=$row->mem_email1?>@<?=$row->mem_email2?>'/> -->
+            <div class='row'>
+                <div class='col-md-4'>
+                    <div class='box'>
+                        <div class='box-body pad'>
+                            <!-- <input type='hidden' name='key' value='<?=encode($key)?>'/> -->
+                            <h4>회원 정보</h4>
+                            <div class="form-group">
+                                <label th:text="${member.mailCertification} ? '메일인증여부 : 인증완료 ' : '메일인증여부 :'"
+                                       for="bd_subject">
+                                </label>
+                                <i th:if="${member.mailCertification}" class='fas fa-check-circle'></i>
+                                <i th:unless="${member.mailCertification}" class='fas fa-times'
+                                   style='color:#0159fe'></i>
+                                <a th:unless="${member.mailCertification}" href='' class='mail_btn2'
+                                   style='background:#ddd;color:#000;padding:3px 10px;border-radius:4px'>메일재발송</a>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">프로필사진</label>
+                                <div><img
+                                        th:src="${member.profileImage == '' ? '/image/admin/noimage.png' : member.profileImage }"
+                                        style='width:70px;height:70px;border:1px solid #ddd;border-radius:50%'></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">가입일</label>
+                                <pre th:text="${member.createdDate}"></pre>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">아이디</label>
+                                <pre th:text="${member.username}"></pre>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">연락처</label><br>
+                                <input type='text' name='mem_hp1' maxlength="3" class='form-control'
+                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberFront}'> -
+                                <input type='text' name='mem_hp2' maxlength="4" class='form-control'
+                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberMiddle}'>
+                                -
+                                <input type='text' name='mem_hp3' maxlength="4" class='form-control'
+                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberBack}'>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">이메일</label><br>
+                                <input type='text' name='mem_email1' class='form-control'
+                                       style='width:150px;display:inline-block' th:value='${member.emailFront}'> @
+                                <input type='text' name='mem_email2' class='form-control'
+                                       style='width:150px;display:inline-block' th:value='${member.emailBack}'>
+                            </div>
+
+                            <h4 style='padding-top:20px;'>비즈니스 정보</h4>
+                            <div class="form-group">
+                                <label for="bd_subject">기업명</label>
+                                <input type='text' name='mem_company' class='form-control'
+                                       th:value='${member.companyName}'>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">비즈니스 카테고리(업종)</label>
+                                <input type='text' name='mem_service' class='form-control'
+                                       th:value='${member.businessCategory}'>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">웹사이트 주소</label>
+                                <input type='text' name='mem_website' class='form-control'
+                                       th:value='${member.websiteUrl}'>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">사업자 유형</label>
+                                <select name="mem_business_type" class='form-control'>
+                                    <option value="">선택해주세요.</option>
+                                    <option value="1" th:selected="${member.businessType == 1}">개인</option>
+                                    <option value="2" th:selected="${member.businessType == 2}">법인</option>
+                                    <option value="3" th:selected="${member.businessType == 3}">간이과세자</option>
+                                    <option value="4" th:selected="${member.businessType == 4}">공기업</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">사업자 번호</label>
+                                <input type="text" name="mem_business_number" class="form-control"
+                                       th:value="${member.businessNumber}">
+                                </select>
+                            </div>
+
+
+                            <!-- <h4 style='padding-top:20px;'>채널 정보</h4>
+                            <div class="form-group">
+                                <label for="bd_subject">대표 채널 URL</label>
+                                <pre><a href='<?=$mem_ch_url?>' target="_blank"><?=$row->mem_ch_url?></a></pre>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">채널 카테고리</label>
+                                <pre><?=$row->mem_ch_category?></pre>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">현재 채널 구독자 수</label>
+                                <pre><?=$row->mem_ch_subscriber?></pre>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bd_subject">보유채널</label>
+                                <pre><?=$mem_channel_type?></pre>
+                            </div> -->
+
+                            <!-- <div class="form-group text-right">
+                                <button type="button" class="btn btn-default pull-left cancel">목록</button>
+                                <button type='button' id='smit' class='btn btn-primary'>글쓰기</button>
+                            </div> -->
+
+                            <div class="form-group text-right">
+                                <button type="button" class="btn btn-default pull-left cancel">취소</button>
+                                <button type='submit' class='btn btn-primary'>등록</button>
+                            </div>
+                        </div>
+                    </div><!-- /.box -->
+                </div><!-- /.col-->
+
+                <div class='col-md-8'>
+                    <div class='box'>
+                        <div class='box-body pad'>
+                            <!-- <input type='hidden' name='key' value='<?=encode($key)?>'/> -->
+                            <h4>콘테스트 개최내역</h4>
+                            <ul th:each="contest : ${member.openedContests}" style="padding-left:0">
+                                <li style="list-style:none;margin-bottom:10px;">
+                                    <a th:href="@{/admin/contest/view(id=${contest.id})}"
+                                       th:text="${contest.info}" target="_blank">
+                                    </a>
+                                </li>
+                            </ul>
+                            <p th:unless="${member.openedContests}" style='text-align:center;'>콘테스트 개최내역이 없습니다.</p>
+
+                            <h4 style='padding-top:20px;'>콘테스트 참가내역</h4>
+                            <ul th:each="contest : ${member.enteredContests}" style="padding-left:0">
+                                <li style="list-style:none;margin-bottom:10px;">
+                                    <a th:href="@{/admin/contest/view(id=${contest.id})}"
+                                       th:text="${contest.info}" target="_blank">
+                                    </a>
+                                </li>
+                            </ul>
+                            <p th:unless="${member.enteredContests}" style='text-align:center;'>콘테스트 참가내역이 없습니다.</p>
+
+                            <!--                        <h4 style='padding-top:20px;'>소통 내역</h4>-->
+                            <!--                        <?=$chat_HTML?>-->
+                        </div>
+                    </div><!-- /.box -->
+                </div><!-- /.col-->
+            </div><!-- ./row -->
+
+        </form>
+
+    </section>
+
+</div>
+<footer th:replace="admin/fragments/footer :: footer"></footer>
+</body>
