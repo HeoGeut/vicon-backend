@@ -66,7 +66,7 @@ class AuthController(
         if (loginMember == null) {
             val msg = "아이디 또는 비밀번호가 맞지 않습니다"
             model.addAttribute("msg", msg)
-            model.addAttribute("url", "/")
+            model.addAttribute("url", "/auth/login")
             return "redirect"
         }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.contest.Contest
+import com.vicon.viconbackend.features.admin.member.AdminMemberDetailDTO
 import com.vicon.viconbackend.features.auth.MemberCreateForm
 import org.hibernate.Hibernate
 import javax.persistence.*
@@ -66,6 +67,31 @@ data class Member(
         this.channelType = memberCreateForm.channelType.toString()
 
         return this
+    }
+
+    fun fromEdit(memberEditForm: AdminMemberDetailDTO): Member {
+        this.phoneNumberFront = memberEditForm.phoneNumberFront
+        this.phoneNumberMiddle = memberEditForm.phoneNumberMiddle
+        this.phoneNumberBack = memberEditForm.phoneNumberBack
+        this.emailFront = memberEditForm.emailFront
+        this.emailBack = memberEditForm.emailBack
+        this.companyName = memberEditForm.companyName
+        this.businessCategory = memberEditForm.businessCategory
+        this.websiteUrl = memberEditForm.websiteUrl
+        this.businessType = findBusinessType(memberEditForm.businessType)
+        this.businessNumber = memberEditForm.businessNumber
+
+        return this
+    }
+
+    private fun findBusinessType(ordinal: Int): BusinessType {
+        return when (ordinal) {
+            1 -> BusinessType.INDIVIDUAL
+            2 -> BusinessType.CORPORATION
+            3 -> BusinessType.SIMPLE_TAX
+            4 -> BusinessType.PUBLIC_ENTERPRISE
+            else -> BusinessType.NONE
+        }
     }
 
 //    fun getPassword(): String {

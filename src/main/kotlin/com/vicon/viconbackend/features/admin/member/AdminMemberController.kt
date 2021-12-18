@@ -6,11 +6,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.util.Base64Utils
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
-import java.util.*
 import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 
@@ -50,11 +49,39 @@ class AdminMemberController(
         val memberDetail = AdminMemberDetailDTO.of(member)
         model.addAttribute("member", memberDetail)
 
-        model.addAttribute("id", id)
-
         logger.debug(member.toString())
         logger.debug(memberDetail.toString())
 
         return "admin/member/edit"
+    }
+
+    @PostMapping("edit")
+    fun editMember(
+        editForm: AdminMemberDetailDTO,
+        model: Model
+    ): String {
+        logger.debug(editForm.toString())
+        val memberId = editForm.id
+        val findMember = memberService.findById(memberId.toLong())
+        if (findMember.isPresent) {
+            val editedMember = findMember.get().fromEdit(editForm)
+            return try {
+                memberService.save(editedMember)
+                val msg = "저장되었습니다"
+                model.addAttribute("msg", msg)
+                model.addAttribute("url", "/admin/member/edit?id=${memberId}")
+                "admin/edit_redirect"
+            } catch (e: Exception) {
+                val msg = "DB오류입니다. 다시 시도해주세요\n${e.message}"
+                model.addAttribute("msg", msg)
+                model.addAttribute("url", "/admin/member")
+                "admin/edit_redirect"
+            }
+        } else {
+            val msg = "존재하지 않는 회원입니다. 잠시 후 다시 시도해주세요"
+            model.addAttribute("msg", msg)
+            model.addAttribute("url", "/admin/member")
+            return "admin/edit_redirect"
+        }
     }
 }

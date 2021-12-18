@@ -4,6 +4,7 @@ import com.vicon.viconbackend.domain.member.Member
 import java.time.format.DateTimeFormatter
 
 data class AdminMemberDetailDTO(
+    val id : String = "",
     val mailCertification: Boolean = false,
     val profileImage: String = "",
     val createdDate: String = "",
@@ -24,6 +25,7 @@ data class AdminMemberDetailDTO(
     companion object {
         fun of(member: Member): AdminMemberDetailDTO {
             return AdminMemberDetailDTO(
+                id = member.id.toString(),
                 mailCertification = member.isCertificated ?: false,
                 profileImage = member.profileImage ?: "/image/noimage.png",
                 createdDate = member.createdAt!!.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),

@@ -23,7 +23,7 @@
     <section class="content">
 
         <form action="/admin/member/edit" th:object="${member}" method="post" enctype="multipart/form-data">
-            <input type='hidden' name='key' th:value='${id}'/>
+            <input type='hidden' th:field="${member.id}" th:value="${member.id}"/>
             <!-- <input type='hidden' name='send_mail' value='<?=$row->mem_email1?>@<?=$row->mem_email2?>'/> -->
             <div class='row'>
                 <div class='col-md-4'>
@@ -44,9 +44,10 @@
 
                             <div class="form-group">
                                 <label for="bd_subject">프로필사진</label>
-                                <div><img
-                                        th:src="${member.profileImage == '' ? '/image/admin/noimage.png' : member.profileImage }"
-                                        style='width:70px;height:70px;border:1px solid #ddd;border-radius:50%'></div>
+                                <div>
+                                    <img th:src="${member.profileImage == '' ? '/image/admin/noimage.png' : member.profileImage }"
+                                         style='width:70px;height:70px;border:1px solid #ddd;border-radius:50%'>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -62,45 +63,52 @@
                             <div class="form-group">
                                 <label for="bd_subject">연락처</label><br>
                                 <input type='text' name='mem_hp1' maxlength="3" class='form-control'
-                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberFront}'> -
+                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberFront}'
+                                       th:field="${member.phoneNumberFront}">
+                                -
                                 <input type='text' name='mem_hp2' maxlength="4" class='form-control'
-                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberMiddle}'>
+                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberMiddle}'
+                                       th:field="${member.phoneNumberMiddle}">
                                 -
                                 <input type='text' name='mem_hp3' maxlength="4" class='form-control'
-                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberBack}'>
+                                       style='width:100px;display:inline-block' th:value='${member.phoneNumberBack}'
+                                       th:field="${member.phoneNumberBack}">
                             </div>
 
                             <div class="form-group">
                                 <label for="bd_subject">이메일</label><br>
                                 <input type='text' name='mem_email1' class='form-control'
-                                       style='width:150px;display:inline-block' th:value='${member.emailFront}'> @
+                                       style='width:150px;display:inline-block' th:value='${member.emailFront}'
+                                       th:field="${member.emailFront}"> @
                                 <input type='text' name='mem_email2' class='form-control'
-                                       style='width:150px;display:inline-block' th:value='${member.emailBack}'>
+                                       style='width:150px;display:inline-block' th:value='${member.emailBack}'
+                                       th:field="${member.emailBack}">
                             </div>
 
                             <h4 style='padding-top:20px;'>비즈니스 정보</h4>
                             <div class="form-group">
                                 <label for="bd_subject">기업명</label>
                                 <input type='text' name='mem_company' class='form-control'
-                                       th:value='${member.companyName}'>
+                                       th:value='${member.companyName}' th:field="${member.companyName}">
                             </div>
 
                             <div class="form-group">
                                 <label for="bd_subject">비즈니스 카테고리(업종)</label>
                                 <input type='text' name='mem_service' class='form-control'
-                                       th:value='${member.businessCategory}'>
+                                       th:value='${member.businessCategory}' th:field="${member.businessCategory}">
                             </div>
 
                             <div class="form-group">
                                 <label for="bd_subject">웹사이트 주소</label>
                                 <input type='text' name='mem_website' class='form-control'
-                                       th:value='${member.websiteUrl}'>
+                                       th:value='${member.websiteUrl}' th:field="${member.websiteUrl}">
                             </div>
 
                             <div class="form-group">
                                 <label for="bd_subject">사업자 유형</label>
-                                <select name="mem_business_type" class='form-control'>
-                                    <option value="">선택해주세요.</option>
+                                <select name="mem_business_type" class='form-control'
+                                        th:field="${member.businessType}">
+                                    <option value="0">선택해주세요.</option>
                                     <option value="1" th:selected="${member.businessType == 1}">개인</option>
                                     <option value="2" th:selected="${member.businessType == 2}">법인</option>
                                     <option value="3" th:selected="${member.businessType == 3}">간이과세자</option>
@@ -111,7 +119,7 @@
                             <div class="form-group">
                                 <label for="bd_subject">사업자 번호</label>
                                 <input type="text" name="mem_business_number" class="form-control"
-                                       th:value="${member.businessNumber}">
+                                       th:value="${member.businessNumber}" th:field="${member.businessNumber}">
                                 </select>
                             </div>
 
@@ -187,4 +195,5 @@
 
 </div>
 <footer th:replace="admin/fragments/footer :: footer"></footer>
+<div th:replace="admin/fragments/include :: include"></div>
 </body>

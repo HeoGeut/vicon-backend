@@ -79,7 +79,7 @@ jQuery(function(){
     // cancel button
     $(".cancel").click(function(e){
         e.preventDefault();
-        history.back();
+        location.href='/admin/member';
     });
 
     // list row
