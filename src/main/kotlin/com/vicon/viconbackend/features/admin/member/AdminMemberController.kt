@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
 @Controller
@@ -37,6 +34,15 @@ class AdminMemberController(
         model.addAttribute("navigation", navigationName)
 
         return "admin/member/list"
+    }
+
+    @PostMapping("ajax")
+    @ResponseBody
+    fun ajaxDelete(
+        @RequestBody data: String
+    ): Int {
+        val returnValue = memberService.delete(data.dropLast(1))
+        return if (returnValue) 1 else 0
     }
 
     @GetMapping("edit")

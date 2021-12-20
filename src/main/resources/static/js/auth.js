@@ -48,8 +48,6 @@ jQuery(function ($) {
     $('#id_chk').click(function () {
         var mem_id = $('input[name=mem_id]').val();
 
-        console.log(mem_id)
-
         if (mem_id == "") {
             alert("아이디를 입력해 주세요.")
             $("input[name=mem_id]").focus();
@@ -63,7 +61,6 @@ jQuery(function ($) {
             data: mem_id,
 
             success: function (data) {
-                console.log(data)
                 if (data == 1) {
                     $("input[name=mem_id_chk]").val('1');
                     $('#id_chk').css('display', 'none');

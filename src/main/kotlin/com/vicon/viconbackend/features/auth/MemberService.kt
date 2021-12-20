@@ -35,4 +35,14 @@ class MemberService(
     fun saveAll(members: List<Member>) {
         memberRepository.saveAll(members)
     }
+
+    fun delete(memberId : String): Boolean {
+        val member = memberRepository.findById(memberId.toLong())
+        return try {
+            memberRepository.delete(member.get())
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
 }
