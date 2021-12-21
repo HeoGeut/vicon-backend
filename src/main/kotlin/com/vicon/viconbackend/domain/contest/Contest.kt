@@ -3,6 +3,7 @@ package com.vicon.viconbackend.domain.contest
 import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.member.Member
+import com.vicon.viconbackend.domain.payment.Payment
 import com.vicon.viconbackend.features.contest.ContestCreateForm
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -10,56 +11,60 @@ import javax.persistence.*
 
 @Entity
 data class Contest(
-        @Enumerated(EnumType.STRING)
-        var type: ContestType? = ContestType.STANDARD,
-        var category: String = "",
-        @Enumerated(EnumType.STRING)
-        var channelType: ChannelType? = ChannelType.NONE,
-        var title: String? = "",
-        var name: String? = "",
+    @Enumerated(EnumType.STRING)
+    var type: ContestType? = ContestType.STANDARD,
+    var category: String = "",
+    @Enumerated(EnumType.STRING)
+    var channelType: ChannelType? = ChannelType.NONE,
+    var title: String? = "",
+    var name: String? = "",
 
-        @Column(name = "content", columnDefinition = "text")
-        var text: String? = "",
+    @Column(name = "content", columnDefinition = "text")
+    var text: String? = "",
 
-        @Enumerated(EnumType.STRING)
-        var contentsStyle: ContentsStyle? = ContentsStyle.REVIEW,
+    @Enumerated(EnumType.STRING)
+    var contentsStyle: ContentsStyle? = ContentsStyle.REVIEW,
 
-        var reward: BigDecimal? = BigDecimal.ZERO,
+    var reward: BigDecimal? = BigDecimal.ZERO,
 
-        var isPaidAds: Boolean? = false,
-        var adsPrice: String? = "",
-        var isBurdenFee: Boolean? = false,
+    var isPaidAds: Boolean? = false,
+    var adsPrice: BigDecimal? = BigDecimal.ZERO,
+    var isBurdenFee: Boolean? = false,
 
-        var recruitDeadLineDate: LocalDateTime? = null,
-        var contentsCompletedDate: LocalDateTime? = null,
+    var recruitDeadLineDate: LocalDateTime? = null,
+    var contentsCompletedDate: LocalDateTime? = null,
 
-        var recruitNumber : BigDecimal = BigDecimal.ZERO,
+    var recruitNumber: BigDecimal = BigDecimal.ZERO,
 
-        @Enumerated(EnumType.STRING)
-        var cashReceiptType: CashReceiptType? = CashReceiptType.UNISSUED,
-        var cashReceiptIssuanceType: Char? = null,
-        var cashReceiptsNumber: String = "",
+    @Enumerated(EnumType.STRING)
+    var cashReceiptType: CashReceiptType? = CashReceiptType.UNISSUED,
+    var cashReceiptIssuanceType: Char? = null,
+    var cashReceiptsNumber: String = "",
 
-        var isIssuedTaxInvoice: Boolean? = false,
-        var taxInvoiceNumber: String = "",
+    var isIssuedTaxInvoice: Boolean? = false,
+    var taxInvoiceNumber: String = "",
 
-        var isConfirmed: Boolean? = false,
-        var isPaidReward: Boolean? = false,
-        var isCompletedContents: Boolean? = false,
+    var isConfirmed: Boolean? = false,
+    var isPaidReward: Boolean? = false,
+    var isCompletedContents: Boolean? = false,
 
-        var totalPaymentPrice: BigDecimal? = BigDecimal.ZERO,
+    var totalPaymentPrice: BigDecimal? = BigDecimal.ZERO,
 
-        var orderNumber: String? = "",
+    var orderNumber: String? = "",
 
-        @OneToMany(mappedBy = "contest", cascade = [CascadeType.ALL])
-        var contestAttachments: List<ContestAttachment>? = mutableListOf(),
+    @OneToMany(mappedBy = "contest", cascade = [CascadeType.ALL])
+    var contestAttachments: List<ContestAttachment>? = mutableListOf(),
 
-        @OneToMany(mappedBy = "contest")
-        var applies: List<Apply>? = mutableListOf(),
+    @OneToMany(mappedBy = "contest")
+    var applies: List<Apply>? = mutableListOf(),
 
-        @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-        @JoinColumn(name = "MEMBER_ID")
-        var member: Member? = null
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "MEMBER_ID")
+    var member: Member? = null,
+
+    @OneToOne(mappedBy = "contest")
+    @JoinColumn(name = "PAYMENT_ID")
+    var payment: Payment? = null
 
 ) : Auditable<Long>() {
     fun from(createForm: ContestCreateForm): Contest {
@@ -76,14 +81,14 @@ data class Contest(
 //      need add file
         this.reward = createForm.c_reward.replace(",", "").toBigDecimal()
         this.isPaidAds = createForm.c_ad_chk.run {
-            when(this){
+            when (this) {
                 "1" -> true
                 else -> false
             }
         }
-        this.adsPrice = createForm.c_ad_price
+        this.adsPrice = createForm.c_ad_price.toBigDecimal()
         this.isBurdenFee = createForm.burdenFee.run {
-            when(this){
+            when (this) {
                 "1" -> true
                 else -> false
             }

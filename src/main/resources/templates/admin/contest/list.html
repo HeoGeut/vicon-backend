@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="admin/fragments/head :: head"></head>
+<head>
+    <script type='text/javascript' src='/admin/js/contest.js'></script>
+    <link href="/admin/css/contest.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class='skin-purple sidebar-mini'>
+
+<header th:replace="admin/fragments/header :: header"></header>
+<aside th:replace="admin/fragments/sidebar :: aside"></aside>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1> 콘테스트 관리 <small>목록</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="">콘테스트관리</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <form name="frm" action="/admin/contest" method="get" class="frm" id="frm">
+                <input type="hidden" name="page_now" th:value="${currentPage}"/>
+                <!--                <input type="hidden" name="page_row" value="<?=$page_row?>"/>-->
+                <!--                <input type="hidden" name="page_type" value="<?=$page_type?>"/>-->
+                <!--                <input type="hidden" name="sorter" class='standard_sorter' value="<?=$sorter?>"/>-->
+                <!--                <input type="hidden" name="sorting" class='standard_sorting' value="<?=$sorting?>"/>-->
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <!--                            <div class='text-left pull-left'>-->
+                            <!--                                <a href='file_proc.php' class='btn btn-primary btn-sm'><i class="fas fa-trash-alt"></i> 파일 캐시 비우기</a>-->
+                            <!--                            </div>-->
+                            <div class='text-right'>
+                                <div class="input-group">
+                                    <input type="text" name="table_search" class="form-control input-sm pull-right"
+                                           style="width: 150px;" placeholder="콘테스트 제목" value=""/>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover tbl_sort table-bordered">
+                                <colgroup>
+                                    <col width='50'/>
+                                    <col width='70'/>
+                                    <col width='90'/>
+                                    <col width='90'/>
+                                    <col/>
+                                    <col/>
+                                    <col/>
+                                    <col width='100'/>
+                                    <col width='80'/>
+                                    <col width=''/>
+                                    <col width='80'/>
+                                    <col width='80'/>
+                                    <col width='80'/>
+                                    <col width='80'/>
+                                    <col width='100'/>
+                                    <col width='50'/>
+                                    <col width='50'/>
+                                </colgroup>
+                                <tr>
+                                    <th class="text-center">번호</th>
+                                    <th class="text-center">콘텐츠<br>스타일</th>
+                                    <th class="text-center">비즈니스<br>카테고리</th>
+                                    <th class="text-center">채널</th>
+                                    <th class="text-left sort">제목</th>
+                                    <th class="text-left sort">기업명 / 제품명</th>
+                                    <th class="text-left sort">상금</th>
+                                    <th class="text-left">모집마감일</th>
+                                    <th class="text-left">지원자수</th>
+                                    <th class="text-left">결제금액</th>
+                                    <th class="text-left">작업여부</th>
+                                    <th class="text-left">입금여부</th>
+                                    <th class="text-left">검토여부</th>
+                                    <th class="text-left">지급여부</th>
+                                    <th class="text-left sort">등록시간</th>
+                                    <th class="text-center">보기</th>
+                                    <th class="text-center">삭제</th>
+                                </tr>
+
+                                <tr th:each="contest : ${contests}" th:target="${contest.id}">
+                                    <td class="text-center" th:text="${contestStat.count}">107</td>
+                                    <td class="text-center" th:text="${contest.contentsStyle}">PPL</td>
+                                    <td class="text-center" th:text="${contest.category}">광고</td>
+                                    <td class="text-center" th:text="${contest.channelType}"></td>
+                                    <td class="text-left" th:text="${contest.title}"> 방한용품 광고</td>
+                                    <td class="text-left" th:text="${contest.name}">핫앤쿨</td>
+                                    <td class="text-left" th:text="${contest.reward}">400,000원</td>
+                                    <td class="text-left" th:text="${contest.recruitDeadLineDate}">2021-12-24</td>
+                                    <td class="text-left" th:text="${contest.applyNumber}">1명</td>
+                                    <td class="text-left" th:text="${contest.totalPayments}">110,001원</td>
+                                    <td class="text-left">
+                                        <span th:if="${contest.isCompletedContents}"
+                                              style="color:#367fa9;font-weight:bold">작업완료</span>
+                                        <span th:unless="${contest.isCompletedContents}"
+                                              style='color:#9c9c9c'>작업대기</span>
+                                    </td>
+                                    <td class="text-left" th:text="${contest.paymentStatus}"></td>
+                                    <td class="text-left">
+                                        <a href="#" class="state_toggle btn btn-sm certification" id="certification"
+                                           th:classappend="${contest.isConfirmed ? 'btn-success' : 'btn-danger'}"
+                                           th:attr="data-act=${contest.isConfirmed ? 'on' : 'off'}"
+                                           th:text="${contest.isConfirmed ? '검토완료' : '검토대기'}">검토대기</a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a href="#" class="state_toggle btn btn-sm" id="paid"
+                                           th:classappend="${contest.isPaidReward ? 'btn-primary' : 'btn-default'}"
+                                           th:attr="data-act=${contest.isPaidReward ? 'on' : 'off'}"
+                                           th:text="${contest.isPaidReward ? '지급완료' : '지급대기'}">지급대기</a>
+                                    </td>
+                                    <td class="text-left" th:text="${contest.createdDate}">2021-12-09 15:23:16</td>
+                                    <td class="text-center">
+                                        <a th:href="@{/admin/contest/view (id=${contest.id})}"
+                                           class="btn btn-default btn-sm">보기</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" class="btn btn-warning btn-sm del">삭제</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="box-footer clearfix text-right">
+                            <ul class="pagination pagination-sm no-margin">
+                                <li><a href="javascript:goList('1')" class="direction prev">Prev End</a></li>
+
+                                <li th:each="i : ${#numbers.sequence(1, totalPage)}"
+                                    th:classappend="${currentPage == i ? 'active' : ''} ">
+                                    <a href="#" th:onclick="|javaScript:goList(${i})|" th:text="${i}"></a>
+                                </li>
+                                <li><a href="#" th:onclick="|javascript:goList(${currentPage+1})|"
+                                       class="direction next">Next</a></li>
+                                <li><a href="#" th:onclick="|javascript:goList(${totalPage})|" class="direction next">Next
+                                    End</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<footer th:replace="admin/fragments/footer :: footer"></footer>
+<div th:replace="admin/fragments/include :: include"></div>
+
+</body>

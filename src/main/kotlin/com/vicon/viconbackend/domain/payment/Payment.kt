@@ -1,7 +1,9 @@
 package com.vicon.viconbackend.domain.payment
 
 import com.vicon.viconbackend.domain.common.Persistable
+import com.vicon.viconbackend.domain.contest.Contest
 import javax.persistence.Entity
+import javax.persistence.OneToOne
 
 @Entity
 data class Payment(
@@ -40,6 +42,9 @@ data class Payment(
     var useCashReceipt: String? = "",
     var taxType: String? = "",
     var taxNumber: String? = "",
-    var approvedTime: Int? = 0
+    var approvedTime: Int? = 0,
+
+    @OneToOne
+    var contest: Contest? = null
 
 ) : Persistable<Long>()

@@ -32,11 +32,9 @@ class MemberService(
         memberRepository.save(member)
     }
 
-    fun saveAll(members: List<Member>) {
-        memberRepository.saveAll(members)
-    }
+    fun saveAll(members: List<Member>): MutableList<Member> = memberRepository.saveAll(members)
 
-    fun delete(memberId : String): Boolean {
+    fun delete(memberId: String): Boolean {
         val member = memberRepository.findById(memberId.toLong())
         return try {
             memberRepository.delete(member.get())

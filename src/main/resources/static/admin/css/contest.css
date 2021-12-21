@@ -1,0 +1,9 @@
+
+.layer_pop{position:relative;padding:50px;background:#fff;max-width:800px;margin:50px auto;min-height:300px}
+.layer_pop .p1{text-align:center;font-weight:bold;font-size:22px;margin-bottom:30px}
+.layer_pop .p1 span{color:#0058ff}
+.layer_pop img{max-width:100%}
+.layer_pop .view_content>p{font-weight:bold;font-weight:15px;margin-bottom:10px;}
+.layer_pop .view_content>div{white-space:pre-wrap;font-size:15px;margin-bottom:30px}
+.layer_pop .attach_bx a{display:block;font-size:15px;color:#0058ff;margin-bottom:2px}
+.layer_pop .attach_bx a i{font-size:13px}

@@ -149,8 +149,4 @@ data class Member(
         SIMPLE_TAX("간이과세자"),
         PUBLIC_ENTERPRISE("공기업")
     }
-
-    enum class MemberRole {
-        ADMIN, USER
-    }
 }

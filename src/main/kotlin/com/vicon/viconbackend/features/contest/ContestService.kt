@@ -2,6 +2,7 @@ package com.vicon.viconbackend.features.contest
 
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.domain.contest.ContestRepository
+import org.springframework.data.domain.AbstractPageRequest
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -9,23 +10,30 @@ import java.util.*
 class ContestService(
     val contestRepository: ContestRepository
 ) {
-    fun findTop6ByOpenContest(): List<Contest> {
-        return contestRepository.findTop6ByIsConfirmed(true)
+    fun findTop6ByOpenContest() = contestRepository.findTop6ByIsConfirmed(true)
+
+    fun findTop3ByOrderByRecruitDeadLineDate() =
+        contestRepository.findTop3ByOrderByRecruitDeadLineDate()
+
+    fun save(contest: Contest) = contestRepository.save(contest)
+
+    fun findById(id: Long) = contestRepository.findById(id)
+
+    fun findTop10ByCloseContest() =
+        contestRepository.findTop10ByIsCompletedContents(true)
+
+    fun findAllByPageable(pageRequest: AbstractPageRequest) =
+        contestRepository.findBy(pageRequest)
+
+    fun delete(id: String): Boolean {
+        val contest = contestRepository.findById(id.toLong()).get()
+        return try {
+            contestRepository.delete(contest)
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
-    fun findTop3ByOrderByRecruitDeadLineDate(): List<Contest> {
-        return contestRepository.findTop3ByOrderByRecruitDeadLineDate()
-    }
-
-    fun save(contest: Contest): Contest {
-        return contestRepository.save(contest)
-    }
-
-    fun findById(id: Long): Optional<Contest> {
-        return contestRepository.findById(id)
-    }
-
-    fun findTop10ByCloseContest() : List<Contest>{
-        return contestRepository.findTop10ByIsCompletedContents(true)
-    }
+    fun saveAll(contests: List<Contest>): MutableList<Contest> = contestRepository.saveAll(contests)
 }
