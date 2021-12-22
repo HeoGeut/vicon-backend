@@ -1,6 +1,7 @@
 package com.vicon.viconbackend.features.admin.contest
 
 import com.vicon.viconbackend.features.admin.AdminIndexService
+import com.vicon.viconbackend.features.apply.ApplyService
 import com.vicon.viconbackend.features.contest.ContestService
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
@@ -13,7 +14,8 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("admin/contest")
 class AdminContestController(
     val contestService: ContestService,
-    val adminIndexService: AdminIndexService
+    val adminIndexService: AdminIndexService,
+    val applyService: ApplyService
 ) {
 
     private val logger = LoggerFactory.getLogger(this.javaClass)
@@ -40,7 +42,7 @@ class AdminContestController(
     @PostMapping("ajax")
     @ResponseBody
     fun ajaxDelete(
-        @RequestBody data: String // input text에 = 붙어서 오는 버그 @RequestParam 쓰면 해결된다고함
+        @RequestBody data: String // input text 에 = 붙어서 오는 버그 @RequestParam 쓰면 해결된다고함
     ): Int {
         val returnValue = contestService.delete(data.dropLast(1))
         return if (returnValue) 1 else 0
@@ -51,7 +53,6 @@ class AdminContestController(
     fun ajaxToggle(
         toggleData: ToggleDTO
     ): Int {
-        logger.debug(toggleData.toString())
         return try {
             val findContest = contestService.findById(toggleData.contestId.toLong()).get()
             if (toggleData.item == "certification") {
@@ -64,5 +65,27 @@ class AdminContestController(
         } catch (e: Exception) {
             0
         }
+    }
+
+    @GetMapping("view")
+    fun contestView(
+        @RequestParam id: String,
+        model: Model
+    ): String {
+        val findContest = contestService.findById(id.toLong()).get()
+        val contest = AdminContestViewDTO.of(findContest)
+        model.addAttribute("contest", contest)
+
+        return "admin/contest/view"
+    }
+
+    @PostMapping("applyAjax")
+    @ResponseBody
+    fun ajaxApply(
+        @RequestParam applyId: String,
+        model: Model
+    ): ApplyDetailDTO {
+        val findApply = applyService.findById(applyId.toLong()).get()
+        return ApplyDetailDTO.of(findApply)
     }
 }

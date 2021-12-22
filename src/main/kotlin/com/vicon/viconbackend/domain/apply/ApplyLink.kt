@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 
 @Entity
-data class Apply_Link(
+data class ApplyLink(
     var link: String? = "",
 
     @ManyToOne(fetch = FetchType.LAZY)

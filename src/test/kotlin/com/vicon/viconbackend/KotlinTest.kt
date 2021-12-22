@@ -96,5 +96,22 @@ class KotlinTest {
         println(bytBase64Decode)
     }
 
+    @Test
+    fun `enum class의 반환값 확인`() {
+        val value = TestEnum.FIRST.value
+        val name = TestEnum.FIRST.name
+        val ordinal = TestEnum.FIRST.ordinal
 
+        println(value) //첫번째
+        println(name) // FIRST
+        println(ordinal) // 0
+
+    }
+
+}
+
+enum class TestEnum(val value: String) {
+    FIRST("첫번째"),
+    SECOND("두번째"),
+    THIRD("세번째")
 }

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="admin/fragments/head :: head"></head>
+<head>
+    <script type='text/javascript' src='/admin/js/contest.js'></script>
+    <link href="/admin/css/contest.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class='skin-purple sidebar-mini'>
+
+<header th:replace="admin/fragments/header :: header"></header>
+<aside th:replace="admin/fragments/sidebar :: aside"></aside>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1> 콘테스트 관리 <small>상세보기</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="">콘테스트관리</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row" th:object="${contest}">
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="box-body pad">
+                        <!-- <input type='hidden' name='key' value='NUlUTQ=='/> -->
+                        <div class="form-group">
+                            <label for="bd_subject">등록일</label>
+                            <pre th:text="*{createdDate}">2021-12-09 15:23:16</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">작성자</label>
+                            <pre><a th:href="@{/admin/member/edit (id=*{memberId})}" target="_blank"
+                                    th:text="*{username}">crespe</a></pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">비즈니스 카테고리 / 채널 / 콘텐츠 스타일 / 지원자수</label>
+                            <pre th:text="*{contestInfo}">광고 /  / PPL / 1명</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">제목</label>
+                            <pre style="font-weight:bold" th:text="*{title}">방한용품 광고</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">설명</label>
+                            <pre th:text="*{text}"></pre>
+                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="bd_subject">첨부파일</label>-->
+<!--                            <p class="bd_file" th:each="attachment : *{contestAttachments}">-->
+<!--                                <a th:href="${attachment.fileUrl}" th:text="${attachment.fileName}">-->
+<!--                                    스크린샷_2020-11-23_오전_1.53.19.png-->
+<!--                                </a>-->
+<!--                            </p>-->
+<!--                        </div>-->
+                    </div>
+                </div><!-- /.box -->
+
+                <div class="box">
+                    <div class="box-body pad">
+                        <h4 style="color:#0058ff">콘테스트 참가내역</h4>
+                        <!--                 <p style='font-weight:bold'><i class="far fa-check-circle"></i> 채택완료 : </p>-->
+                        <table class="table table-hover tbl_sort table-bordered" style="font-size:13px">
+                            <colgroup>
+                                <col width="10%">
+                                <col>
+                                <col width="15%">
+                                <col width="30%">
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th class="text-center">번호</th>
+                                <th class="text-left">지원자</th>
+                                <th class="text-center">제안서</th>
+                                <th class="text-left">등록시간</th>
+                            </tr>
+                            <tr th:each="enteredContest : *{enteredContests}">
+                                <td class="text-center" th:text="${enteredContestStat.index}">1</td>
+                                <td th:text="${enteredContest.username}">saneone
+                                    <span th:if="${enteredContest.isConfirmedApply}" style="color:#0058ff">
+                                        <i class="far fa-check-circle"></i> 채택완료
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#lpop" class="pop_open" data-object="" th-da>
+                                        <i class="far fa-file-alt"></i> 제안서 보기
+                                    </a>
+                                </td>
+                                <td class="text-left">2021-12-09 15:24:51</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-default pull-left cancel">목록</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.col-->
+
+            <div class="col-md-4">
+                <div class="box">
+                    <div class="box-body pad">
+                        <!-- <input type='hidden' name='key' value='NUlUTQ=='/> -->
+                        <h4 style="padding-top:20px;color:#0058ff">콘테스트 사양서</h4>
+                        <div class="form-group">
+                            <label for="bd_subject">모집인원</label>
+                            <pre th:text="*{applyNumber}"> 명</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">상금</label>
+                            <pre th:text="*{reward}">400000 원</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">광고비 집행여부 (금액)</label>
+                            <pre th:if="*{isBurdenFee}" th:text="|예 (*{adsPrice})|">아니오</pre>
+                            <pre th:unless="*{isBurdenFee}" th:text="아니오">아니오</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">수수료 부담여부</label>
+                            <pre th:text="*{isPaidAds ? '예' : '아니오'}">아니오</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">모집 마감일</label>
+                            <pre th:text="*{recruitDeadLineDate}">2021-12-24</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">콘텐츠 제작 및 배포 완료일</label>
+                            <pre th:text="*{contentsCompletedDate}">2021-12-31</pre>
+                        </div>
+                        <h4 style="padding-top:20px;color:#0058ff">결제</h4>
+                        <div class="form-group">
+                            <label for="bd_subject">현금영수증</label>
+                            <pre th:text="*{payment.cashReceipt}"> ( : )</pre>
+                        </div>
+                        <div class="form-group">
+                            <label for="bd_subject">세금계산서</label>
+                            <pre th:text="*{payment.taxInvoice}"></pre>
+                        </div>
+                    </div>
+                </div><!-- /.box -->
+            </div><!-- /.col-->
+        </div><!-- ./row -->
+
+        <!-- 제안서 팝업 -->
+        <div id='lpop' class='layer_pop mfp-hide'></div>
+
+    </section>
+</div>
+
+<footer th:replace="admin/fragments/footer :: footer"></footer>
+<div th:replace="admin/fragments/include :: include"></div>
+
+</body>

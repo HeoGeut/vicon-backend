@@ -52,7 +52,8 @@ class PostConstructor(
                 isPaidReward = Random.nextBoolean(),
                 isCompletedContents = Random.nextBoolean(),
                 totalPaymentPrice = BigDecimal(1111111),
-                orderNumber = null
+                orderNumber = null,
+                member = memberService.findById(it.toLong()).get()
             )
         }
         contestService.saveAll(contests)

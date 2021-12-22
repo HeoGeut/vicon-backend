@@ -22,7 +22,7 @@ data class Apply(
     var draws: List<ApplyDraw> = mutableListOf(),
 
     @OneToMany(mappedBy = "apply", cascade = [CascadeType.ALL])
-    var links: List<Apply_Link> = mutableListOf(),
+    var links: List<ApplyLink> = mutableListOf(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTEST_ID")

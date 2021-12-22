@@ -54,9 +54,6 @@ class AdminMemberController(
         val memberDetail = AdminMemberDetailDTO.of(member)
         model.addAttribute("member", memberDetail)
 
-        logger.debug(member.toString())
-        logger.debug(memberDetail.toString())
-
         return "admin/member/edit"
     }
 
@@ -65,7 +62,6 @@ class AdminMemberController(
         editForm: AdminMemberDetailDTO,
         model: Model
     ): String {
-        logger.debug(editForm.toString())
         val memberId = editForm.id
         val findMember = memberService.findById(memberId.toLong())
         if (findMember.isPresent) {
