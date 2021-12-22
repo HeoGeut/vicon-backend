@@ -58,7 +58,7 @@ data class Contest(
     @OneToMany(mappedBy = "contest")
     var applies: List<Apply>? = mutableListOf(),
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     var member: Member? = null,
 
@@ -106,9 +106,9 @@ data class Contest(
 }
 
 enum class CashReceiptType(val type: String) {
+    UNISSUED("미발행"),
     DEDUCTION("소득공제용"),
-    EVIDENCE("지출증빙용"),
-    UNISSUED("미발행")
+    EVIDENCE("지출증빙용")
 }
 
 enum class ContentsStyle(val style: String) {

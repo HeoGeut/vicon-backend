@@ -7,8 +7,8 @@ import javax.persistence.ManyToOne
 
 @Entity
 data class ContestAttachment(
+    var fileUrl: String? = "",
     var fileName: String? = "",
-    var realName: String? = "",
     var virtualNumber: String? = "",
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -52,10 +52,10 @@ class AdminMemberController(
     ): String {
         val member = memberService.findById(id.toLong()).get()
         val memberDetail = AdminMemberDetailDTO.of(member)
-        model.addAttribute("member", memberDetail)
 
-        logger.debug(member.toString())
         logger.debug(memberDetail.toString())
+
+        model.addAttribute("member", memberDetail)
 
         return "admin/member/edit"
     }

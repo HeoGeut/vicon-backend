@@ -4,7 +4,7 @@ import com.vicon.viconbackend.domain.member.Member
 import java.time.format.DateTimeFormatter
 
 data class AdminMemberDetailDTO(
-    val id : String = "",
+    val id: String = "",
     val mailCertification: Boolean = false,
     val profileImage: String = "",
     val createdDate: String = "",
@@ -46,7 +46,7 @@ data class AdminMemberDetailDTO(
         }
 
         private fun enteredContests(member: Member): List<ContestInfo>? {
-            if (member.applies?.isEmpty() == true) {
+            if (member.applies.isNullOrEmpty()) {
                 return null
             }
 
@@ -62,7 +62,7 @@ data class AdminMemberDetailDTO(
         }
 
         private fun openedContests(member: Member): List<ContestInfo>? {
-            if (member.contests?.isEmpty() == true) {
+            if (member.contests.isNullOrEmpty()) {
                 return null
             }
 
@@ -71,7 +71,7 @@ data class AdminMemberDetailDTO(
                 ContestInfo(
                     id = it.id.toString(),
                     info = "· ${it.title} / ${it.category} / ${it.channelType?.type ?: ""} / " +
-                            "${it.contentsStyle?.style ?: ""} / ${it.applies?.size ?: ""} " +
+                            "${it.contentsStyle?.style ?: ""} / " +
                             "(${it.createdAt!!.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))})"
                 )
             }

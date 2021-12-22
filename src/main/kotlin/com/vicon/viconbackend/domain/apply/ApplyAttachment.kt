@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne
 @Entity
 data class ApplyAttachment(
     var fileName: String? = "",
-    var realName: String? = "",
+    var fileUrl: String? = "",
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "APPLY_ID")
