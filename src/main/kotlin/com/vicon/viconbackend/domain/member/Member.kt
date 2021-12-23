@@ -41,6 +41,8 @@ data class Member(
 
     var isCertificated: Boolean? = false,
 
+    var enabled: Boolean? = false,
+
     @OneToMany(mappedBy = "member")
     var applies: List<Apply>? = mutableListOf(),
 

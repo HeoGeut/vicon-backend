@@ -44,7 +44,7 @@ class PostConstructor(
                 contentsCompletedDate = LocalDateTime.now(),
                 recruitNumber = (1..5).random().toBigDecimal(),
                 cashReceiptType = CashReceiptType.UNISSUED,
-                cashReceiptIssuanceType = (0..1).random().toChar(),
+                cashReceiptIssuanceType = (0..1).random().toString(),
                 cashReceiptsNumber = "01012341234",
                 isIssuedTaxInvoice = false,
                 taxInvoiceNumber = "123123-123123",
@@ -53,7 +53,8 @@ class PostConstructor(
                 isCompletedContents = Random.nextBoolean(),
                 totalPaymentPrice = BigDecimal(1111111),
                 orderNumber = null,
-                member = memberService.findById(it.toLong()).get()
+                member = memberService.findById(it.toLong()).get(),
+                enabled = true
             )
         }
         contestService.saveAll(contests)
@@ -89,6 +90,7 @@ class PostConstructor(
                 channelType = "유튜브",
                 businessNumber = "126-123-123-13",
                 isCertificated = false,
+                enabled = true
             )
         }
         memberService.saveAll(members)

@@ -38,7 +38,7 @@ data class Contest(
 
     @Enumerated(EnumType.STRING)
     var cashReceiptType: CashReceiptType? = CashReceiptType.UNISSUED,
-    var cashReceiptIssuanceType: Char? = null,
+    var cashReceiptIssuanceType: String? = null,
     var cashReceiptsNumber: String = "",
 
     var isIssuedTaxInvoice: Boolean? = false,
@@ -51,6 +51,8 @@ data class Contest(
     var totalPaymentPrice: BigDecimal? = BigDecimal.ZERO,
 
     var orderNumber: String? = "",
+
+    var enabled: Boolean? = false,
 
     @OneToMany(mappedBy = "contest", cascade = [CascadeType.ALL])
     var contestAttachments: List<ContestAttachment>? = mutableListOf(),

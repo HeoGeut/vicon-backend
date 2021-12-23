@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="admin/fragments/head :: head"></head>
+<body class='skin-purple sidebar-mini'>
+
+<header th:replace="admin/fragments/header :: header"></header>
+<aside th:replace="admin/fragments/sidebar :: aside"></aside>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1> 회원 관리 <small>상세보기</small></h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="">회원 관리</li>
+    </ol>
+  </section>
+  <section class="content">
+    <style>
+        pre em {
+            font-size: 11px;
+            color: #999
+        }
+    </style>
+
+    <form action="/admin/creator/view" th:object="${creator}" method="post" enctype="multipart/form-data">
+      <div class='row'>
+        <div class='col-md-4'>
+          <div class='box'>
+            <div class='box-body pad'>
+              <h4>회원 정보</h4>
+              <div class="form-group">
+                <label for="bd_subject">프로필사진</label>
+                <div>
+                  <img th:src="${creator.profileImage == '' ? '/image/admin/noimage.png' : creator.profileImage }"
+                       style='width:70px;height:70px;border:1px solid #ddd;border-radius:50%'>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">가입일</label>
+                <pre th:text="${creator.createdDate}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">아이디</label>
+                <pre th:text="${creator.username}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">연락처</label>
+                <pre th:text="${creator.phoneNumber}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">이메일</label>
+                <pre th:text="${creator.email}"></pre>
+              </div>
+
+              <h4 style='padding-top:20px;'>비즈니스 정보</h4>
+              <div class="form-group">
+                <label for="bd_subject">기업명</label>
+                <pre th:text="${creator.companyName}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">비즈니스 카테고리(업종)</label>
+                <pre th:text="${creator.businessCategory}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">웹사이트 주소</label>
+                <pre><a th:href="@{https://${creator.websiteUrl}}" th:text="${creator.websiteUrl}" target="_blank"></a></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">사업자 유형</label>
+                <pre th:text="${creator.businessType}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">사업자 번호</label>
+                <pre th:text="${creator.businessNumber}"></pre>
+              </div>
+
+              <h4 style='padding-top:20px;'>채널 정보</h4>
+              <div class="form-group">
+                <label for="bd_subject">대표 채널 URL</label>
+                <pre><a th:href="@{https://${creator.websiteUrl}}" th:text="${creator.channelUrl}"
+                        target="_blank"></a></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">채널 카테고리</label>
+                <pre th:text="${creator.channelCategory}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">현재 채널 구독자 수</label>
+                <pre th:text="${creator.subscriberAmount}"></pre>
+              </div>
+
+              <div class="form-group">
+                <label for="bd_subject">보유채널</label>
+                <pre th:text="${creator.channelCategory}"></pre>
+              </div>
+
+              <div class="form-group text-right">
+                <button type="button" class="btn btn-default pull-left creator_list">목록</button>
+              </div>
+            </div>
+          </div><!-- /.box -->
+        </div><!-- /.col-->
+
+        <div class='col-md-8'>
+          <div class='box'>
+            <div class='box-body pad'>
+              <h4>콘테스트 개최내역</h4>
+              <ul th:each="contest : ${creator.openedContests}" style="padding-left:0">
+                <li style="list-style:none;margin-bottom:10px;">
+                  <a th:href="@{/admin/contest/view(id=${contest.id})}"
+                     th:text="${contest.info}" target="_blank">
+                  </a>
+                </li>
+              </ul>
+              <p th:unless="${creator.openedContests}" style='text-align:center;'>콘테스트 개최내역이 없습니다.</p>
+
+              <h4 style='padding-top:20px;'>콘테스트 참가내역</h4>
+              <ul th:each="contest : ${creator.enteredContests}" style="padding-left:0">
+                <li style="list-style:none;margin-bottom:10px;">
+                  <a th:href="@{/admin/contest/view(id=${contest.id})}"
+                     th:text="${contest.info}" target="_blank">
+                  </a>
+                </li>
+              </ul>
+              <p th:unless="${creator.enteredContests}" style='text-align:center;'>콘테스트 참가내역이 없습니다.</p>
+              <!--                        <h4 style='padding-top:20px;'>소통 내역</h4>-->
+              <!--                        <?=$chat_HTML?>-->
+            </div>
+          </div><!-- /.box -->
+        </div><!-- /.col-->
+      </div><!-- ./row -->
+    </form>
+  </section>
+</div>
+<footer th:replace="admin/fragments/footer :: footer"></footer>
+<div th:replace="admin/fragments/include :: include"></div>
+</body>

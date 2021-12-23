@@ -4,7 +4,6 @@ import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.domain.contest.ContestRepository
 import org.springframework.data.domain.AbstractPageRequest
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class ContestService(
@@ -23,12 +22,13 @@ class ContestService(
         contestRepository.findTop10ByIsCompletedContents(true)
 
     fun findAllByPageable(pageRequest: AbstractPageRequest) =
-        contestRepository.findBy(pageRequest)
+        contestRepository.findByEnabled(pageRequest)
 
     fun delete(id: String): Boolean {
         val contest = contestRepository.findById(id.toLong()).get()
         return try {
-            contestRepository.delete(contest)
+            contest.enabled = false
+            this.save(contest)
             true
         } catch (e: Exception) {
             false

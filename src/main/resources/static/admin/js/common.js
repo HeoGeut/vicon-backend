@@ -82,6 +82,12 @@ jQuery(function () {
         location.href = '/admin/member';
     });
 
+    // creator list
+    $(".creator_list").click(function (e){
+        e.preventDefault();
+        location.href = '/admin/creator';
+    });
+
     // list row
     $(".page_row").on("change", function () {
         $(this).parents("form").submit();

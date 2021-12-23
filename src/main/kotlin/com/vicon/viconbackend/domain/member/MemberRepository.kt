@@ -9,5 +9,5 @@ interface MemberRepository : JpaRepository<Member, Long> {
     fun findTop6By(): List<Member>
     fun findByUsername(username: String) : Optional<Member>
     fun findTop10By(): List<Member>
-    fun findBy(pageable: Pageable) : Page<Member>
+    fun findByEnabled(pageable: Pageable, enabled: Boolean = true) : Page<Member>
 }

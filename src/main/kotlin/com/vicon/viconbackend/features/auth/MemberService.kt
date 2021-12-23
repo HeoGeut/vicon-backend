@@ -18,7 +18,7 @@ class MemberService(
     fun findByUsername(username: String) = memberRepository.findByUsername(username)
 
     fun findTop10By() = memberRepository.findTop10By()
-    fun findAllByPageable(pageRequest: Pageable): Page<Member> = memberRepository.findBy(pageRequest)
+    fun findAllByPageable(pageRequest: Pageable): Page<Member> = memberRepository.findByEnabled(pageRequest)
 
     fun save(member: Member) {
 
@@ -35,9 +35,10 @@ class MemberService(
     fun saveAll(members: List<Member>): MutableList<Member> = memberRepository.saveAll(members)
 
     fun delete(memberId: String): Boolean {
-        val member = memberRepository.findById(memberId.toLong())
+        val member = memberRepository.findById(memberId.toLong()).get()
         return try {
-            memberRepository.delete(member.get())
+            member.enabled = false
+            this.save(member)
             true
         } catch (e: Exception) {
             false

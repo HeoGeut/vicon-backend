@@ -11,5 +11,5 @@ interface ContestRepository : JpaRepository<Contest, Long> {
 
     fun findTop10ByIsCompletedContents(isCompleted: Boolean) : List<Contest>
 
-    fun findBy(pageable: Pageable) : Page<Contest>
+    fun findByEnabled(pageable: Pageable, enabled : Boolean = true) : Page<Contest>
 }

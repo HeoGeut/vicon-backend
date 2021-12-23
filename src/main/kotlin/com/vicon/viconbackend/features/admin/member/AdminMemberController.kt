@@ -18,7 +18,7 @@ class AdminMemberController(
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     @GetMapping("")
-    fun memberList(
+    fun list(
         model: Model,
         request: HttpServletRequest,
         @RequestParam(value = "page_now", required = false, defaultValue = "1") selectedPage: String
