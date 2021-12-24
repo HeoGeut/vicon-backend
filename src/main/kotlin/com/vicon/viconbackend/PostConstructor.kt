@@ -1,9 +1,11 @@
 package com.vicon.viconbackend
 
 import com.vicon.viconbackend.domain.contest.*
+import com.vicon.viconbackend.domain.faq.Faq
 import com.vicon.viconbackend.domain.globalConfig.GlobalConfig
 import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.domain.qna.Qna
+import com.vicon.viconbackend.features.admin.faq.AdminFaqService
 import com.vicon.viconbackend.features.admin.qna.AdminQnaService
 import com.vicon.viconbackend.features.auth.MemberService
 import com.vicon.viconbackend.features.contest.ContestService
@@ -19,7 +21,8 @@ class PostConstructor(
     val memberService: MemberService,
     val globalConfigService: GlobalConfigService,
     val contestService: ContestService,
-    val adminQnaService: AdminQnaService
+    val adminQnaService: AdminQnaService,
+    val adminFaqService: AdminFaqService
 ) {
 
 //    @PostConstruct
@@ -28,6 +31,18 @@ class PostConstructor(
         setGlobalConfig()
         setContests()
         setQnaList()
+        setFaqList()
+    }
+
+    private fun setFaqList() {
+        val faqList = (1..35).map {
+            Faq(
+                title = "faq title$it",
+                content = "test faq content $it",
+                enabled = true
+            )
+        }
+        adminFaqService.saveAll(faqList)
     }
 
     private fun setQnaList() {

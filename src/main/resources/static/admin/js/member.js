@@ -9,7 +9,6 @@ jQuery(function () {
 
         // var key = $(this).parents("tr").attr("target");
         var key = $(this).parents("tr").attr("target");
-        console.log(key)
         $.ajax({
             url: "member/ajax",
             type: "POST",

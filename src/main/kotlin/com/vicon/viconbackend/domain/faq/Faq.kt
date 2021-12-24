@@ -7,6 +7,7 @@ import javax.persistence.Entity
 data class Faq(
     var title: String? = "",
     var content: String? = "",
-    var state: Char? = null
+
+    var enabled: Boolean = true
 
 ) : Auditable<Long>()
