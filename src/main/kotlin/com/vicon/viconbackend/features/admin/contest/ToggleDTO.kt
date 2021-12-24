@@ -1,6 +1,6 @@
 package com.vicon.viconbackend.features.admin.contest
 
 data class ToggleDTO(
-    val contestId: String = "",
+    val id: String = "",
     val item: String = ""
 ) {}

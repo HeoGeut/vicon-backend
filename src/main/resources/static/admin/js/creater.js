@@ -2,6 +2,7 @@ jQuery(function(){
 	$("#smit").click(function(){
         $(this).parents("form").submit()
     });
+
     //del
 	$(".del").click(function(e){
 		e.preventDefault();

@@ -54,7 +54,7 @@ class AdminContestController(
         toggleData: ToggleDTO
     ): Int {
         return try {
-            val findContest = contestService.findById(toggleData.contestId.toLong()).get()
+            val findContest = contestService.findById(toggleData.id.toLong()).get()
             if (toggleData.item == "certification") {
                 findContest.isConfirmed = !findContest.isConfirmed!!
             } else {

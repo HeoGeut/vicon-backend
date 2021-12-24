@@ -3,6 +3,8 @@ package com.vicon.viconbackend
 import com.vicon.viconbackend.domain.contest.*
 import com.vicon.viconbackend.domain.globalConfig.GlobalConfig
 import com.vicon.viconbackend.domain.member.Member
+import com.vicon.viconbackend.domain.qna.Qna
+import com.vicon.viconbackend.features.admin.qna.AdminQnaService
 import com.vicon.viconbackend.features.auth.MemberService
 import com.vicon.viconbackend.features.contest.ContestService
 import com.vicon.viconbackend.features.globalConfig.GlobalConfigService
@@ -16,7 +18,8 @@ import kotlin.random.Random
 class PostConstructor(
     val memberService: MemberService,
     val globalConfigService: GlobalConfigService,
-    val contestService: ContestService
+    val contestService: ContestService,
+    val adminQnaService: AdminQnaService
 ) {
 
 //    @PostConstruct
@@ -24,6 +27,21 @@ class PostConstructor(
         setMembers()
         setGlobalConfig()
         setContests()
+        setQnaList()
+    }
+
+    private fun setQnaList() {
+        val qnaList = IntRange(1, 35).map {
+            Qna(
+                title = "qna title$it",
+                content = "test content $it",
+                isConfirmed = Random.nextBoolean(),
+                answer = listOf("", "test answer$it").random(),
+                enabled = true,
+                member = memberService.findById(it.toLong()).get()
+            )
+        }
+        adminQnaService.saveAll(qnaList)
     }
 
     private fun setContests() {

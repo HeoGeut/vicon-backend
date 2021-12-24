@@ -11,7 +11,9 @@ data class Qna(
     var title: String? = "",
     var content: String? = "",
     var isConfirmed: Boolean? = false,
-    var memo: String? = "",
+    var answer: String? = "",
+
+    var enabled: Boolean? = false,
 
     @ManyToOne(fetch = FetchType.LAZY)
     var member: Member? = null

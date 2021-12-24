@@ -76,12 +76,6 @@ jQuery(function () {
         });
     }
 
-    // cancel button
-    $(".cancel").click(function (e) {
-        e.preventDefault();
-        location.href = '/admin/member';
-    });
-
     // creator list
     $(".creator_list").click(function (e){
         e.preventDefault();
@@ -91,31 +85,6 @@ jQuery(function () {
     // list row
     $(".page_row").on("change", function () {
         $(this).parents("form").submit();
-    });
-
-    // state toggle
-    $(".state_toggle").click(function (e) {
-        e.preventDefault();
-        var key = $(this).parents("tr").attr("target").toString();
-        var value = $(this).attr("id").toString()
-        var toggleData = {"contestId": key, "item": value}
-
-        $.ajax({
-            url: "contest/toggleAjax",
-            type: "POST",
-            data: toggleData,
-
-            success: function (data) {
-                if (data == 1) {
-                    location.reload();
-                } else {
-                    alert("DB 오류입니다. 다시 시도해 주세요.");
-                }
-            },
-            error: function () {
-                alert("변경 실패.");
-            }
-        });
     });
 
     //list sort

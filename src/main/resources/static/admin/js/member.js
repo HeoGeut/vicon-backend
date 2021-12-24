@@ -30,6 +30,11 @@ jQuery(function () {
         })
     });
 
+    // cancel button
+    $(".cancel").click(function (e) {
+        e.preventDefault();
+        location.href = '/admin/member';
+    });
 
     $(".mail_btn").click(function (e) {
         e.preventDefault();
