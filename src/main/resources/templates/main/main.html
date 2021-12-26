@@ -18,7 +18,7 @@
             </p>
             <ul th:each="contest : ${contests}">
                 <li>
-                    <a href='#'>
+                    <a th:href='@{contests/view/{id} (id=${contest.id})}'>
                         <div class='tit'>
                             <div class='img_bx'>
                                 <img src='/image/site/noimage.png' th:attr="src=${contest.memberProfileImage}">

@@ -64,7 +64,7 @@
                     <p th:text="${contest.name}">기업명<a href='#' class='view_pop'>정보 보기</a></p>
                 </div>
                 <div class='cont_box'>
-                    <a href=''>
+                    <a th:href="@{view/{id} (id=${contest.id})}">
                         <p class="p1">
                             <span th:class="${contest.isReview}? 's1' : 's2'" th:text="${contest.isReview}? '리뷰' : 'PPL'">PPL</span>
                             <img src="../image/site/sub/pre_crown.png" th:if="${not contest.isStandard}">

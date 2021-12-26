@@ -7,6 +7,7 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
 data class ContestDTO(
+    val id: String = "",
     val memberProfileImage: String? = "",
     val name: String = "",
     val title: String = "",
@@ -22,6 +23,7 @@ data class ContestDTO(
     companion object {
         fun of(contest: Contest): ContestDTO {
             return ContestDTO(
+                id = contest.id.toString(),
                 memberProfileImage = contest.member!!.profileImage ?: "",
                 name = contest.name!!,
                 title = contest.title!!,
