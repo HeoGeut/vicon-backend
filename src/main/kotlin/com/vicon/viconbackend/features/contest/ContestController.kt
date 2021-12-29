@@ -25,7 +25,7 @@ class ContestController(
 
     @GetMapping("list")
     fun findAllByOpenState(model: Model): String {
-        val contests = contestService.findTop6ByOpenContest()
+        val contests = contestService.findTop9ByOpenContest()
         val contestDtoList = contests.map { ContestDTO.of(it) }
         model.addAttribute("contests", contestDtoList)
 

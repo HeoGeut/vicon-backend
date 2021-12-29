@@ -31,10 +31,10 @@ class IndexController(
         @SessionAttribute(name="loginMember", required = false) loginMemberId: String?
     ): String {
 
-        val contests = contestService.findTop6ByOpenContest()
+        val contests = contestService.findTop9ByOpenContest()
         val contestDtoList = contests.map { ContestDTO.of(it) }
 
-        val members = memberService.findTop6By()
+        val members = memberService.findTop9By()
         val memberDtoList = members.map { MemberDTO.of(it) }
 
         val boards = boardRepository.findTop3By()

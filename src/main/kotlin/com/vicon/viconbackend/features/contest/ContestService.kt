@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class ContestService(
     val contestRepository: ContestRepository
 ) {
-    fun findTop6ByOpenContest() = contestRepository.findTop6ByIsConfirmed(true)
+    fun findTop9ByOpenContest() = contestRepository.findTop9ByIsConfirmed(true)
 
     fun findTop3ByOrderByRecruitDeadLineDate() =
         contestRepository.findTop3ByOrderByRecruitDeadLineDate()
