@@ -2,96 +2,93 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head th:include="fragments/head :: head"></head>
 <head>
-    <link rel='stylesheet' type='text/css' href='../css/contest.css'/>
-    <script type='text/javascript' src='../js/contest.js'></script>
+  <link rel='stylesheet' type='text/css' href='../css/contest.css'/>
+  <script type='text/javascript' src='../js/contest.js'></script>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <header th:replace="fragments/header :: header"></header>
 
 <div class='snb_wrap'>
-    <ul>
-        <li><a th:href='@{list}'>열린 콘테스트</a></li>
-        <li><a th:href='@{open}'>콘테스트 열기</a></li>
-        <li><a th:href='@{old}'>지난 콘테스트</a></li>
-        <li><a th:href='@{case}'>사례</a></li>
-    </ul>
-    <div class='contest_top'><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
+  <ul>
+    <li><a th:href='@{list}'>열린 콘테스트</a></li>
+    <li><a th:href='@{open}'>콘테스트 열기</a></li>
+    <li><a th:href='@{old}'>지난 콘테스트</a></li>
+    <li><a th:href='@{case}'>사례</a></li>
+  </ul>
+  <div class='contest_top'><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
 </div>
 
 <div class='sub_key'>콘테스트 열기</div>
 
 <div class='wrap'>
-    <p class='nav' th:text="${contestForm1.c_type} == '1' ? '콘테스트 열기' : '프리미엄 콘테스트 열기'">
-        <span>콘테스트 열기</span> > 콘테스트 열기
+  <p class='nav' th:text="${contestForm1.c_type} == '1' ? '콘테스트 열기' : '프리미엄 콘테스트 열기'">
+    <span>콘테스트 열기</span> > 콘테스트 열기
+  </p>
+
+  <div class='lnb'>
+    <p class='p1'>콘테스트</p>
+    <p class='p2'>제한없이<br>모든 유튜버에게<br>
+      <span th:text="${contestForm1.c_type}=='1'? '30만원부터' : '100만원부터'"></span>
     </p>
 
-    <div class='lnb'>
-        <p class='p1'>콘테스트</p>
-        <p class='p2'>제한없이<br>모든 유튜버에게<br>
-            <span th:text="${contestForm1.c_type}=='1'? '30만원부터' : '100만원부터'"></span>
-        </p>
-
-        <div class='info_box'>
-            <p class='p3'><i class="fas fa-exclamation-triangle"></i> 콘텐츠 제작 프로세스</p>
-            <p class='p4'>콘텐츠 제작이 완료되면 '일부 공개' 형태로
-                업로드하여 의뢰인에게 링크 형태로 전달됩니다.<span></span>제작된 콘텐츠에 민감한 사항 존재시 수정 요청을
-                합니다. (영상 전체 수정은 불가합니다.)<span></span>2단계의 수정이 진행되면 ’공개'로 릴리즈 및 광고
-                집행합니다. (광고 집행 시 광고 집행화면 캡처본을
-                광고주 메일로 제출합니다.)</p>
-        </div>
+    <div class='info_box'>
+      <p class='p3'><i class="fas fa-exclamation-triangle"></i> 콘텐츠 제작 프로세스</p>
+      <p class='p4'>콘텐츠 제작이 완료되면 '일부 공개' 형태로<br>업로드하여 의뢰인에게 링크 형태로 전달됩니다.<span></span>제작된 콘텐츠에 민감한 사항 존재시 수정 요청을<br>합니다. (영상 전체 수정은 불가합니다.)<span></span>2단계의 수정이 진행되면 ’공개'로 릴리즈 및 광고<br>집행합니다. (광고 집행 시 광고 집행화면 캡처본을<br>광고주 메일로 제출합니다.)
+      </p>
     </div>
+  </div>
 
-    <div class='cont'>
-        <form name='form' th:action="@{/contests/create1}" method="post" th:object="${contestForm1}"
-              enctype="multipart/form-data">
-            <input type='hidden' th:field="*{c_type}" th:value="*{c_type}">
-            <!--            <input type='hidden' th:name="contestId" th:value="${contestId}">-->
-            <p class='b_tit marginb10'>귀하의 비즈니스 키워드를 알려주세요</p>
-            <div class='form_control'>
-                <input type='text' th:field="*{businessCategory}"
-                       placeholder='예시) 식당, IT 제품 판매, 게임 홍보, 화장품 판매' maxlength="8">
-            </div>
+  <div class='cont'>
+    <form name='form' th:action="@{/contests/create1}" method="post" th:object="${contestForm1}"
+          enctype="multipart/form-data">
+      <input type='hidden' th:field="*{c_type}" th:value="*{c_type}">
+      <!--            <input type='hidden' th:name="contestId" th:value="${contestId}">-->
+      <p class='b_tit marginb10'>귀하의 비즈니스 키워드를 알려주세요</p>
+      <div class='form_control'>
+        <input type='text' th:field="*{businessCategory}"
+               placeholder='예시) 식당, IT 제품 판매, 게임 홍보, 화장품 판매' maxlength="8">
+      </div>
 
-            <p class='b_tit'>콘테스트 요청서</p>
-            <div class='form_control'>
-                <h4>제목</h4>
-                <input type='text' th:field="*{title}" placeholder='예시) 비콘 홍보 콘텐츠 캠페인'>
-            </div>
+      <p class='b_tit'>콘테스트 요청서</p>
+      <div class='form_control'>
+        <h4>제목</h4>
+        <input type='text' th:field="*{title}" placeholder='예시) 비콘 홍보 콘텐츠 캠페인'>
+      </div>
 
-            <div class='form_control'>
-                <h4>기업명 / 제품명</h4>
-                <input type='text' th:field="*{name}" placeholder='기업명 또는 제품명을 입력해주세요.'>
-            </div>
+      <div class='form_control'>
+        <h4>기업명 / 제품명</h4>
+        <input type='text' th:field="*{name}" placeholder='기업명 또는 제품명을 입력해주세요.'>
+      </div>
 
-            <div class='form_control'>
-                <h4>설명</h4>
-                <textarea th:field="*{text}"
-                          placeholder="홍보하고자 하는 캠페인을 설명해 주세요.&#13;&#10;레퍼런스 및 참고 사이트 URL 등 관련 정보를 써넣어 주세요. &#13;&#10;예시) 기업 및 자영업자와 크리에이터를 연결해 주는 온라인 광고 콘테스트 플랫폼 비콘의 브랜디드 캠페인입니다.&#13;&#10;비콘 사이트(http://www.vicontest.com)를 참고해서 자유롭게 영상을 제작하시면 됩니다!&#13;&#10;※ 개인 채널에 업로드 하여야 하며, 2년 간 유지해야 함 (크리에이터: 저작권 소유, 기업 : 사용권 소유)"></textarea>
-            </div>
+      <div class='form_control'>
+        <h4>설명</h4>
+        <textarea th:field="*{text}"
+                  placeholder="홍보하고자 하는 캠페인을 설명해 주세요.&#13;&#10;레퍼런스 및 참고 사이트 URL 등 관련 정보를 써넣어 주세요. &#13;&#10;예시) 기업 및 자영업자와 크리에이터를 연결해 주는 온라인 광고 콘테스트 플랫폼 비콘의 브랜디드 캠페인입니다.&#13;&#10;비콘 사이트(http://www.vicontest.com)를 참고해서 자유롭게 영상을 제작하시면 됩니다!&#13;&#10;※ 개인 채널에 업로드 하여야 하며, 2년 간 유지해야 함 (크리에이터: 저작권 소유, 기업 : 사용권 소유)"></textarea>
+      </div>
 
-            <div class="form_control">
-                <h4>콘텐츠 스타일</h4>
-                <input type="hidden" th:name="style" value="2" class="lst_val">
-                <ul class="chk_lst c_style">
-                    <li th:target="${'1'}">리뷰</li>
-                    <li th:target="${'2'}" class="act">PPL</li>
-                </ul>
-            </div>
+      <div class="form_control">
+        <h4>콘텐츠 스타일</h4>
+        <input type="hidden" th:name="style" value="2" class="lst_val">
+        <ul class="chk_lst c_style">
+          <li th:target="${'1'}">리뷰</li>
+          <li th:target="${'2'}" class="act">PPL</li>
+        </ul>
+      </div>
 
-            <div class='form_control'>
-                <h4>파일첨부</h4>
-                <input type='file' class='img_upload_target' id='file_target' multiple='multiple' th:field="*{file}"/>
-                <div id='file_lst'></div>
-            </div>
+      <div class='form_control'>
+        <h4>파일첨부</h4>
+        <input type='file' class='img_upload_target' id='file_target' multiple='multiple' th:field="*{file}"/>
+        <div id='file_lst'></div>
+      </div>
 
-            <a href='#' class='btn margint20' id='smit_step1'>다음 단계로</a>
-            <!-- <button type='button' class='btn margint20' id='smit_step1'>다음 단계로</button> -->
-        </form>
-    </div>
-    <div class='clear'></div>
+      <a href='#' class='btn margint20' id='smit_step1'>다음 단계로</a>
+      <!-- <button type='button' class='btn margint20' id='smit_step1'>다음 단계로</button> -->
+    </form>
+  </div>
+  <div class='clear'></div>
 </div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
