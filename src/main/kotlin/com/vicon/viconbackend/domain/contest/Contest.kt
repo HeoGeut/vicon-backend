@@ -88,17 +88,17 @@ data class Contest(
                 else -> false
             }
         }
-        this.adsPrice = createForm.c_ad_price.toBigDecimal()
+        this.adsPrice = createForm.c_ad_price.replace(",", "").toBigDecimal()
         this.isBurdenFee = createForm.burdenFee.run {
             when (this) {
                 "1" -> true
                 else -> false
             }
         }
-        val deadLineList = createForm.c_deadline!!.split("-").map { it.toInt() }
+        val deadLineList = createForm.c_deadline.split("-").map { it.toInt() }
         this.recruitDeadLineDate = LocalDateTime.of(deadLineList[0], deadLineList[1], deadLineList[2], 0, 0)
 
-        val dueDateList = createForm.c_duedate!!.split("-").map { it.toInt() }
+        val dueDateList = createForm.c_duedate.split("-").map { it.toInt() }
         this.contentsCompletedDate = LocalDateTime.of(dueDateList[0], dueDateList[1], dueDateList[2], 0, 0)
 
         this.totalPaymentPrice = createForm.totalReward.toBigDecimal()
