@@ -126,6 +126,20 @@ jQuery(function ($) {
             }
         }
 
+        if($("input[name=recruitNumber]").val()=="")
+        {
+            alert("인원을 입력해 주세요.")
+            $("input[name=c_recruit]").focus();
+            return false;
+        }
+
+        var recruit = $('input[name=recruitNumber]').val();
+        if (recruit < 1) {
+            alert("모집 최소인원은 1명입니다.")
+            $("input[name=c_recruit]").focus();
+            return false;
+        }
+
         if ($('input[name=c_ad_chk]').val() == '1') {
             if ($("input[name=c_ad_price]").val() == "") {
                 alert("광고 최소액을 입력해 주세요.")

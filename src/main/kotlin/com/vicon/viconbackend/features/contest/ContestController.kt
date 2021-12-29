@@ -4,6 +4,7 @@ import com.vicon.viconbackend.domain.board.BoardRepository
 import com.vicon.viconbackend.domain.contest.*
 import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.domain.member.MemberRepository
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -20,6 +21,8 @@ class ContestController(
     val memberRepository: MemberRepository,
     val boardRepository: BoardRepository,
 ) {
+    private val logger = LoggerFactory.getLogger(this.javaClass)
+
     @GetMapping("list")
     fun findAllByOpenState(model: Model): String {
         val contests = contestService.findTop6ByOpenContest()
@@ -39,8 +42,7 @@ class ContestController(
         @RequestParam(value = "type", required = true) type: String,
         model: Model,
     ): String {
-        model.addAttribute("c_type", type)
-        model.addAttribute("contestForm1", ContestCreateForm())
+        model.addAttribute("contestForm1", ContestCreateForm(c_type = type))
 
         return "contests/create1"
     }
@@ -58,6 +60,9 @@ class ContestController(
             text = contestForm1.text,
             style = contestForm1.style,
         )
+
+        logger.debug(contestForm2.toString())
+
         model.addAttribute("contestForm2", contestForm2)
 
         return "contests/create2"
@@ -68,6 +73,9 @@ class ContestController(
         model: Model,
         contestForm2: ContestCreateForm
     ): String {
+
+        logger.debug(contestForm2.toString())
+
         model.addAttribute("contestForm2", contestForm2)
 
         return "contests/payment"
@@ -77,6 +85,9 @@ class ContestController(
     fun payment(
         contestForm: ContestCreateForm
     ): String {
+
+        logger.debug(contestForm.toString())
+
         val contest = Contest().from(contestForm)
         contestService.save(contest)
 

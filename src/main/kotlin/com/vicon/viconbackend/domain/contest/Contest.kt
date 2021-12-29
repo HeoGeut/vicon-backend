@@ -81,6 +81,7 @@ data class Contest(
         this.name = createForm.name
         this.text = createForm.text
 //      need add file
+        this.recruitNumber = createForm.recruitNumber.toBigDecimal()
         this.reward = createForm.c_reward.replace(",", "").toBigDecimal()
         this.isPaidAds = createForm.c_ad_chk.run {
             when (this) {
@@ -102,6 +103,13 @@ data class Contest(
         this.contentsCompletedDate = LocalDateTime.of(dueDateList[0], dueDateList[1], dueDateList[2], 0, 0)
 
         this.totalPaymentPrice = createForm.totalReward.toBigDecimal()
+
+        this.enabled = createForm.enabled.run {
+            when (this) {
+                "1" -> true
+                else -> false
+            }
+        }
 
         return this
     }

@@ -38,6 +38,7 @@
                             <p class='p2' th:text="${contest.title}"></p>
                             <p class='p4' th:text="${contest.text}"></p>
                             <p class='p3'><img src='/image/site/index/won.png'>
+                                <img src="/image/site/noimage.png"> <span th:text="contest.appl">2</span>명 모집&nbsp;&nbsp;&nbsp;
                                 <span th:text="${contest.totalReward} + '원'"></span>
                             </p>
                             <p class='p5'><img src='/image/site/index/premium.png' th:if="${not contest.isStandard}">
