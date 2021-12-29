@@ -18,7 +18,9 @@ data class ContestDTO(
 
     val restDate: String = "",
     val applyNumber: String = "",
-    val totalReward: String = ""
+    val recruitNumber: String = "",
+    val totalReward: String = "",
+    val individualReward: String = ""
 ) {
     companion object {
         fun of(contest: Contest): ContestDTO {
@@ -35,7 +37,9 @@ data class ContestDTO(
                 )
                     .toString(),
                 applyNumber = contest.applies!!.size.toString(),
-                totalReward = "${contest.reward!!.toInt().div(10000)}만"
+                recruitNumber = contest.recruitNumber.toInt().toString(),
+                totalReward = "${contest.reward!!.toInt().div(10000)}만원",
+                individualReward = "인당 ${(contest.reward!! / contest.recruitNumber).toInt().div(10000)}만원"
             )
         }
     }
