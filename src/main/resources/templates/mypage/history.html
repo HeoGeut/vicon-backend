@@ -1,10 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/mypage.css}"/>
+  <script type="text/javascript" src="../js/mypage.js"></script>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='snb_wrap'>
+  <div class='top'>
+    <div class='inner'>
+      <p><span>콘테스트</span>원하는 비용으로<br>원하는 광고를 만들고<br>내보내는 좋은 방법</p>
+      <a href='/info/howto'>콘테스트는 어떻게 진행되나요?</a>
+    </div>
+  </div>
+</div>
+
+<div class='wrap'>
+  <p class='nav marginb20'>마이페이지</p>
+
+  <div class='view_wrap'>
+    <div class='content'>
+      <div class='c_nav'>
+        <a href='/mypage/info'>회원 정보</a>
+        <a href='/mypage/history' class='act'>콘테스트 개최내역</a>
+        <a href='/mypage/join'>콘테스트 참가내역</a>
+      </div>
+
+      <div class="contest_list">
+        <p class="tit">콘테스트 개최내역</p>
+        <form name="frm" action="/mypage/history" method="get">
+          <!--                <input type="hidden" name="page_now" value="0">-->
+          <!--                <input type="hidden" name="page_row" value="10">-->
+          <!--                <div class="filter_box">-->
+          <!--                    <div class="col">-->
+          <!--                        <div class="chk_box">-->
+          <!--                            <input type="radio" name="chk2" checked="" id="chk0" value="0">-->
+          <!--                            <label for="chk0"><span></span> 전체</label>-->
+          <!--                        </div>-->
+          <!--                        <div class="chk_box">-->
+          <!--                            <input type="radio" name="chk2" checked="checked" id="chk1" value="2">-->
+          <!--                            <label for="chk1"><span></span> PPL</label>-->
+          <!--                        </div>-->
+          <!--                        <div class="chk_box bd">-->
+          <!--                            <input type="radio" name="chk2" id="chk2" value="1">-->
+          <!--                            <label for="chk2"><span></span> 리뷰</label>-->
+          <!--                        </div>-->
+          <!--                    </div>-->
+          <!--                    <div class="col">-->
+          <!--                        <div class="chk_box">-->
+          <!--                            <input type="radio" name="chk" id="chk3" value="1" checked="">-->
+          <!--                            <label for="chk3"><span></span> 최신 등록 순</label>-->
+          <!--                        </div>-->
+          <!--                        <div class="chk_box">-->
+          <!--                            <input type="radio" name="chk" id="chk4" value="2">-->
+          <!--                            <label for="chk4"><span></span> 상금 순</label>-->
+          <!--                        </div>-->
+          <!--                        <div class="chk_box">-->
+          <!--                            <input type="radio" name="chk" id="chk5" value="3">-->
+          <!--                            <label for="chk5"><span></span> 지원 적은 순</label>-->
+          <!--                        </div>-->
+          <!--                    </div>-->
+          <!--                    &lt;!&ndash; <div class="chk_box">-->
+          <!--                        <input type="radio" name="r1" id="chk1" value="chk1">-->
+          <!--                        <label for="chk1"><span></span> PPL</label>-->
+          <!--                    </div>-->
+          <!--                    <div class="chk_box bd">-->
+          <!--                        <input type="radio" name="r1" id="chk2" value="chk2">-->
+          <!--                        <label for="chk2"><span></span> 리뷰</label>-->
+          <!--                    </div>-->
+          <!--                    <div class="chk_box">-->
+          <!--                        <input type="radio" name="r2" id="chk3" value="chk3" checked>-->
+          <!--                        <label for="chk3"><span></span> 최신 등록 순</label>-->
+          <!--                    </div>-->
+          <!--                    <div class="chk_box">-->
+          <!--                        <input type="radio" name="r2" id="chk4" value="chk4">-->
+          <!--                        <label for="chk4"><span></span> 마감임박순</label>-->
+          <!--                    </div>-->
+          <!--                    <div class="chk_box">-->
+          <!--                        <input type="radio" name="r2" id="chk5" value="chk5">-->
+          <!--                        <label for="chk5"><span></span> 상금 순</label>-->
+          <!--                    </div>-->
+          <!--                    <div class="chk_box">-->
+          <!--                        <input type="radio" name="r2" id="chk6" value="chk6">-->
+          <!--                        <label for="chk6"><span></span> 지원 적은 순</label>-->
+          <!--                    </div> &ndash;&gt;-->
+          <!--                </div>-->
+
+          <ul class="lst">
+            <li th:each="history : ${contestHistory}">
+              <div class="title">
+                <p class="p1 ">
+                  <span th:classappend="${history.contestStyle == 'PPL'} ? 's1' : 's2'"
+                        th:text="${history.contestStyle}">PPL</span>
+                  <span th:text="${history.title}" style="font-size:16; color:black;"></span>
+                  <span style="color:#a8a8a8" th:if="${history.isConfirmed}">  관리자 승인 대기</span>
+                </p>
+                <p class="p2">
+                  <a href="#" class="chk_btn" th:data-key="${history.id}" th:classappend="${history.isCompleted} ? 'act' : ''">
+                    <i class="fas fa-check"></i>작업완료</a>
+                  <a href="#review_pop130" class="wrt_btn"> <i class="far fa-file-alt"></i> 후기쓰기</a>
+                  <img src="/image/site/index/won.png"> <span th:text="${history.reward}">30만원</span>
+                  <img src="/image/site/sub/icon3.png"> <span style="color:red" th:text="${history.progress}">종료</span>
+                  <img src="/image/site/sub/icon1.png">
+                  <span style="color: #8f8f8f; font-weight: unset" th:text="${history.applyNumber}"></span>
+                </p>
+                <i class="fas fa-chevron-down"></i></div>
+
+              <div class="cont">
+                <p>
+                  <span th:text="${history.title}"></span>
+                  <a th:href="@{/contests/view/{id} (id=${history.id})}" target="_blank">
+                    게시글 바로가기
+                    <i class="fas fa-angle-right"></i>
+                  </a>
+                </p>
+                <ul>
+                  <li th:if="${history.applies.size() == 0}" style="text-align:center;width:100%;margin-right:0">등록된 제안서가 없습니다.</li>
+
+                  <li th:each="apply : ${history.applies}">
+                    <i class="fas fa-user-circle"></i>
+                    <span th:text="${applyStat.count} + '번 지원자'">1번 지원자</span>
+                    <div class="ch_box">
+                      <a href="#lpop" class="pop_open" th:data-object="${apply.id}">
+                        <i class="far fa-file-alt"></i> 제안서</a>
+                      <a href="#" class="apply_chk " th:classappend="${apply.confirmed}? 'act' : ''"
+                         th:data-object="${apply.id}">
+                        <i class="far fa-check-circle"></i> 채택</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+            </li>
+          </ul>
+
+          <!--          <div class="margint50">-->
+
+          <!--            <div class="paginate-complex">-->
+          <!--              <strong>1</strong> <a href="javascript:goList('1')">2</a> <a href="javascript:goList('1')"-->
+          <!--                                                                           class="direction next"><span>&nbsp;</span></a>-->
+          <!--            </div>-->
+          <!--            <script type="text/javascript">-->
+          <!--                function goList(page) {-->
+          <!--                    var f = document.frm;-->
+          <!--                    f.page_now.value = page;-->
+          <!--                    f.submit();-->
+          <!--                }-->
+          <!--            </script>-->
+          <!--          </div>-->
+          <div class="clear"></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="rnb">
+      <p class="t1"><img src="/image/site/sub/alarm.png"> 콘테스트 마감이 얼마 남지 않았어요!</p>
+      <ul>
+        <li th:each="contest : ${contests}">
+          <div class="tit">
+            <div class="img_bx"><img src="/image/site/index/noimage.png"
+                                     th:attr="src=${contest.memberProfileImage}"></div>
+            <p class="p1" th:text="${contest.name}">KB 국민은행</p>
+            <p class="p2" th:text="${contest.isReview}? '리뷰' : 'PPL'">리뷰</p>
+          </div>
+          <div class="cont">
+            <p class="p1">
+              <span class="s1" th:text="'D-' + ${contest.restDate}">D-11</span>
+              <span class="s2" th:text="${contest.applyNumber}">11</span>
+              명 응모</p>
+            <p class="p2" th:text="${contest.name}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+            <p class="p4" th:text="${contest.text}">KB 국민은행의 신규 예금상품을 미리 알아보는 것부터 가입하는 과정까지 자연스럽고
+              재미있는재미있는재미있는재미있는 컨텐츠에 녹여...</p>
+            <p class="p3">
+              <img src="/image/site/index/won.png">
+              <span th:text="${contest.totalReward}"></span>만원
+            </p>
+            <p class="p5">
+              <img src="/image/site/index/premium.png" th:if="${not contest.isStandard}">
+            </p>
+          </div>
+        </li>
+      </ul>
+      <a href="/contests/list" class="more_list">목록 더보기</a>
+    </div>
+  </div>
+
+
+</div>
+
+
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>
