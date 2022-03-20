@@ -1,10 +1,12 @@
 package com.vicon.viconbackend.features.auth
 
 import com.vicon.viconbackend.domain.member.Member
+import org.springframework.web.multipart.MultipartFile
 
 data class MemberDetailsDto(
     val id: Long,
     val profileImage: String = "",
+    val file: MultipartFile? = null,
     val username: String = "",
     val password: String = "",
     val password2: String = "",
@@ -47,10 +49,11 @@ data class MemberDetailsDto(
         }
     }
 
-    fun toEntity(): Member {
+    fun toEntity(imageUrl: String): Member {
         return Member(
             username = username,
             password = password,
+            profileImage = imageUrl,
             phoneNumberFront = phoneNumberFront,
             phoneNumberMiddle = phoneNumberMiddle,
             phoneNumberBack = phoneNumberBack,

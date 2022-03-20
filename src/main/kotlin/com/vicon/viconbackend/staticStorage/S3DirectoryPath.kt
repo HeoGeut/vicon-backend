@@ -2,6 +2,6 @@ package com.vicon.viconbackend.staticStorage
 
 object S3DirectoryPath {
 
-    const val USER = "user"
+    const val PROFILE_IMAGE = "user/profile_image"
 
 }

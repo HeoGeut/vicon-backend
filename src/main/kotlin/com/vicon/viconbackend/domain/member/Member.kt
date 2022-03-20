@@ -101,6 +101,7 @@ data class Member(
     fun update(newValue: Member) {
         this.username = newValue.username
         this.password = newValue.password.ifBlank { this.password }
+        this.profileImage = newValue.profileImage
         this.phoneNumberFront = newValue.phoneNumberFront
         this.phoneNumberMiddle = newValue.phoneNumberMiddle
         this.phoneNumberBack = newValue.phoneNumberBack

@@ -2,24 +2,28 @@ package com.vicon.viconbackend.features.auth
 
 import com.vicon.viconbackend.config.SessionConst
 import com.vicon.viconbackend.domain.member.Member
+import com.vicon.viconbackend.staticStorage.S3DirectoryPath
+import com.vicon.viconbackend.staticStorage.S3Uploader
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import javax.servlet.http.HttpServletRequest
 
 @Controller
 @RequestMapping("auth")
 class AuthController(
     val memberService: MemberService,
-    val authService: AuthService
+    val authService: AuthService,
+    val s3Uploader: S3Uploader,
 ) {
     private val logger = LoggerFactory.getLogger(AuthController::class.java)
 
     @GetMapping("join")
     fun join(model: Model): String {
-        val channelTypes : LinkedHashMap<String, String> = linkedMapOf()
+        val channelTypes: LinkedHashMap<String, String> = linkedMapOf()
         channelTypes["YOUTUBE"] = "유튜브"
         channelTypes["BLOG"] = "블로그"
         channelTypes["INSTAGRAM"] = "인스타그램"
@@ -94,10 +98,10 @@ class AuthController(
     @GetMapping("edit/{id}")
     fun edit(@PathVariable id: Long, model: Model): String {
         val member = memberService.findById(id).get()
-        val memberDetails = MemberDetailsDto.of(member).also { println(it) }
+        val memberDetails = MemberDetailsDto.of(member)
         model.addAttribute("memberDetails", memberDetails)
 
-        val channelTypes : LinkedHashMap<String, String> = linkedMapOf()
+        val channelTypes: LinkedHashMap<String, String> = linkedMapOf()
         channelTypes["YOUTUBE"] = "유튜브"
         channelTypes["BLOG"] = "블로그"
         channelTypes["INSTAGRAM"] = "인스타그램"
@@ -111,10 +115,23 @@ class AuthController(
     fun editConfirm(memberDetailsDto: MemberDetailsDto): String {
         memberDetailsDto.also { println(it) }
         val findMember = memberService.findById(memberDetailsDto.id).get()
-        val newValue = memberDetailsDto.toEntity()
+
+        val imageUrl = getImageUrl(memberDetailsDto.file)
+
+        val newValue = memberDetailsDto.toEntity(imageUrl)
         findMember.update(newValue)
         memberService.save(findMember)
 
         return "redirect:/"
+    }
+
+    private fun getImageUrl(file: MultipartFile?): String {
+        return if (file != null) {
+            println("updload")
+            s3Uploader.upload(file, S3DirectoryPath.PROFILE_IMAGE)
+        } else {
+            println("file is null")
+            ""
+        }
     }
 }
