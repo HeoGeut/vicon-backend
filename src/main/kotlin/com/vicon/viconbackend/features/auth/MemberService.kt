@@ -5,7 +5,6 @@ import com.vicon.viconbackend.domain.member.MemberRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class MemberService(
@@ -13,7 +12,7 @@ class MemberService(
     val memberRepository: MemberRepository,
 ) {
 
-    fun findTop9By() = memberRepository.findTop9ByOrderByCreatedAt()
+    fun findTop9By() = memberRepository.findTop9ByOrderByCreatedAtDesc()
     fun findById(id: Long) = memberRepository.findById(id)
     fun findByUsername(username: String) = memberRepository.findByUsername(username)
 

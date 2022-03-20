@@ -44,8 +44,7 @@
                 <li th:each="contest : ${contests}">
                     <div class="tit">
                         <div class="img_bx">
-                            <img src="/image/site/index/noimage.png"
-                                 th:attr="src=${contest.memberProfileImage}">
+                            <img th:src="${(contest.memberProfileImage != null && !#strings.isEmpty(contest.memberProfileImage)) ? contest.memberProfileImage : '/image/site/noimage.png'}">
                         </div>
                         <p class="p1" th:text="${contest.name}">KB 국민은행</p>
                         <p class="p2" th:text="${contest.isReview}? ' 리뷰' : 'PPL'">리뷰</p>

@@ -40,7 +40,9 @@
         <div class='rnb'>
             <div class='info'>
                 <div class='summary'>
-                    <div class="logo"><img src="/image/site/noimage.png"></div>
+                    <div class="logo">
+                        <img th:src="${(contest.memberProfileImage != null && !#strings.isEmpty(contest.memberProfileImage)) ? contest.memberProfileImage : '/image/site/noimage.png'}">
+                    </div>
                     <p>
                         <span th:text="*{name}">회원이름</span>
                         <a href='#'>정보 보기</a>

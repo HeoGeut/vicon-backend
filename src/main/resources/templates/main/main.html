@@ -21,7 +21,7 @@
           <a th:href='@{contests/view/{id} (id=${contest.id})}'>
             <div class='tit'>
               <div class='img_bx'>
-                <img src='/image/site/noimage.png' th:attr="src=${contest.memberProfileImage}">
+                <img th:src="${(contest.memberProfileImage != null && !#strings.isEmpty(contest.memberProfileImage)) ? contest.memberProfileImage : '/image/site/noimage.png'}">
               </div>
               <p class='p1' th:text="${contest.name}"></p>
               <p class='p2'>
@@ -61,7 +61,7 @@
         <ul>
           <li th:each="member : ${members}">
             <div class='img_bx'>
-              <img src='/image/site/noimage.png'>
+              <img th:src="${(member.profileImage != null && !#strings.isEmpty(member.profileImage)) ? member.profileImage : '/image/site/noimage.png'}">
             </div>
             <span th:text="${member.memberId}"></span><br>
             <p th:text="'응모 ' + ${member.tryApply} + ' | 당선 ' + ${member.chosenApply} + ' | 콘텐츠리뷰'"></p>

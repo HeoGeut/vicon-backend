@@ -14,7 +14,7 @@ data class CreatorDTO(
         fun of(member: Member): CreatorDTO {
             return CreatorDTO(
                 profileImage = member.profileImage,
-                memberId = member.username!!,
+                memberId = member.username,
                 applyNumber = member.applies?.size.toString(),
                 confirmNumber = member.applies?.count { it.isConfirm == true }.toString(),
                 totalReward = "0"

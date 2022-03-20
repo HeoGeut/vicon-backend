@@ -70,7 +70,7 @@
 .rnb ul{margin-top:15px}
 .rnb li .tit{position:relative;border-bottom:1px solid #e6e6e6;padding:7px 15px;background:#f3f3f3}
 .rnb li .tit .img_bx{float:left;vertical-align: middle;display:flex;align-items: center;margin-right:10px;border-radius:50%;border:1px solid #e6e6e6;width:50px;height:50px;text-align:center;line-height:50px;background:#fff}
-.rnb li .tit .img_bx img{display:block;max-width:90%;height:fit-content;margin:0 auto}
+.rnb li .tit .img_bx img{display:block;max-width:100%;height:fit-content;margin:0 auto}
 .rnb li .tit .p1{padding-top: 17px;vertical-align: middle;font-size:16px;color:#5a5a5a;font-weight:500;}
 .rnb li .tit .p1:after{display: block;content:"";clear:both}
 .rnb li .tit .p2{position:absolute;top:50%;right:15px;margin-top:-12px;border-radius:30px;font-size:14px;color:#fff;font-weight:bold;display: inline-block;padding:3px 10px;background:#ffb400}
