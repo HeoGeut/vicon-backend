@@ -88,4 +88,22 @@ class MypageController(
             0
         }
     }
+
+    @GetMapping("join")
+    fun join(
+        model: Model,
+        request: HttpServletRequest
+    ): String {
+        val memberId = request.session.getAttribute(SessionConst().LOGIN_MEMBER).toString()
+        val member = memberService.findById(memberId.toLong()).get()
+
+        val contestHistories = member.contests!!.map { ContestJoinHistoryDto.of(it) }
+        model.addAttribute("contestHistories", contestHistories)
+
+        val contests = contestRepository.findTop3ByOrderByRecruitDeadLineDate()
+        val contestDtoList = contests.map { ContestDTO.of(it) }
+        model.addAttribute("contests", contestDtoList)
+
+        return "mypage/join"
+    }
 }
