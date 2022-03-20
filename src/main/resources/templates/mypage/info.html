@@ -41,7 +41,7 @@
                         <th>아이디</th>
                         <td>
                             <div class='profile_bx'>
-                                <img src='/image/site/noimage.png'>
+                                <img th:src="${(member.profileImage != null && !#strings.isEmpty(member.profileImage)) ? member.profileImage : '/image/site/noimage.png'}">
                             </div>
                             <span th:text="*{username}"></span>
                         </td>

@@ -6,6 +6,7 @@ data class MemberInfoDTO(
     val id: Long = 0,
     val username: String = "",
     val phoneNumber: String = "",
+    val profileImage : String = "",
     val email: String = "",
     val apply: String = "0",
     val elect: String = "0",
@@ -27,6 +28,7 @@ data class MemberInfoDTO(
             return MemberInfoDTO(
                 id = member.id!!,
                 username = member.username,
+                profileImage = member.profileImage ?: "",
                 phoneNumber = "${member.phoneNumberFront}-${member.phoneNumberMiddle}-${member.phoneNumberBack}",
                 email = "${member.emailFront}@${member.emailBack}",
                 apply = member.applies?.size.toString(),

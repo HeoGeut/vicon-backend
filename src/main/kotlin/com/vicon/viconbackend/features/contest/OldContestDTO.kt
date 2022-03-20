@@ -1,9 +1,12 @@
 package com.vicon.viconbackend.features.contest
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.vicon.viconbackend.domain.contest.ContentsStyle
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.domain.contest.ContestType
+import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 data class OldContestDTO(

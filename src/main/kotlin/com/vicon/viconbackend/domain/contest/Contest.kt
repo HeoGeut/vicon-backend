@@ -1,10 +1,12 @@
 package com.vicon.viconbackend.domain.contest
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.vicon.viconbackend.domain.apply.Apply
 import com.vicon.viconbackend.domain.common.Auditable
 import com.vicon.viconbackend.domain.member.Member
 import com.vicon.viconbackend.domain.payment.Payment
 import com.vicon.viconbackend.features.contest.ContestCreateForm
+import org.springframework.format.annotation.DateTimeFormat
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -31,7 +33,12 @@ data class Contest(
     var adsPrice: BigDecimal? = BigDecimal.ZERO,
     var isBurdenFee: Boolean? = false,
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     var recruitDeadLineDate: LocalDateTime? = null,
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     var contentsCompletedDate: LocalDateTime? = null,
 
     var recruitNumber: BigDecimal = BigDecimal.ZERO,

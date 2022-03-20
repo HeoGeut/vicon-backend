@@ -58,8 +58,8 @@
                     <div class='img_box'>
                         <div class='img'><img src='/image/site/no_img2.jpeg'></div>
                         <div class='summary'>
-                            <div class="logo">
-                                <img th:attr="src=${contest.memberProfileImage}">
+                            <div class="logo" style="overflow:hidden">
+                                <img th:attr="src=${contest.memberProfileImage}" style="max-width:100%;height:100%">
                             </div>
                             <div class="info">
                                 <p th:text="${contest.name}">기업명</p>
