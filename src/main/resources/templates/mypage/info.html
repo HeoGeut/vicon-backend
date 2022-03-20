@@ -29,7 +29,7 @@
             </div>
 
             <div class='mypage_box' th:object="${member}">
-                <a href='' class='edit_btn'>회원 정보 수정</a>
+                <a th:href='@{/auth/edit/{id} (id= ${member.id})}' class='edit_btn'>회원 정보 수정</a>
 
                 <p class='tit'><i class="fas fa-user-circle"></i> 기본정보</p>
                 <table cellpadding='0' cellspacing='0' class='tbl1'>

@@ -13,7 +13,7 @@ class MemberService(
     val memberRepository: MemberRepository,
 ) {
 
-    fun findTop9By() = memberRepository.findTop9By()
+    fun findTop9By() = memberRepository.findTop9ByOrderByCreatedAt()
     fun findById(id: Long) = memberRepository.findById(id)
     fun findByUsername(username: String) = memberRepository.findByUsername(username)
 

@@ -19,6 +19,13 @@ class AuthController(
 
     @GetMapping("join")
     fun join(model: Model): String {
+        val channelTypes : LinkedHashMap<String, String> = linkedMapOf()
+        channelTypes["YOUTUBE"] = "유튜브"
+        channelTypes["BLOG"] = "블로그"
+        channelTypes["INSTAGRAM"] = "인스타그램"
+        channelTypes["FACEBOOK"] = "페이스북"
+
+        model.addAttribute("channelTypes", channelTypes)
         model.addAttribute("memberCreateForm", MemberCreateForm())
         return "auth/join"
     }
@@ -81,6 +88,33 @@ class AuthController(
     fun logout(request: HttpServletRequest): String? {
         val session = request.getSession(false)
         session?.invalidate()
+        return "redirect:/"
+    }
+
+    @GetMapping("edit/{id}")
+    fun edit(@PathVariable id: Long, model: Model): String {
+        val member = memberService.findById(id).get()
+        val memberDetails = MemberDetailsDto.of(member).also { println(it) }
+        model.addAttribute("memberDetails", memberDetails)
+
+        val channelTypes : LinkedHashMap<String, String> = linkedMapOf()
+        channelTypes["YOUTUBE"] = "유튜브"
+        channelTypes["BLOG"] = "블로그"
+        channelTypes["INSTAGRAM"] = "인스타그램"
+        channelTypes["FACEBOOK"] = "페이스북"
+        model.addAttribute("channelTypes", channelTypes)
+
+        return "auth/edit"
+    }
+
+    @PostMapping("edit")
+    fun editConfirm(memberDetailsDto: MemberDetailsDto): String {
+        memberDetailsDto.also { println(it) }
+        val findMember = memberService.findById(memberDetailsDto.id).get()
+        val newValue = memberDetailsDto.toEntity()
+        findMember.update(newValue)
+        memberService.save(findMember)
+
         return "redirect:/"
     }
 }

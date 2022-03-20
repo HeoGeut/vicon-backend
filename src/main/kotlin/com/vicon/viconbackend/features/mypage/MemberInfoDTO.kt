@@ -3,6 +3,7 @@ package com.vicon.viconbackend.features.mypage
 import com.vicon.viconbackend.domain.member.Member
 
 data class MemberInfoDTO(
+    val id: Long = 0,
     val username: String = "",
     val phoneNumber: String = "",
     val email: String = "",
@@ -24,6 +25,7 @@ data class MemberInfoDTO(
     companion object {
         fun of(member: Member): MemberInfoDTO {
             return MemberInfoDTO(
+                id = member.id!!,
                 username = member.username,
                 phoneNumber = "${member.phoneNumberFront}-${member.phoneNumberMiddle}-${member.phoneNumberBack}",
                 email = "${member.emailFront}@${member.emailBack}",

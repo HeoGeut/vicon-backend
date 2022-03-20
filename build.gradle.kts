@@ -28,7 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.0.0.RC2")
+    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 //    implementation("org.springframework.boot:spring-boot-starter-security")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

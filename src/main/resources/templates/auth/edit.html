@@ -1,10 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/auth.css"/>
+    <script type="text/javascript" src="../../js/auth.js"></script>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
+
+
+<div class='sub_key'>회원가입</div>
+
+<div class='wrap'>
+    <p class='nav'><span>Member</span> > 회원정보수정</p>
+
+    <div class='lnb'>
+        <p class='p1'>회원정보수정</p>
+        <p class='p2'>광고 맡기기도<br>광고 받기도<br><span>가입만 하면 바로</span></p>
+    </div>
+
+    <div class='cont'>
+        <form name='form' action='/auth/edit' method="post" th:object="${memberDetails}">
+            <input type="hidden" th:name="id" th:value="*{id}"/>
+            <div class='form_control'>
+                <h4>아이디<span>●</span></h4>
+                <input readonly style="background:#ededed" type='text' th:value="*{username}" th:name='username' placeholder='5~12자' id='userId' maxlength="12">
+            </div>
+
+            <div class='form_control' style='margin-bottom:0 !important'>
+                <h4>비밀번호<span>●</span></h4>
+                <input type='password' th:name='password' placeholder='영어, 숫자, 특수기호를 넣어 8~16자' maxlength="16">
+                <p id='pw_chk'></p>
+            </div>
+            <div class='form_control'>
+                <input type='password' th:name='password2' placeholder='비밀번호 확인' style='margin-top:0;border-top:none'>
+                <p id='pw_chk2'></p>
+            </div>
+
+            <div class='form_control'>
+                <h4>연락처<span>●</span></h4>
+                <div>
+                    <input type='tel' th:name='phoneNumberFront' th:value="*{phoneNumberFront}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                           placeholder='010' value="*{010" maxlength="3"> -
+                    <input type='tel' th:name='phoneNumberMiddle' th:value="*{phoneNumberMiddle}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                           placeholder='1234' maxlength="4"> -
+                    <input type='tel' th:name='phoneNumberBack' th:value="*{phoneNumberBack}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+                           placeholder='5678' maxlength="4">
+                </div>
+            </div>
+
+            <div class='form_control'>
+                <h4>이메일<span>●</span></h4>
+                <div>
+                    <input type='email' th:name='emailFront' th:value="*{emailFront}" placeholder='id'> @
+                    <input type='email' th:name='emailBack' th:value="*{emailBack}" placeholder='service.com'>
+                </div>
+            </div>
+
+            <div class='form_box'>
+                <div class='b1'>
+                    <p class='b_tit'>비즈니스 정보</p>
+                    <div class='form_control'>
+                        <h4>기업명</h4>
+                        <input type='text' th:name='companyName' th:value='*{companyName}' placeholder='기업명'>
+                    </div>
+
+                    <div class='form_control'>
+                        <h4>비즈니스 카테고리(업종)</h4>
+                        <input type='text' th:name='businessCategory' th:value='*{businessCategory}' placeholder='ex) 화장품 제조, 온라인 서비스 등'>
+                    </div>
+
+                    <div class='form_control'>
+                        <h4>웹사이트 주소</h4>
+                        <input type='text' th:name='websiteUrl' th:value='*{websiteUrl}' placeholder='http://www.example.com'>
+                    </div>
+
+                    <div class='form_control'>
+                        <h4>사업자 유형</h4>
+                        <label><input type='radio' th:name='businessType' value='*{INDIVIDUAL'> 개인</label>
+                        <label><input type='radio' th:name='businessType' value='*{CORPORATION'> 법인</label>
+                        <label><input type='radio' th:name='businessType' value='*{SIMPLE_TAX'> 간이과세자</label>
+                        <label><input type='radio' th:name='businessType' value='*{PUBLIC_ENTERPRISE'> 공기업</label>
+                    </div>
+
+                    <div class='form_control'>
+                        <h4>사업자 번호</h4>
+                        <input type='text' th:name='businessNumber' th:value='*{businessNumber}' placeholder='사업자 번호'>
+                    </div>
+                </div>
+
+                <div class='b2'>
+                    <p class='b_tit'>대표 채널 정보</p>
+                    <div class='form_control'>
+                        <h4>대표 채널 URL</h4>
+                        <input type='text' th:name='channelUrl' th:value='*{channelUrl}' placeholder='대표 채널 URL'>
+                    </div>
+
+                    <div class='form_control'>
+                        <h4>채널 카테고리</h4>
+                        <input type='text' th:name='channelCategory' th:value='*{channelCategory}' placeholder='주요 콘텐츠/장르'>
+                    </div>
+
+                    <div class='form_control'>
+                        <h4>현재 채널 구독자 수</h4>
+                        <input type='text' th:name='subscriberAmount' th:value='*{subscriberAmount}' placeholder='000,000 명'>
+                    </div>
+                    <div class="form_control">
+                        <h4>보유채널</h4>
+                        <label th:each="channelTypeOne : ${channelTypes}">
+                            <input type="checkbox" th:field="*{channelType}" th:value="${channelTypeOne.key}">
+                            <label th:text="${channelTypeOne.value}"></label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type='button' class='btn margint20' id='edit_smit'>회원정보수정 완료</button>
+        </form>
+    </div>
+    <div class='clear'></div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>

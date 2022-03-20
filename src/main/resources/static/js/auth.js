@@ -205,40 +205,40 @@ jQuery(function ($) {
     // 회원정보수정
     $('#edit_smit').click(function () {
         // 비밀번호 입력시
-        if ($("input[name=mem_pw2]").val() != "") {
-            if (check_pwd($('input[name=mem_pw]').val()) == false) {
+        if ($("input[name=password]").val() != "") {
+            if (check_pwd($('input[name=password]').val()) == false) {
                 alert('비밀번호는 영어, 숫자, 특수기호를 넣어 8~16자로 입력해주세요.');
-                $("input[name=mem_pw]").focus();
+                $("input[name=password]").focus();
                 $('#pw_chk').text('사용불가능');
                 return false;
             }
 
-            if ($("input[name=mem_pw]").val().length < 8) {
+            if ($("input[name=password]").val().length < 8) {
                 alert('비밀번호는 영어, 숫자, 특수기호를 넣어 8~16자로 입력해주세요.');
-                $("input[name=mem_pw]").focus();
+                $("input[name=password]").focus();
                 return false;
             }
 
-            if ($("input[name=mem_pw2]").val() == "") {
+            if ($("input[name=password2]").val() == "") {
                 alert("비밀번호 확인을 입력해 주세요.");
-                $("input[name=mem_pw2]").focus();
+                $("input[name=password2]").focus();
                 return false;
             }
         }
 
-        if ($("input[name=mem_pw]").val() != $("input[name=mem_pw2]").val()) {
+        if ($("input[name=password]").val() != $("input[name=password2]").val()) {
             alert("입력한 비밀번호가 일치하지 않습니다.");
-            $("input[name=mem_pw2]").focus();
+            $("input[name=password2]").focus();
             return false;
         }
 
-        if ($("input[name=mem_hp1]").val() == "" || $("input[name=mem_hp2]").val() == "" || $("input[name=mem_hp3]").val() == "") {
+        if ($("input[name=phoneNumberFront]").val() == "" || $("input[name=phoneNumberMiddle]").val() == "" || $("input[name=phoneNumberBack]").val() == "") {
             alert("휴대폰번호를 입력해 주세요.")
-            $("input[name=mem_hp]").focus();
+            $("input[name=phoneNumberFront]").focus();
             return false;
         }
 
-        if ($("input[name=mem_email1]").val() == "" || $("input[name=mem_email2]").val() == "") {
+        if ($("input[name=emailFront]").val() == "" || $("input[name=emailBack]").val() == "") {
             alert("이메일 주소를 입력해 주세요.");
             return false;
         }

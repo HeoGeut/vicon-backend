@@ -40,6 +40,7 @@ data class Member(
     var businessNumber: String? = "",
 
     var isCertificated: Boolean? = false,
+    var isSBA: Boolean? = false,
 
     var enabled: Boolean? = false,
 
@@ -67,6 +68,7 @@ data class Member(
         this.subscriberAmount = memberCreateForm.mem_ch_subscriber
         this.businessType = BusinessType.valueOf(memberCreateForm.mem_business_type!!)
         this.channelType = memberCreateForm.channelType.toString()
+        this.isSBA = memberCreateForm.mem_sba
 
         return this
     }
@@ -86,7 +88,7 @@ data class Member(
         return this
     }
 
-    private fun findBusinessType(ordinal: Int): BusinessType {
+    fun findBusinessType(ordinal: Int): BusinessType {
         return when (ordinal) {
             1 -> BusinessType.INDIVIDUAL
             2 -> BusinessType.CORPORATION
@@ -94,6 +96,22 @@ data class Member(
             4 -> BusinessType.PUBLIC_ENTERPRISE
             else -> BusinessType.NONE
         }
+    }
+
+    fun update(newValue: Member) {
+        this.username = newValue.username
+        this.password = newValue.password.ifBlank { this.password }
+        this.phoneNumberFront = newValue.phoneNumberFront
+        this.phoneNumberMiddle = newValue.phoneNumberMiddle
+        this.phoneNumberBack = newValue.phoneNumberBack
+        this.emailFront = newValue.emailFront
+        this.emailBack = newValue.emailBack
+        this.companyName = newValue.companyName
+        this.businessCategory = newValue.businessCategory
+        this.websiteUrl = newValue.websiteUrl
+        this.channelCategory = newValue.channelCategory
+        this.subscriberAmount = newValue.subscriberAmount
+        this.businessNumber = newValue.businessNumber
     }
 
 //    fun getPassword(): String {
