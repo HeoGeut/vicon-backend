@@ -1,12 +1,9 @@
 package com.vicon.viconbackend.features.contest
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.vicon.viconbackend.domain.contest.ContentsStyle
 import com.vicon.viconbackend.domain.contest.Contest
 import com.vicon.viconbackend.domain.contest.ContestType
-import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 data class OldContestDTO(
@@ -17,7 +14,8 @@ data class OldContestDTO(
     val name: String = "",
     val applyNumber: String = "",
     val recruitDeadLineDate: String = "",
-    val restDate: String = "",
+    val restDateString: String = "",
+    val restDate : Int = 0,
 
     val isReview: Boolean = true,
     val createdDate: String = "",
@@ -37,8 +35,10 @@ data class OldContestDTO(
                 name = contest.name!!,
                 applyNumber = contest.applies!!.size.toString(),
                 recruitDeadLineDate = contest.recruitDeadLineDate!!.toString().dropLast(9),
-                restDate = getRestDate(contest),
-
+                restDateString = getRestDate(contest),
+                restDate = ChronoUnit.DAYS.between(
+                    LocalDate.now(), contest.recruitDeadLineDate!!.toLocalDate()
+                ).toInt(),
                 isReview = contest.contentsStyle!! == ContentsStyle.PPL,
                 createdDate = contest.createdAt.toString().dropLast(9),
                 title = contest.title!!,

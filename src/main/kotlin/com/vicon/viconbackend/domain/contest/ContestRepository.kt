@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface ContestRepository : JpaRepository<Contest, Long> {
-    fun findTop9ByIsConfirmed(isConfirmed: Boolean): List<Contest>
+    fun findTop9ByIsConfirmedOrderByCreatedAtDesc(isConfirmed: Boolean): List<Contest>
 
     fun findTop3ByOrderByRecruitDeadLineDate(): List<Contest>
 

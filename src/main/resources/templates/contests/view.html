@@ -18,9 +18,9 @@
     <div class='contest_top'><span>콘테스트</span>원하는 비용으로 원하는 광고를<br>만들고 내보내는 좋은 방법</div>
 </div>
 
-<div class='sub_key'>지난 콘테스트</div>
+<div class='sub_key' th:text="${contest.restDate} < 0 ? '지난 콘테스트' : '열린 콘테스트' ">지난 콘테스트</div>
 <div class='wrap' style='padding-bottom:0'>
-    <p class='nav marginb30'>지난 콘테스트</p>
+    <p class='nav marginb30' th:text="${contest.restDate} < 0 ? '지난 콘테스트' : '열린 콘테스트' ">지난 콘테스트</p>
     <a href='javascript:history.back();' class='go_list'><img src='/image/site/sub/go_list.png'></a>
     <div class='contest_view' th:object="${contest}">
         <div class='view_box'>
@@ -52,7 +52,7 @@
                     <li>
                         <img src='/image/site/sub/rnb_icon4.png'>
                         <span>마감</span>
-                        <span th:text="*{restDate}" style="color: #FFFFFF">11일 전</span>
+                        <span th:text="*{restDateString}" style="color: #FFFFFF">11일 전</span>
                     </li>
                     <li>
                         <img src='/image/site/sub/rnb_icon5.png'>
