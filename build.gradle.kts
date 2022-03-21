@@ -30,6 +30,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 //    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.2")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

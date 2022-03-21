@@ -1,0 +1,33 @@
+{
+  "mId": "tvivarepublica",
+  "paymentKey": "avNA96Bjgq7XZYkKL4MrjMD1AJYQEV0zJwlEWR52xydGPnOQ",
+  "orderId": "20220321024247",
+  "method": "가상계좌",
+  "status": "WAITING_FOR_DEPOSIT",
+  "requestedAt": "2022-03-21T02:42:53+09:00",
+  "approvedAt": null,
+  "useEscrow": false,
+  "card": null,
+  "virtualAccount": {
+    "accountNumber": "X65659014472318",
+    "accountType": "일반",
+    "bank": "국민",
+    "customerName": "test1",
+    "dueDate": "2022-03-24T02:42:53+09:00",
+    "expired": false,
+    "settlementStatus": "INCOMPLETED",
+    "refundStatus": "NONE"
+  },
+  "mobilePhone": null,
+  "giftCertificate": null,
+  "cashReceipt": null,
+  "discount": null,
+  "cancels": null,
+  "secret": "ps_4vZnjEJeQVxMKavonKzrPmOoBN0k",
+  "useDiscount": false,
+  "discountAmount": null,
+  "useCashReceipt": false,
+  "currency": "KRW",
+  "totalAmount": 440000,
+  "balanceAmount": 440000
+}

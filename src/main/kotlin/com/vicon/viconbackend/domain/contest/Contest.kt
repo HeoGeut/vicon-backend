@@ -96,7 +96,8 @@ data class Contest(
                 else -> false
             }
         }
-        this.adsPrice = createForm.c_ad_price.replace(",", "").toBigDecimal()
+        this.adsPrice = createForm.c_ad_price?.replace(",", "")?.toBigDecimal()
+            ?: BigDecimal.ZERO
         this.isBurdenFee = createForm.burdenFee.run {
             when (this) {
                 "1" -> true
@@ -117,6 +118,8 @@ data class Contest(
                 else -> false
             }
         }
+
+        this.orderNumber = createForm.orderNumber
 
         return this
     }

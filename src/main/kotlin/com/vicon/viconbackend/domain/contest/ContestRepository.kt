@@ -12,4 +12,6 @@ interface ContestRepository : JpaRepository<Contest, Long> {
     fun findTop10ByIsCompletedContents(isCompleted: Boolean) : List<Contest>
 
     fun findByEnabled(pageable: Pageable, enabled : Boolean = true) : Page<Contest>
+
+    fun findByOrderNumber(orderNumber: String) : Contest
 }

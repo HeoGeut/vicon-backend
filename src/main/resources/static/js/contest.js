@@ -198,9 +198,9 @@ jQuery(function ($) {
     });
 
     // 콘테스트 열기 스텝3
-    $('#smit_step3').click(function () {
-        $(this).parents('.wrap').find('form').submit();
-    });
+    // $('#smit_step3').click(function () {
+    //     $(this).parents('.wrap').find('form').submit();
+    // });
 
     // 상금입력
     $('.num_only').on('keyup', function () {

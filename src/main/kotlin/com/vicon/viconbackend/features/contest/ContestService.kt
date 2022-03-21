@@ -36,4 +36,6 @@ class ContestService(
     }
 
     fun saveAll(contests: List<Contest>): MutableList<Contest> = contestRepository.saveAll(contests)
+
+    fun findByOrderNumber(orderId: String) = contestRepository.findByOrderNumber(orderId)
 }

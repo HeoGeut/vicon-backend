@@ -1,7 +1,9 @@
 package com.vicon.viconbackend.domain.payment
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.vicon.viconbackend.domain.common.Persistable
 import com.vicon.viconbackend.domain.contest.Contest
+import com.vicon.viconbackend.domain.contest.ContestRepository
 import javax.persistence.Entity
 import javax.persistence.OneToOne
 
@@ -47,4 +49,39 @@ data class Payment(
     @OneToOne
     var contest: Contest? = null
 
-) : Persistable<Long>()
+) : Persistable<Long>(){
+    fun from(res: JsonNode, contest: Contest) : Payment {
+        return Payment(
+            mId = res.get("mId").asText(),
+            paymentKey = res.get("paymentKey").asText(),
+            orderId = res.get("orderId").asText(),
+            currency = res.get("currency").asText(),
+            method = res.get("method").asText(),
+            totalAmount = res.get("totalAmount").asText(),
+            balanceAmount = res.get("balanceAmount").asText(),
+            status = res.get("status").asText(),
+            requestedAt = res.get("requestedAt").asText(),
+            approvedAt = res.get("approvedAt").asText(),
+            useEscrow = res.get("useEscrow").asText(),
+            card = res.get("card").asText(),
+            accountNumber = res.get("virtualAccount").get("accountNumber").asText(),
+            accountType = res.get("virtualAccount").get("accountType").asText(),
+            bank = res.get("virtualAccount").get("bank").asText(),
+            customerName = res.get("virtualAccount").get("customerName").asText(),
+            dueDate = res.get("virtualAccount").get("dueDate").asText(),
+            expired = res.get("virtualAccount").get("expired").asText(),
+            settlementStatus = res.get("virtualAccount").get("settlementStatus").asText(),
+            refundStatus = res.get("virtualAccount").get("refundStatus").asText(),
+            mobilePhone = res.get("mobilePhone").asText(),
+            giftCertificate = res.get("giftCertificate").asText(),
+            cashReceiptType = res.get("cashReceipt").asText(),
+            discount = res.get("discount").asText() ?: "",
+            cancels = res.get("cancels").asText() ?: "",
+            secret = res.get("secret").asText() ?: "",
+            useDiscount = res.get("useDiscount").asText() ?: "",
+            discountAmount = res.get("discountAmount").asText() ?: "",
+            useCashReceipt = res.get("useCashReceipt").asText() ?: "",
+            contest = contest,
+        )
+    }
+}

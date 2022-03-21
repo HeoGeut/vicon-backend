@@ -22,12 +22,12 @@
 
 <div class="wrap">
     <p class="nav"><span>콘테스트 열기</span> >
-        <span th:text="${contestForm2.c_type}=='1'? '콘테스트 열기' : '프리미엄 콘테스트 열기'">콘테스트 열기</span> > 결제</p>
+        <span th:text="${contestForm2?.c_type}=='1'? '콘테스트 열기' : '프리미엄 콘테스트 열기'">콘테스트 열기</span> > 결제</p>
 
     <div class="lnb">
         <p class="p1">콘테스트</p>
         <p class="p2">제한없이<br>모든 유튜버에게<br>
-            <span th:text="${contestForm2.c_type}=='1'? '30만원부터' : '100만원부터'">100만원부터</span>
+            <span th:text="${contestForm2?.c_type}=='1'? '30만원부터' : '100만원부터'">100만원부터</span>
         </p>
 
         <div class="info_box">
@@ -40,17 +40,17 @@
         </div>
     </div>
 
-    <div class="cont" th:object="${contestForm2}">
+    <div class="cont" name="object" th:object="${contestForm2}">
         <p class="b_tit margint0">결제</p>
         <div class="form_control">
             <h4 style="border-bottom:1px solid #000;padding-bottom:10px">무통장 입금</h4>
             <div class="account_box">
-                <div>제목<span th:text="*{title}"></span></div>
-                <div>기업명<span th:text="*{name}"></span></div>
+                <div>제목<span th:text="${contestForm2?.title}"></span></div>
+                <div>기업명<span th:text="${contestForm2?.name}"></span></div>
                 <!--div>계좌번호<span>12-2314-312559-01</span></div-->
                 <div>총 결제금액<span style="color:#0058ff"
-                                 th:text="*{totalReward}">원</span></div>
-                <!--                                 th:text="${#numbers.formatDecimal(*{totalReward},3,2)}">원</span></div>-->
+                                 th:text="${contestForm2?.totalReward}">원</span></div>
+                <!--                                 th:text="${#numbers.formatDecimal(${contestForm2?.totalReward},3,2)}">원</span></div>-->
             </div>
             <h5>*입금 후 콘테스트 요청서 검토가 시작됩니다.<br>*24시간 이내 기재된 연락처로 검토 결과를 보내드립니다.</h5>
         </div>
@@ -82,14 +82,17 @@
         <button type="button" class="btn margint20" id="smit_step3">결제하기</button>
     </div>
     <div class="clear"></div>
-
-    <form name="frm" action="/contests/payment" th:object="${contestForm2}" method="post" enctype="multipart/form-data">
+yu
+    <form name="frm" th:action="@{/contests/paymentAjax}" th:object="${contestForm2}" method="post"
+          enctype="multipart/form-data">
+        <input type="hidden" th:field="*{username}" th:value="*{username}">
         <input type="hidden" th:field="*{c_type}" th:value="*{c_type}">
         <input type="hidden" th:field="*{businessCategory}" th:value="*{businessCategory}">
         <input type="hidden" th:field="*{title}" th:value="*{title}">
         <input type="hidden" th:field="*{name}" th:value="*{name}">
         <input type="hidden" th:field="*{text}" th:value="*{text}">
         <input type="hidden" th:field="*{style}" th:value="*{style}">
+        <!--        <input type="hidden" th:field="*{file}" th:value="*{file}">-->
         <input type="hidden" th:field="*{recruitNumber}" th:value="*{recruitNumber}">
         <input type="hidden" th:field="*{c_reward}" th:value="*{c_reward}">
         <input type="hidden" th:field="*{c_ad_chk}" th:value="*{c_ad_chk}">
@@ -98,7 +101,8 @@
         <input type="hidden" th:field="*{c_deadline}" th:value="*{c_deadline}">
         <input type="hidden" th:field="*{c_duedate}" th:value="*{c_duedate}">
         <input type="hidden" th:field="*{totalReward}" th:value="*{totalReward}">
-        <!--    <input type="hidden" name="orderId" th:value="*{}">-->
+        <input type="hidden" th:field="*{enabled}" th:value="*{enabled}">
+        <input type="hidden" th:field="*{orderNumber}" th:value="*{orderNumber}">
     </form>
 
     <div class="clear"></div>
@@ -106,4 +110,25 @@
 
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>
+<!-- tosspayment -->
+<script src="https://js.tosspayments.com/v1"></script>
+<script>
+  // var clientKey = 'live_ck_k6bJXmgo28eWGObdqqYVLAnGKWx4'; // live
+  var clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq'; // test
+  var tossPayments = TossPayments(clientKey);
+  var button = document.getElementById('smit_step3');
+  var successUrl = 'http://localhost:9800/contests/success';
+
+  button.addEventListener('click', function () {
+    tossPayments.requestPayment('가상계좌', {
+      amount: [[${contestForm2?.totalReward}]],       // 금액
+      orderId: "[[${contestForm2?.orderNumber}]]",       // 주문번호pk
+      orderName: "[[${contestForm2?.title}]]",     // 상품명
+      customerName: "[[${contestForm2?.username}]]",  // 입금자명
+      // successUrl: 'http://www.vicon.company/main/payment/success.php',
+      successUrl: successUrl,
+      failUrl: 'http://www.vicon.company/main/payment/fail.php'
+    });
+  });
+</script>
 </html>
