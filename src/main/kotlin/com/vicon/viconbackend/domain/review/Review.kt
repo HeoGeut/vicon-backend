@@ -15,7 +15,7 @@ data class Review(
     @Column(name = "content", columnDefinition = "text")
     var content: String? = "",
 
-    var link: String? = "",
+    var youtubeUrl: String? = "",
     var star: String? = "",
 
     @ManyToOne(fetch = FetchType.LAZY)

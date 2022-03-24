@@ -2,7 +2,8 @@ jQuery(function($){
 	// 기업정보 팝업 열기
 	$('.pop').click(function(e){
 		e.preventDefault();
-		$(this).parents('.company').find('.info_pop').css('display','block');
+		// $(this).parents('.company').find('.info_pop').css('display','block');
+		alert('준비중입니다.');
 	});
 
 	// 기업정보 팝업 닫기

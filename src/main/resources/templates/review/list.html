@@ -59,7 +59,7 @@
                                 contest title
                             </span>
                         </p>
-                        <a href=''>자세히보기</a>
+                        <a th:href='@{/contests/view/{id} (id=${review.contestId})}'>자세히보기</a>
                     </div>
                     <div class='b2'>
                         <p class='p1'>
@@ -74,15 +74,16 @@
                             </span>
 
                         </p>
-                        <a href='#'>후기 읽기</a>
+                        <a th:href='@{/review/view/{id} (id=${review.id})}'>후기 읽기</a>
                     </div>
                 </div>
                 <div class='info'>
                     <div class='summary'>
-                        <div class="logo"><img th:src="${review.memberProfileImage}" src="/image/site/noimage.png">
+                        <div class="logo">
+                            <img th:src="${review.memberProfileImage}" src="/image/site/noimage.png">
                         </div>
                         <p>
-                            <span>KB 국민은행</span>
+                            <span th:text="${review.username}">KB 국민은행</span>
                             <!--                            <img th:each="num: ${#numbers.sequence(1,${review.star.toInt()})}" src="/image/site/sub/star.png">-->
                             <img th:each="num: ${#numbers.sequence(0, review.getStar()-1)}"
                                  src="/image/site/sub/star.png">

@@ -31,62 +31,6 @@
       <div class="contest_list">
         <p class="tit">콘테스트 개최내역</p>
         <form name="frm" action="/mypage/history" method="get">
-          <!--                <input type="hidden" name="page_now" value="0">-->
-          <!--                <input type="hidden" name="page_row" value="10">-->
-          <!--                <div class="filter_box">-->
-          <!--                    <div class="col">-->
-          <!--                        <div class="chk_box">-->
-          <!--                            <input type="radio" name="chk2" checked="" id="chk0" value="0">-->
-          <!--                            <label for="chk0"><span></span> 전체</label>-->
-          <!--                        </div>-->
-          <!--                        <div class="chk_box">-->
-          <!--                            <input type="radio" name="chk2" checked="checked" id="chk1" value="2">-->
-          <!--                            <label for="chk1"><span></span> PPL</label>-->
-          <!--                        </div>-->
-          <!--                        <div class="chk_box bd">-->
-          <!--                            <input type="radio" name="chk2" id="chk2" value="1">-->
-          <!--                            <label for="chk2"><span></span> 리뷰</label>-->
-          <!--                        </div>-->
-          <!--                    </div>-->
-          <!--                    <div class="col">-->
-          <!--                        <div class="chk_box">-->
-          <!--                            <input type="radio" name="chk" id="chk3" value="1" checked="">-->
-          <!--                            <label for="chk3"><span></span> 최신 등록 순</label>-->
-          <!--                        </div>-->
-          <!--                        <div class="chk_box">-->
-          <!--                            <input type="radio" name="chk" id="chk4" value="2">-->
-          <!--                            <label for="chk4"><span></span> 상금 순</label>-->
-          <!--                        </div>-->
-          <!--                        <div class="chk_box">-->
-          <!--                            <input type="radio" name="chk" id="chk5" value="3">-->
-          <!--                            <label for="chk5"><span></span> 지원 적은 순</label>-->
-          <!--                        </div>-->
-          <!--                    </div>-->
-          <!--                    &lt;!&ndash; <div class="chk_box">-->
-          <!--                        <input type="radio" name="r1" id="chk1" value="chk1">-->
-          <!--                        <label for="chk1"><span></span> PPL</label>-->
-          <!--                    </div>-->
-          <!--                    <div class="chk_box bd">-->
-          <!--                        <input type="radio" name="r1" id="chk2" value="chk2">-->
-          <!--                        <label for="chk2"><span></span> 리뷰</label>-->
-          <!--                    </div>-->
-          <!--                    <div class="chk_box">-->
-          <!--                        <input type="radio" name="r2" id="chk3" value="chk3" checked>-->
-          <!--                        <label for="chk3"><span></span> 최신 등록 순</label>-->
-          <!--                    </div>-->
-          <!--                    <div class="chk_box">-->
-          <!--                        <input type="radio" name="r2" id="chk4" value="chk4">-->
-          <!--                        <label for="chk4"><span></span> 마감임박순</label>-->
-          <!--                    </div>-->
-          <!--                    <div class="chk_box">-->
-          <!--                        <input type="radio" name="r2" id="chk5" value="chk5">-->
-          <!--                        <label for="chk5"><span></span> 상금 순</label>-->
-          <!--                    </div>-->
-          <!--                    <div class="chk_box">-->
-          <!--                        <input type="radio" name="r2" id="chk6" value="chk6">-->
-          <!--                        <label for="chk6"><span></span> 지원 적은 순</label>-->
-          <!--                    </div> &ndash;&gt;-->
-          <!--                </div>-->
 
           <ul class="lst">
             <li th:each="history : ${contestHistory}">
@@ -98,13 +42,16 @@
                   <span style="color:#a8a8a8" th:if="${history.isConfirmed}">  관리자 승인 대기</span>
                 </p>
                 <p class="p2">
-                  <a href="#" class="chk_btn" th:data-key="${history.id}" th:classappend="${history.isCompleted} ? 'act' : ''">
+                  <a href="#" class="chk_btn" th:data-key="${history.id}"
+                     th:classappend="${history.isCompleted} ? 'act' : ''">
                     <i class="fas fa-check"></i>작업완료</a>
-                  <a href="#review_pop130" class="wrt_btn"> <i class="far fa-file-alt"></i> 후기쓰기</a>
+                  <a th:href="'#review_pop' + ${history.id}" class="wrt_btn"> <i class="far fa-file-alt"></i> 후기쓰기</a>
                   <img src="/image/site/index/won.png"> <span th:text="${history.reward}">30만원</span>
-                  <img src="/image/site/sub/icon3.png"> <span style="color:red" th:text="${history.progress}">종료</span>
+                  <img src="/image/site/sub/icon3.png"> <span style="color:red"
+                                                              th:text="${history.progress}">종료</span>
                   <img src="/image/site/sub/icon1.png">
-                  <span style="color: #8f8f8f; font-weight: unset" th:text="${history.applyNumber}"></span>
+                  <span style="color: #8f8f8f; font-weight: unset"
+                        th:text="${history.applyNumber}"></span>
                 </p>
                 <i class="fas fa-chevron-down"></i></div>
 
@@ -117,7 +64,9 @@
                   </a>
                 </p>
                 <ul>
-                  <li th:if="${history.applies.size() == 0}" style="text-align:center;width:100%;margin-right:0">등록된 제안서가 없습니다.</li>
+                  <li th:if="${history.applies.size() == 0}"
+                      style="text-align:center;width:100%;margin-right:0">등록된 제안서가 없습니다.
+                  </li>
 
                   <li th:each="apply : ${history.applies}">
                     <i class="fas fa-user-circle"></i>
@@ -125,31 +74,16 @@
                     <div class="ch_box">
                       <a href="#lpop" class="pop_open" th:data-object="${apply.id}">
                         <i class="far fa-file-alt"></i> 제안서</a>
-                      <a href="#" class="apply_chk " th:classappend="${apply.confirmed}? 'act' : ''"
+                      <a href="#" class="apply_chk "
+                         th:classappend="${apply.confirmed}? 'act' : ''"
                          th:data-object="${apply.id}">
                         <i class="far fa-check-circle"></i> 채택</a>
                     </div>
                   </li>
                 </ul>
               </div>
-
             </li>
           </ul>
-
-          <!--          <div class="margint50">-->
-
-          <!--            <div class="paginate-complex">-->
-          <!--              <strong>1</strong> <a href="javascript:goList('1')">2</a> <a href="javascript:goList('1')"-->
-          <!--                                                                           class="direction next"><span>&nbsp;</span></a>-->
-          <!--            </div>-->
-          <!--            <script type="text/javascript">-->
-          <!--                function goList(page) {-->
-          <!--                    var f = document.frm;-->
-          <!--                    f.page_now.value = page;-->
-          <!--                    f.submit();-->
-          <!--                }-->
-          <!--            </script>-->
-          <!--          </div>-->
           <div class="clear"></div>
         </form>
       </div>
@@ -190,6 +124,38 @@
 
 </div>
 
+<div>
+  <div th:each="history: ${contestHistory}" th:id="'review_pop' + *{history.id}" class="review_pop">
+    <form th:name="'frm' + *{history.id}" action="/mypage/review" method="post">
+      <input type="hidden" th:name="contestId" th:value="${history.id}">
+      <input type="hidden" th:field="${reviewRequestForm.star}" th:value="5">
+      <p class="p1">후기 쓰기</p>
+      <table cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+          <td><input type="text" th:field="${reviewRequestForm.title}" placeholder="제목"></td>
+        </tr>
+        <tr>
+          <td><input type="text" th:field="${reviewRequestForm.youtubeUrl}" placeholder="유튜브링크"></td>
+        </tr>
+        <tr>
+          <td><textarea th:field="${reviewRequestForm.content}" placeholder="내용"></textarea></td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="p2">별점을 입력해주세요.</p>
+      <div class="starRev">
+        <span class="starR on" target="1">별1</span>
+        <span class="starR on" target="2">별2</span>
+        <span class="starR on" target="3">별3</span>
+        <span class="starR on" target="4">별4</span>
+        <span class="starR on" target="5">별5</span>
+      </div>
+      <button type="button" class="rv_smit">작성 완료</button>
+    </form>
+    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+  </div>
+</div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
 

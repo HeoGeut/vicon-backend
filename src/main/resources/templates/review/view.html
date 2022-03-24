@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:include="fragments/head :: head"></head>
+<head>
+  <link rel="stylesheet" type="text/css" href='../../css/review.css'/>
+  <script type="text/javascript" src='../../js/review.js'></script>
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+
+<div class='snb_wrap'>
+  <ul>
+    <li><a href='/review/list'>전체 후기</a></li>
+    <!--    <li><a href='list.php?type=1'>리뷰 후기</a></li>-->
+    <!--    <li><a href='list.php?type=2'>PPL 후기</a></li>-->
+  </ul>
+  <div class='top2'>
+    <div class='inner'>
+      <p><span>VICON review</span>쉽게 원하는 것을 요구하고<br>그 이상을 받아서 좋아요.</p>
+      <!-- <a href=''>이 콘테스트 자세히 알아보기</a> -->
+    </div>
+  </div>
+</div>
+
+
+<div class='sub_key'>전체 후기</div>
+
+<div class='wrap'>
+  <p class='nav marginb30'>전체 후기</p>
+  <div class="view_wrap">
+    <div class="content">
+      <div class="tit" th:object="${review}">
+        <div class="b1">
+          <p class="p1">
+            <img src="/image/site/sub/comt.png">
+            <span th:text="${review.contestInReview.title}"></span>
+          </p>
+          <p class="p2">
+            <img th:each="num: ${#numbers.sequence(0, review.getStar()-1)}"
+                 src="/image/site/sub/star.png">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            작성자
+            <span th:text="${review.username}">saneone</span>
+            작성일
+            <span th:text="${review.createdDate}">22.03.23</span>
+          </p>
+        </div>
+        <div class="b2">
+          <p class="p1">
+            <span th:class="${review.isReview()? 's2' : 's1'}"
+                  th:text="${review.isReview()? '리뷰' : 'PPL'}"></span>
+            <span th:tex="${review.title}"></span>
+          </p>
+          <p class="p2">
+            <span>
+              <img src="/image/site/sub/review_icon1.png">
+              <span th:text="${review.contestInReview.createdDate}">2022-03-31</span>
+            </span>
+            <span><img src="/image/site/sub/review_icon2.png"> <span
+                th:text="${review.contestInReview.reward} + '만원'"></span></span>
+            <span><img src="/image/site/sub/review_icon3.png"> <span
+                th:text="${review.contestInReview.category}"></span></span>
+            <span><img src="/image/site/sub/review_icon4.png"> <span
+                th:text="${review.contestInReview.applyNumber} + '명 지원'"></span></span>
+          </p>
+          <div class="company">
+            <div class="img_bx">
+              <img th:src="${review.profileImage}" src="/data/member/1647735842.JPG">
+            </div>
+            <p th:text="${review.companyName}"></p>
+            <div class="clear"></div>
+            <a th:href="@{/contest/view/{id} (id= ${review.contestInReview.contestId})}" class="pop">자세히보기</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="cont">
+        <iframe src="https://www.youtube.com/embed/1" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen=""></iframe>
+        <br>
+        <div th:text="${review.content}"></div>
+
+      </div>
+
+      <a href="/review/list" class="btn2">목록</a>
+
+      <!-- <div class='btn_box'>
+          <a href='' class='btn2'>수정</a>
+          <a href='' class='btn2'>삭제</a>
+      </div> -->
+      <div class="clear"></div>
+    </div>
+
+
+    <div class="rnb">
+      <p class="t1"><img src="/image/site/sub/alarm.png"> 콘테스트 마감이 얼마 남지 않았어요!</p>
+      <ul>
+        <li th:each="contest : ${contests}">
+          <div class="tit">
+            <div class="img_bx">
+              <img
+                  th:src="${(contest.memberProfileImage != null && !#strings.isEmpty(contest.memberProfileImage)) ? contest.memberProfileImage : '/image/site/noimage.png'}">
+            </div>
+            <p class="p1" th:text="${contest.name}">KB 국민은행</p>
+            <p class="p2" th:text="${contest.isReview}? '리뷰' : 'PPL'">리뷰</p>
+          </div>
+          <div class="cont">
+            <p class="p1">
+              <span class="s1" th:text="'D-' + ${contest.restDate}">D-11</span>
+              <span class="s2" th:text="${contest.applyNumber}">11</span>
+              명 응모</p>
+            <p class="p2" th:text="${contest.name}">신규 예금상품 가입 체험 컨텐츠 앞 광고 공모</p>
+            <p class="p4" th:text="${contest.text}">KB 국민은행의 신규 예금상품을 미리 알아보는 것부터 가입하는 과정까지 자연스럽고
+              재미있는재미있는재미있는재미있는 컨텐츠에 녹여...</p>
+            <p class="p3">
+              <img src="/image/site/index/won.png">
+              <span th:text="${contest.totalReward}"></span>만원
+            </p>
+            <p class="p5">
+              <img src="/image/site/index/premium.png" th:if="${not contest.isStandard}">
+            </p>
+          </div>
+        </li>
+      </ul>
+      <a href="/contests/list" class="more_list">목록 더보기</a>
+    </div>
+  </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+</body>
+</html>

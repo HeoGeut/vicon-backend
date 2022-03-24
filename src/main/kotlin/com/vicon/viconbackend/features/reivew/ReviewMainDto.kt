@@ -4,7 +4,7 @@ import com.vicon.viconbackend.domain.review.Review
 import java.math.BigDecimal
 
 data class ReviewMainDto(
-    val link: String? = "",
+    val youtubeUrl: String? = "",
     val title: String = "",
     val star: BigDecimal = BigDecimal.ZERO,
     val createDate: String = "",
@@ -13,7 +13,7 @@ data class ReviewMainDto(
     companion object {
         fun of(review: Review): ReviewMainDto {
             return ReviewMainDto(
-                link = review.link?.let { getLink(it) },
+                youtubeUrl = review.youtubeUrl?.let { getLink(it) },
                 title = review.title!!,
                 star = review.star!!.toBigDecimal(),
                 createDate = review.createdAt!!.toLocalDate().toString(),
